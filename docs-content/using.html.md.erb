@@ -1,12 +1,39 @@
 ---
-title: Using YOUR-PRODUCT-NAME
-owner: Partners
+title: Using Crunchy PostgreSQL for PCF
+owner: Crunchy Data 
 ---
 
-This topic describes how to use YOUR-PRODUCT-NAME.
+This topic describes how to use Crunchy PostgreSQL for PCF.
 
-##<a id='using'></a> Using YOUR-PRODUCT-NAME
+##<a id='using'></a> Using Crunchy PostgreSQL for PCF
 
-**This topic should include any instructions for how to use the service or dashboard created by the tile. Give procedures for how to perform the different functions offered by your product, and provide screenshots where necessary.** 
+1. To create a service, use the following as a template:
 
-**You can also use this section to include information about Architecture and Troubleshooting for known errors. If you include a Troubleshooting section, follow the Symptom/Explanation format used in the [Okta Troubleshooting](http://docs.pivotal.io/p-identity/okta/troubleshooting.html) topic**.
+    <pre class="terminal">
+    cf create-service postgresql-9.5 db-10gb my_pgsql -c '
+    {
+        "db_name": "crunchydb",
+        "db_username": "crunchy",
+        "owner_name": "Crunchy Data",
+        "owner_email": "admin@crunchydata.com"
+    }'
+    </pre>
+
+1. Once a service is created, bind the service to your application:
+
+    <pre class="terminal">
+    cf bind-service <APP_NAME> <SERVICE_NAME>
+    cf restage <APP_NAME>
+    </pre
+
+1. With the application bound to the PostgreSQL service, use the binding credentials provided to the application to connect to the service.
+
+##<a id='diaster'></a> Restore Database From Backup
+
+1. SSH into the master database that needs a restoration.
+
+1. As the vcap user, run the following:
+
+    <pre class="terminal">
+    /var/vcap/jobs/postgresql/bin/restore 
+    </pre>
