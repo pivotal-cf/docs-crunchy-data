@@ -3,53 +3,60 @@ title: Installing and Configuring Crunchy PostgreSQL For PCF
 owner: Crunchy Data 
 ---
 
-This topic describes how to install and configure Crunchy PostgreSQL for PCF.
+This topic describes how to install and configure Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF).
 
-##<a id='install'></a> Install and Configure Crunchy PostgreSQL for PCF
+##<a id='import'></a> Import the Tile to Ops Manager
 
-1. Download the product file from Pivotal Network.
+1. Download the product file from [Pivotal Network](https://network.pivotal.io/).
 
 1. Navigate to the Ops Manager Installation Dashboard and click **Import a Product** to upload the product file. 
 
 1. Click **Add** next to the uploaded Crunchy PostgreSQL for PCF tile in the Ops Manager **Available Products** view to add it to your staging area.
 
-1. Click the newly added Crunchy PostgreSQL for PCF tile.
+##<a id='config'></a> Configure Tile Settings
 
-1. Click the Security tab.
+Click the newly added Crunchy PostgreSQL for PCF tile and configure each pane using the sections below.
 
-2. Enter a password for the PostgreSQL administrator role.  This should be a strong password.
+###<a id='sec'></a>Security 
 
-2. Enter a password for the PostgreSQL replication role.  This should be a strong password.
+1. Select **Security**.
 
-2. Enter a password for the Broker administrator.  This should be a strong password.
+2. Enter strong passwords for the following roles:
+	* **PostgreSQL administrator**
+	* **PostgreSQL replication**
+	* **Broker administrator**
 
-2. Enter a Certificate Authority (CA) Cert for Consul.  This should be the CA certificate used to sign the certificates for Consul.
+2. Enter a **Certificate Authority (CA) Cert for Consul**.
 
-2. Enter a Client Certificate for Consul.  This should be signed by the CA certificate above.
+2. Enter a **Client Certificate for Consul** signed by the certificate from the previous step.
 
-2. Enter a Client Key for Consul.  This should be the key used to create the client certificate.
+2. Enter the  **Client Key for Consul** that you used to create the client certificate.
 
-2. Enter a Server Certificate for Consul.  This should be signed by the CA certificate above.
+2. Enter a **Server Certificate for Consul** signed by the CA certificate you entered.
 
-2. Enter a Server Key for Consul.  This should be the key used to create the server certificate.
-
-2. Click **Save**.
-
-1. Click the PostgreSQL Configuration tab.
-
-2. Enter the port for the PostgreSQL Master server.
-
-2. Enter the port for teh PostgreSQL Replica servers.
-
-2. Enter the maximum amount of concurrent connections to the database server.
-
-2. Enter the amount of memory the server used for shared buffers.
-
-2. Enter the amount of memory used for maintenance operations such as VACUUM and CREATE INDEX.
+2. Enter the **Server Key for Consul** that you used to create the server certificate.
 
 2. Click **Save**.
 
-1. Click the HAProxy Configuration tab.
+###<a id='p-config'></a>PostgreSQL Configuration
+
+1. Select **PostgreSQL Configuration**.
+
+2. Enter the port for the PostgreSQL Leader server.
+
+2. Enter the port for the PostgreSQL Replica servers.
+
+2. Specify the maximum amount of concurrent connections to the database server.
+
+2. Specify the amount of memory the server can use for shared buffers.
+
+2. Specify the amount of memory to use for maintenance operations such as `VACUUM` and `CREATE INDEX`.
+
+2. Click **Save**.
+
+###<a id='h-config'></a>HAProxy Configuration
+
+1. Select **HAProxy Configuration**.
 
 2. Enter the port for the PostgreSQL HAProxy server.
 
@@ -57,10 +64,14 @@ This topic describes how to install and configure Crunchy PostgreSQL for PCF.
 
 2. Click **Save**.
 
-1. Click the Broker Configuration tab.
+###<a id='b-config'></a>Broker Configuration
+
+1. Select **Broker Configuration**.
 
 2. Enter the port for the Broker servers.
 
 2. Click **Save**.
 
-1. Return to the Ops Manager Installation Dashboard and click **Apply Changes** to install Crunchy PostgreSQL for PCF tile.
+##<a id='install'></a> Install the Tile
+
+Return to the Ops Manager Installation Dashboard and click **Apply Changes** to install the Crunchy PostgreSQL for PCF tile.

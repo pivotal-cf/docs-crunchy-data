@@ -3,21 +3,16 @@ title: Crunchy PostgreSQL For PCF
 owner: Crunchy Data 
 ---
 
-This documentation describes the Crunchy PostgreSQL for Pivotal CloudFoundry (PCF).
-Using this tile will create all the services required to use Crunchy PostgreSQL 
-with your CloudFoundry applications.  
-
-## <a id='overview'></a>Overview
-
-
-Crunchy PostgreSQL For PCF includes the following key features:
+This documentation describes the Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) tile. Installing this tile creates a service that allows you to use Crunchy PostgreSQL databases with your Cloud Foundry apps. Crunchy PostgreSQL For PCF includes the following key features:
 
 * Crunchy PostgreSQL 9.5 and PostGIS 2.2
-* Master/Slave PostgreSQL Architecture
-* Load Balanced Read Replicas
-* Automated Backups with pgBackrest
-* Disaster Recovery 
-* High Availabilty
+* Leader/Follower PostgreSQL architecture
+* Load-balanced read replicas
+* Automated backups with pgBackrest
+* Disaster recovery 
+* High availabilty
+
+For more information about Crunchy PostgreSQL, see the [Crunchy Data](http://crunchydata.com/) website.  
 
 ## <a id="snapshot"></a>Product Snapshot
 
@@ -33,20 +28,13 @@ Crunchy PostgreSQL For PCF includes the following key features:
 <dd><strong>AWS support?</strong> Yes</dd>
 </dl>
 
-## <a id="reqs"></a>Requirements
-
-Crunchy PostgreSQL has the following requirements:
-
-+ CloudFoundry
-
 ## <a id="limitations"></a>Limitations
 
-Current limitations:
+Crunchy PostgreSQL for PCF currently includes the following limitations:
 
-* Manual Restorations of Backups
-
-* Manual Failovers
+* You must manually restore backups.
+* You must manually perform failovers.
 
 ## <a id="feedback"></a>Feedback
 
-Please provide any bugs, feature requests, or questions send an email to [Crunchy Data](mailto:crunchypcf@crunchydata.com).
+To report bugs, request features, or ask questions, send an email to [Crunchy Data](mailto:crunchypcf@crunchydata.com).
