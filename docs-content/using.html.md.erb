@@ -7,56 +7,30 @@ This topic describes how to use Crunchy PostgreSQL for Pivotal Cloud Foundry (PC
 
 ##<a id='using'></a> Crunchy PostgreSQL Services and Plans
 
-Crunchy PostgreSQL comes with two services:
+Crunchy PostgreSQL comes with one service:
 
 * postgresql-9.5
-* postgis-9.5
 
 ###<a id='using-pgsql-95'></a> PostgreSQL 9.5 Service
 
 The `postgresql-9.5` service comes with two plans:
 
-* small-25
-* large-50
+* small-15
+* large-30
 
-The `small-25` plan includes the following:
-
-* PostgreSQL 9.5
-* Automated Backups
-* Load Balanced Read Replicas
-* Maximum Connections: 25
-
-The `large-50` plan includes the following:
+The `small-15` plan includes the following:
 
 * PostgreSQL 9.5
 * Automated Backups
 * Load Balanced Read Replicas
-* Maximum Connections: 50
+* Maximum Connections: 15
 
-###<a id='using-pgsql-95'></a> PostGIS 9.5 Service
-
-The `postgis-9.5` service comes with two plans:
-
-* small-25
-* large-50
-
-The `small-25` plan includes the following:
+The `large-30` plan includes the following:
 
 * PostgreSQL 9.5
-* PostGIS 2.2
-* Tiger Geocoder Extension
 * Automated Backups
 * Load Balanced Read Replicas
-* Maximum Connections: 20
-
-The `large-50` plan includes the following:
-
-* PostgreSQL 9.5
-* PostGIS 2.2
-* Tiger Geocoder Extension
-* Automated Backups
-* Load Balanced Read Replicas
-* Maximum Connections: 50
+* Maximum Connections: 30
 
 ####<a id='using-pgsql-95'></a> Create PostgreSQL 9.5 Service
 
@@ -67,12 +41,16 @@ Creating a service requires four parameters with the create-service request:
   * `owner_name` is meta information about the owner of this database.
   * `owner_email` is the email where the owner can be contacted.
 
+Optional parameters are as followed:
+  * `postgis` will install PostGIS 2.2 extensions.
+  * `db_encoding` will change the default decoding of the database.  Not recommeded to use. 
+
 Follow the steps below to create and bind a service instance of Crunchy PostgreSQL to use with your app.
 
 1. Create a service instance using the following command as a template:
 
     <pre class="terminal">
-    cf create-service postgresql-9.5 small-25 my_pgsql -c '
+    cf create-service postgresql-9.5 small-15 my_pgsql -c '
     {
         "db_name": "crunchydb",
         "db_username": "crunchy",
