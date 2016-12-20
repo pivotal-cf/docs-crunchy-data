@@ -93,7 +93,7 @@ Follow the steps below to create and bind a service instance of Crunchy PostgreS
     cf restage <APP_NAME>
     </pre>
 
-##<a id='diaster'></a> Backups
+##<a id='disaster'></a> Backups
 
 Crunchy PostgreSQL uses `pgBackrest` for physical backups of the database.  Backups are taken
 every night at 1 am, 7 days a week.  Monday through Saturday will take incremental backups, Sunday
@@ -105,7 +105,7 @@ that databases can be restored to specific points in time (point in time recover
 Currently, individual databases cannot be restored - all databases will be restored in the shared 
 cluster.
 
-##<a id='diaster-recovery'></a> Restore Deltas
+##<a id='disaster-recovery'></a> Restore Deltas
 
 These instructions will demonstrate how the database can be restored using only deltas 
 between the backup and the database.
@@ -157,7 +157,7 @@ For guidance on SSHing to servers in the service, see the [Pivotal documentation
     monit start postgesql
     </pre>
 
-##<a id='diaster-recovery'></a> Restore Point In Time
+##<a id='disaster-recovery'></a> Restore Point In Time
 
 These instructions will demonstrate how the database can be restored using a point 
 in time.
@@ -209,6 +209,6 @@ For guidance on SSHing to servers in the service, see the [Pivotal documentation
     monit start postgesql
     </pre>
 
-##<a id='diaster-recovery'></a> pgBackrest Additional Information
+##<a id='disaster-recovery'></a> pgBackrest Additional Information
 
 For more information regarding pgBackrest restorations, check out the [official documentation.](http://www.pgbackrest.org/user-guide.html)
