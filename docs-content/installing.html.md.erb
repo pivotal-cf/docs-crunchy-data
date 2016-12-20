@@ -13,108 +13,102 @@ This topic describes how to install and configure Crunchy PostgreSQL for Pivotal
 
 1. Click **Add** next to the uploaded Crunchy PostgreSQL for PCF tile in the Ops Manager **Available Products** view to add it to your staging area.
 
-###<a id='install-az'></a> Configure Avaibility Zones and Networks
+##<a id='configure'></a> Configure the Service
 
-In order to make Crunchy PostgreSQL highly available, services must be balanced 
-throughout availbility zones.
+Click the newly added **Crunchy PostgreSQL** on the Ops Manager Installation Dashboard to open the configuration panes. Configure each section as described below.
 
-1. Click the newly added Crunchy PostgreSQL for PCF tile on the dashboard.
-   <%= image_tag("images/tile.png") %>
+  ![Crunchy PostgreSQL tile](images/tile.png)
 
-1. Click the Assign AZs and Networks tab.      
-    <%= image_tag("images/az-net.png") %>
+###<a id='install-az'></a> Configure Availability Zones and Networks
+
+To make Crunchy PostgreSQL highly available, you must balance the service 
+across multiple availability zones.
+
+1. Click **Assign AZs and Networks**.      
+    ![Assign AZs and Networks pane](az-net.png)
 
 1. Choose an availability zone to deploy singleton jobs.  
 
-1. Choose extra availability zones to balance jobs.  It is important to balance as many jobs in multiple availbility zones as possible to increase uptime.
+1. Choose extra availability zones to balance jobs.  To maximize uptime, balance as many jobs as possible across multiple AZs.
 
-1. Choose which network Crunchy PostgreSQL should be deployed to.
+1. Choose the network to deploy Crunchy PostgreSQL to.
 
 1. Click **Save**.
 
 ###<a id='install-consul-sec'></a> Configure Consul Security
 
 Crunchy PostgreSQL uses Consul under the hood for service discovery, service health, 
-key/value stores, DNS, and configuration file rendering.  In order to keep the system 
+key/value stores, DNS, and configuration file rendering.  To keep the system 
 secure, Crunchy PostgreSQL uses SSL to authenticate and protect Consul agents.  For 
 information on generating SSL certificates, see the [Consul documentation.]
 (https://www.consul.io/docs/agent/encryption.html)
 
-1. Click the Consul Security tab.        
-   <%= image_tag("images/consul-sec.png") %>
+1. Click **Consul Security**.        
+   ![Consul Security pane](consul-sec.png)
 
-1. In the first field `CA Certificate` add a Certificate Authority (CA) Certificate.  
-This can be a self-signed CA certificate or an official certificate.  Which ever 
-certificate supplied should be the certificate used to sign client/server certificates.
+1. In the first field **CA Certificate** add the Certificate Authority (CA) that you use to sign client/server certificates. This can be a self-signed CA or an official CA.
 
-1. In the `Client Certificate` field add a signed client cert.  This certificate 
-should have been signed by the CA Certificate issued above.
+1. In the **Client Certificate** field add a signed client cert.  This certificate 
+should have been signed by the CA Certificate you entered above.
 
-1. In the `Client Key` field, add the client key used to create the client certificate.
+1. In the **Client Key** field, add the client key used to create the client certificate.
 
-1. In the `Server Certificate` field add a signed server cert.  This certificate 
-should have been signed by the CA Certificate issued above.
+1. In the **Server Certificate** field add a signed server cert.  This certificate 
+should have been signed by the CA Certificate you entered above.
 
-1. In the `Server Key` field add the server key used to create the server certificate.
+1. In the **Server Key** field add the server key used to create the server certificate.
 
 1. Click **Save**.
 
 ###<a id='install-postgres-sec'></a> Configure PostgreSQL Security
 
-Crunchy PostgreSQL requires two password protected roles for operations:
+Crunchy PostgreSQL requires two password-protected roles for operations. You should use strong passwords for both of these roles:
 
-* Replication Role
-* Administrator Role
+* **Replication Role** is used by read-replica servers to retrieve changes from the master database.
+* **Administrator Role** is the role used by the Broker to handle requests from Cloud Foundry.  
+This role manages databases, roles and extensions.
 
-`Replication role` is used by read-replica servers to retrieve changes from the master database.
+1. Click **PostgreSQL Security**.       
+   ![PostgreSQL Security pane](pgsql-sec.png)
 
-`Administrator role` is the role used by the Broker to handle requests from Cloud Foundry.  
-This role manages databases, roles and extensions.  It's advised to use a strong password for 
-this role.
+1. Enter a strong password for the **Replication Role** for PostgreSQL.
 
-1. Click the PostgreSQL Security tab.       
-   <%= image_tag("images/pgsql-sec.png") %>
-
-1. Enter a password for the `replication role` for PostgreSQL.  This should be a strong password.
-
-1. Enter a password for the `administrator role` for PostgreSQL.  This should be a strong password.
+1. Enter a strong password for the **Administrator Role** for PostgreSQL.
 
 1. Click **Save**.
 
 ###<a id='install-postgres-conf'></a> PostgreSQL Configuration
 
-Crunchy PostgreSQL can be tuned in various ways to meet the demand of the applications 
-bound to the service.  This section provides some guidance on how to tune these settings 
-accordingly.
+You can tune Crunchy PostgreSQL in various ways to meet the demands of the apps that use it. This section provides guidance on how to tune these settings.
 
-1. Click the PostgreSQL Configuration tab.     
-   <%= image_tag("images/pgsql-conf.png") %>
+1. Click **PostgreSQL Configuration**.     
+   ![PostgreSQL Configuration pane](pgsql-conf.png)
 
-1. Enter an integer for the `Max Connections` setting for PostgreSQL.  This setting is the maximum 
+1. Enter an integer for the **Max Connections** setting for PostgreSQL.  This setting is the maximum 
 allowed concurrent connections to the database.  For more information, see the [official PostgreSQL documentation]
 (https://www.postgresql.org/docs/current/static/runtime-config-connection.html#GUC-MAX-CONNECTIONS).
 
-1. Enter the amount of memory allowed for `Shared Buffers`.  This sets the amount of memory the database 
+1. Enter the amount of memory allowed for **Shared Buffers**.  This sets the amount of memory the database 
 server uses for operations.  For more information, see the [official PostgreSQL documentation]
 (https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-SHARED-BUFFERS).
 
-1. Enter the amount of memory allowed for `Maintenance` process (such as VACUUM and CREATE INDEX).  
+1. Enter the amount of memory allowed for **Maintenance** process (such as VACUUM and CREATE INDEX).  
 For more information, see the [official PostgreSQL documentation]
 (https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM).
 
-1. Enter the amount of `WAL Segments` that are kept on the database servers for replication.  
+1. Enter the number of **WAL Segments** that that are kept on the database servers, for replication of the write-ahead log (WAL).
 For more information, see the [official PostgreSQL documentation]
 (https://www.postgresql.org/docs/9.6/static/runtime-config-replication.html#GUC-WAL-KEEP-SEGMENTS).
 
-1. Enter the `Max WAL Size` before automatic WAL Checkpoint is activated.  
+1. Enter the **Max WAL Size** before automatic WAL Checkpoint is activated.  
 For more information, see the [official PostgreSQL documentation]
 (https://www.postgresql.org/docs/9.6/static/runtime-config-wal.html#GUC-MAX-WAL-SIZE).
 
-1. Enter the `Max Worker Processes` to specify how many concurrent processes the system can support.
+1. Enter the **Max Worker Processes** to specify how many concurrent processes the system can support.
 For more information, see the [official PostgreSQL documentation]
 (https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAX-WORKER-PROCESSES).
 
-1. Enter the amount of memory allowed for `WAL Buffers`.  This memory is used to store WAL that hasn't been 
+1. Enter the amount of memory allowed for **WAL Buffers**.  This memory is used to store WAL that hasn't been 
 written to disk yet.  For more information, see the [official PostgreSQL documentation]
 (https://www.postgresql.org/docs/current/static/runtime-config-wal.html#GUC-WAL-BUFFERS).
 
@@ -122,50 +116,47 @@ written to disk yet.  For more information, see the [official PostgreSQL documen
 
 ###<a id='install-broker-sec'></a> Broker Security
 
-The Broker included in Crunchy PostgreSQL requires requests to supply a username and password.  
-The password for the broker should be a strong password.
+The Crunchy PostgreSQL service broker requires requests to supply a username and password. This password should be strong.
 
-1. Click the Broker Security tab.    
-    <%= image_tag("images/broker-sec.png") %>
+1. Click **Broker Security**.    
+    ![Broker Security pane](broker-sec.png)
 
-1. Enter a strong password for the Broker.
+1. Enter a strong password for the broker.
 
 1. Click **Save**.
-
 
 ###<a id='install-cf-conf'></a> Cloud Foundry Configuration
 
-Crunchy PostgreSQL will register its services with Cloud Foundry after deployment.  This section 
-gathers the information needed to do this.
+The Crunchy PostgreSQL tile registers its services with Cloud Foundry after deployment. This section gathers the information needed to do this.
 
-1. Click the Cloud Foundry Configuration tab.    
-    <%= image_tag("images/cf-conf.png") %>
+1. Click **Cloud Foundry Configuration**.    
+    ![Cloud Foundry Configuration pane](cf-conf.png)
 
 1. Enter the Cloud Foundry API URL.  This is the URL used by the `cf` tool to login and can be found in 
-the `Credentials` section of the Cloud Foundry tile.
+the **Credentials** section of the Cloud Foundry tile.
 
 1. Enter the Cloud Foundry administrator username.  This will be used to register the Crunchy 
-PostgreSQL service with Cloud Foundry.  The username can be found in the `Credentials` section
+PostgreSQL service with Cloud Foundry.  The username can be found in the **Credentials** section
 of the Cloud Foundry tile.
 
 1. Enter the Cloud Foundry administrator password.  This will be used to register the Crunchy 
-PostgreSQL service with Cloud Foundry.  The password can be found in the `Credentials` section
+PostgreSQL service with Cloud Foundry.  The password can be found in the **Credentials** section
 of the Cloud Foundry tile.
 
-1. Check `Cloud Foundry SSL Validation` box if the Cloud Foundry SSL certificates should be validated.  
-This should be unchecked if Cloud Foundry is using self-signed certificates.
+1. Enable the **Cloud Foundry SSL Validation** checkbox if the Cloud Foundry SSL certificates should be validated.  
+Disable this checkbox if your Cloud Foundry deployment uses self-signed certificates.
 
 1. Click **Save**.
 
-###<a id='install-resources-conf'></a> Resources Configuration
+###<a id='install-resources-conf'></a> Resource Configuration
 
-Crunchy PostgreSQL and its services can be configured to meet any application demand.  
+You can configure Crunchy PostgreSQL and its services to meet any application demand.  
 Choose VM types for the PostgreSQL servers that make sense for your requirements.
 
-1. Click the Resources tab.     
-    <%= image_tag("images/resource-conf.png") %>
+1. Click **Resource Config**.     
+    ![Resource Config pane](resource-conf.png)
 
-1. Review the prepopulated recommended server sizes.
+1. Review the pre-populated recommended server sizes and make any changes.
 
 1. Click **Save**.
 
