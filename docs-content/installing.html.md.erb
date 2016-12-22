@@ -37,24 +37,18 @@ across multiple availability zones.
 
 ###<a id='install-consul-sec'></a> Configure Consul Security
 
-Crunchy PostgreSQL uses Consul under the hood for service discovery, service health, 
-key/value stores, DNS, and configuration file rendering.  To keep the system 
-secure, Crunchy PostgreSQL uses SSL to authenticate and protect Consul agents.  For 
-information on generating SSL certificates, see the [Consul documentation.]
-(https://www.consul.io/docs/agent/encryption.html)
+Crunchy PostgreSQL uses Consul under the hood for service discovery, service health, key/value stores, DNS, and configuration file rendering.  To keep the system secure, Crunchy PostgreSQL uses SSL to authenticate and protect Consul agents. For information about generating SSL certificates, see the [Consul documentation](https://www.consul.io/docs/agent/encryption.html).
 
 1. Click **Consul Security**.        
    ![Consul Security pane](consul-sec.png)
 
-1. In the first field **CA Certificate** add the Certificate Authority (CA) that you use to sign client/server certificates. This can be a self-signed CA or an official CA.
+1. In the **CA Certificate** field, add the Certificate Authority (CA) that you use to sign client/server certificates. This can be a self-signed CA or an official CA.
 
-1. In the **Client Certificate** field add a signed client cert.  This certificate 
-should have been signed by the CA Certificate you entered above.
+1. In the **Client Certificate** field, add a signed client cert.  This certificate should have been signed by the CA Certificate you entered above.
 
 1. In the **Client Key** field, add the client key used to create the client certificate.
 
-1. In the **Server Certificate** field add a signed server cert.  This certificate 
-should have been signed by the CA Certificate you entered above.
+1. In the **Server Certificate** field add a signed server cert.  This certificate should have been signed by the CA Certificate you entered above.
 
 1. In the **Server Key** field add the server key used to create the server certificate.
 
@@ -66,7 +60,7 @@ Crunchy PostgreSQL requires two password-protected roles for operations. You sho
 
 * **Replication Role** is used by read-replica servers to retrieve changes from the master database.
 * **Administrator Role** is the role used by the Broker to handle requests from Cloud Foundry.  
-This role manages databases, roles and extensions.
+This role manages databases, roles, and extensions.
 
 1. Click **PostgreSQL Security**.       
    ![PostgreSQL Security pane](pgsql-sec.png)
@@ -132,15 +126,13 @@ The Crunchy PostgreSQL tile registers its services with Cloud Foundry after depl
 1. Click **Cloud Foundry Configuration**.    
     ![Cloud Foundry Configuration pane](cf-conf.png)
 
-1. Enter the Cloud Foundry API URL.  This is the URL used by the `cf` tool to login and can be found in 
+1. Enter the Cloud Foundry API URL. This is the URL used by the Cloud Foundry Command Line Interface (cf CLI) to log in, and can be found in 
 the **Credentials** section of the Cloud Foundry tile.
 
-1. Enter the Cloud Foundry administrator username.  This will be used to register the Crunchy 
-PostgreSQL service with Cloud Foundry.  The username can be found in the **Credentials** section
+1. Enter the Cloud Foundry administrator username.  This will be used to register the Crunchy PostgreSQL service with Cloud Foundry.  The username can be found in the **Credentials** section
 of the Cloud Foundry tile.
 
-1. Enter the Cloud Foundry administrator password.  This will be used to register the Crunchy 
-PostgreSQL service with Cloud Foundry.  The password can be found in the **Credentials** section
+1. Enter the Cloud Foundry administrator password.  This will be used to register the Crunchy PostgreSQL service with Cloud Foundry.  The password can be found in the **Credentials** section
 of the Cloud Foundry tile.
 
 1. Enable the **Cloud Foundry SSL Validation** checkbox if the Cloud Foundry SSL certificates should be validated.  
