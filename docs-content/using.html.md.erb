@@ -34,17 +34,17 @@ The `large-30` plan includes the following:
 
 ####<a id='using-pgsql-95'></a> Create PostgreSQL 9.5 Service
 
-Creating a service requires four parameters with the create-service request:
+Creating a service requires four parameters used with the create-service request:
 
   * `db_name` is the database name being requested.
   * `db_username` is the username being requested.
   * `owner_name` is meta information about the owner of this database.
-  * `owner_email` is the email where the owner can be contacted.
+  * `owner_email` is the email address where the owner can be contacted.
 
 Optional parameters:
 
   * `postgis` will install PostGIS 2.2 extensions.
-  * `db_encoding` will change the default decoding of the database.Not recommended to use. 
+  * `db_encoding` will change the default decoding of the database. This is not recommended. 
 
 Follow the steps below to create and bind a service instance of Crunchy PostgreSQL to use with your app.
 

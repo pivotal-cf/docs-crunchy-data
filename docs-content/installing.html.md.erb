@@ -15,7 +15,7 @@ This topic describes how to install and configure Crunchy PostgreSQL for Pivotal
 
 ##<a id='configure'></a> Configure the Service
 
-Click the newly added **Crunchy PostgreSQL** on the Ops Manager Installation Dashboard to open the configuration panes. Configure each section as described below.
+Click the newly added **Crunchy PostgreSQL** tile on the Ops Manager Installation Dashboard to open the configuration panes. Configure each section as described below.
 
   ![Crunchy PostgreSQL tile](images/tile.png)
 
@@ -44,11 +44,11 @@ Crunchy PostgreSQL uses Consul under the hood for service discovery, service hea
 
 1. In the **CA Certificate** field, add the Certificate Authority (CA) that you use to sign client/server certificates. This can be a self-signed CA or an official CA.
 
-1. In the **Client Certificate** field, add a signed client cert.  This certificate should have been signed by the CA Certificate you entered above.
+1. In the **Client Certificate** field, add a signed client certificate. This certificate should have been signed by the CA Certificate you entered above.
 
 1. In the **Client Key** field, add the client key used to create the client certificate.
 
-1. In the **Server Certificate** field add a signed server cert.  This certificate should have been signed by the CA Certificate you entered above.
+1. In the **Server Certificate** field, add a signed server certificate. This certificate should have been signed by the CA Certificate you entered above.
 
 1. In the **Server Key** field add the server key used to create the server certificate.
 
@@ -78,33 +78,23 @@ You can tune Crunchy PostgreSQL in various ways to meet the demands of the apps 
 1. Click **PostgreSQL Configuration**.     
    ![PostgreSQL Configuration pane](pgsql-conf.png)
 
-1. Enter an integer for the **Max Connections** setting for PostgreSQL.  This setting is the maximum 
-allowed concurrent connections to the database.  For more information, see the [official PostgreSQL documentation]
-(https://www.postgresql.org/docs/current/static/runtime-config-connection.html#GUC-MAX-CONNECTIONS).
+1. Enter an integer for the **Max Connections** setting for PostgreSQL. This setting is the maximum allowed concurrent connections to the database. For more information, see the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/static/runtime-config-connection.html#GUC-MAX-CONNECTIONS).
 
-1. Enter the amount of memory allowed for **Shared Buffers**.  This sets the amount of memory the database 
-server uses for operations.  For more information, see the [official PostgreSQL documentation]
-(https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-SHARED-BUFFERS).
+1. Enter the amount of memory allowed for **Shared Buffers**. This sets the amount of memory the database server uses for operations. For more information, see the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-SHARED-BUFFERS).
 
-1. Enter the amount of memory allowed for **Maintenance** process (such as VACUUM and CREATE INDEX).  
-For more information, see the [official PostgreSQL documentation]
-(https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM).
+1. Enter the amount of memory allowed for **Maintenance** processes such as **VACUUM** and **CREATE INDEX**.  
+For more information, see the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM).
 
 1. Enter the number of **WAL Segments** that that are kept on the database servers, for replication of the write-ahead log (WAL).
-For more information, see the [official PostgreSQL documentation]
-(https://www.postgresql.org/docs/9.6/static/runtime-config-replication.html#GUC-WAL-KEEP-SEGMENTS).
+For more information, see the [official PostgreSQL documentation](https://www.postgresql.org/docs/9.6/static/runtime-config-replication.html#GUC-WAL-KEEP-SEGMENTS).
 
 1. Enter the **Max WAL Size** before automatic WAL Checkpoint is activated.  
-For more information, see the [official PostgreSQL documentation]
-(https://www.postgresql.org/docs/9.6/static/runtime-config-wal.html#GUC-MAX-WAL-SIZE).
+For more information, see the [official PostgreSQL documentation](https://www.postgresql.org/docs/9.6/static/runtime-config-wal.html#GUC-MAX-WAL-SIZE).
 
 1. Enter the **Max Worker Processes** to specify how many concurrent processes the system can support.
-For more information, see the [official PostgreSQL documentation]
-(https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAX-WORKER-PROCESSES).
+For more information, see the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAX-WORKER-PROCESSES).
 
-1. Enter the amount of memory allowed for **WAL Buffers**.  This memory is used to store WAL that hasn't been 
-written to disk yet.  For more information, see the [official PostgreSQL documentation]
-(https://www.postgresql.org/docs/current/static/runtime-config-wal.html#GUC-WAL-BUFFERS).
+1. Enter the amount of memory allowed for **WAL Buffers**. This memory is used to store WAL that hasn't been written to disk yet. For more information, see the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/static/runtime-config-wal.html#GUC-WAL-BUFFERS).
 
 1. Click **Save**.
 
@@ -129,11 +119,9 @@ The Crunchy PostgreSQL tile registers its services with Cloud Foundry after depl
 1. Enter the Cloud Foundry API URL. This is the URL used by the Cloud Foundry Command Line Interface (cf CLI) to log in, and can be found in 
 the **Credentials** section of the Cloud Foundry tile.
 
-1. Enter the Cloud Foundry administrator username.  This will be used to register the Crunchy PostgreSQL service with Cloud Foundry.  The username can be found in the **Credentials** section
-of the Cloud Foundry tile.
+1. Enter the Cloud Foundry administrator username. This will be used to register the Crunchy PostgreSQL service with Cloud Foundry. The username can be found in the **Credentials** section of the Cloud Foundry tile.
 
-1. Enter the Cloud Foundry administrator password.  This will be used to register the Crunchy PostgreSQL service with Cloud Foundry.  The password can be found in the **Credentials** section
-of the Cloud Foundry tile.
+1. Enter the Cloud Foundry administrator password. This will be used to register the Crunchy PostgreSQL service with Cloud Foundry. The password can be found in the **Credentials** section of the Cloud Foundry tile.
 
 1. Enable the **Cloud Foundry SSL Validation** checkbox if the Cloud Foundry SSL certificates should be validated.  
 Disable this checkbox if your Cloud Foundry deployment uses self-signed certificates.
@@ -146,7 +134,7 @@ The Crunchy PostgreSQL tile deploys a test application to Cloud Foundry to verif
 
 1. Click **Acceptance Tests Configuration**.
 
-1. Enter an org name that already exists in Cloud Foundry. Use Apps Manager  to find an org that already exists.
+1. Enter an org name that already exists in Cloud Foundry. Use Apps Manager to find an org that already exists.
 
 1. Enter a space name that already exists in Cloud Foundry. Use Apps Manager to find a space that already exists.
 
