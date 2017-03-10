@@ -35,42 +35,6 @@ across multiple availability zones.
 
 1. Click **Save**.
 
-###<a id='install-consul-sec'></a> Configure Consul Security
-
-Crunchy PostgreSQL uses Consul under the hood for service discovery, service health, key/value stores, DNS, and configuration file rendering.  To keep the system secure, Crunchy PostgreSQL uses SSL to authenticate and protect Consul agents. For information about generating SSL certificates, see the [Consul documentation](https://www.consul.io/docs/agent/encryption.html).
-
-1. Click **Consul Security**.        
-   ![Consul Security pane](consul-sec.png)
-
-1. In the **CA Certificate** field, add the Certificate Authority (CA) that you use to sign client/server certificates. This can be a self-signed CA or an official CA.
-
-1. In the **Client Certificate** field, add a signed client certificate. This certificate should have been signed by the CA Certificate you entered above.
-
-1. In the **Client Key** field, add the client key used to create the client certificate.
-
-1. In the **Server Certificate** field, add a signed server certificate. This certificate should have been signed by the CA Certificate you entered above.
-
-1. In the **Server Key** field add the server key used to create the server certificate.
-
-1. Click **Save**.
-
-###<a id='install-postgres-sec'></a> Configure PostgreSQL Security
-
-Crunchy PostgreSQL requires two password-protected roles for operations. You should use strong passwords for both of these roles:
-
-* **Replication Role** is used by read-replica servers to retrieve changes from the master database.
-* **Administrator Role** is the role used by the Broker to handle requests from Cloud Foundry.  
-This role manages databases, roles, and extensions.
-
-1. Click **PostgreSQL Security**.       
-   ![PostgreSQL Security pane](pgsql-sec.png)
-
-1. Enter a strong password for the **Replication Role** for PostgreSQL.
-
-1. Enter a strong password for the **Administrator Role** for PostgreSQL.
-
-1. Click **Save**.
-
 ###<a id='install-postgres-conf'></a> PostgreSQL Configuration
 
 You can tune Crunchy PostgreSQL in various ways to meet the demands of the apps that use it. This section provides guidance on how to tune these settings.
@@ -98,36 +62,6 @@ For more information, see the [official PostgreSQL documentation](https://www.po
 
 1. Click **Save**.
 
-###<a id='install-broker-sec'></a> Broker Security
-
-The Crunchy PostgreSQL service broker requires requests to supply a username and password. This password should be strong.
-
-1. Click **Broker Security**.    
-    ![Broker Security pane](broker-sec.png)
-
-1. Enter a strong password for the broker.
-
-1. Click **Save**.
-
-###<a id='install-cf-conf'></a> Cloud Foundry Configuration
-
-The Crunchy PostgreSQL tile registers its services with Cloud Foundry after deployment. This section gathers the information needed to do this.
-
-1. Click **Cloud Foundry Configuration**.    
-    ![Cloud Foundry Configuration pane](cf-conf.png)
-
-1. Enter the Cloud Foundry API URL. This is the URL used by the Cloud Foundry Command Line Interface (cf CLI) to log in, and can be found in 
-the **Credentials** section of the Cloud Foundry tile.
-
-1. Enter the Cloud Foundry administrator username. This will be used to register the Crunchy PostgreSQL service with Cloud Foundry. The username can be found in the **Credentials** section of the Cloud Foundry tile.
-
-1. Enter the Cloud Foundry administrator password. This will be used to register the Crunchy PostgreSQL service with Cloud Foundry. The password can be found in the **Credentials** section of the Cloud Foundry tile.
-
-1. Enable the **Cloud Foundry SSL Validation** checkbox if the Cloud Foundry SSL certificates should be validated.  
-Disable this checkbox if your Cloud Foundry deployment uses self-signed certificates.
-
-1. Click **Save**.
-
 ###<a id='install-acceptance-tests'></a> Acceptance Tests Configuration
 
 The Crunchy PostgreSQL tile deploys a test application to Cloud Foundry to verify the installation was successful. Perform the following steps to deploy the test application:
@@ -137,8 +71,6 @@ The Crunchy PostgreSQL tile deploys a test application to Cloud Foundry to verif
 1. Enter an org name that already exists in Cloud Foundry. Use Apps Manager to find an org that already exists.
 
 1. Enter a space name that already exists in Cloud Foundry. Use Apps Manager to find a space that already exists.
-
-1. Enter a domain name that already exists in Cloud Foundry. Use Apps Manager to find a domain that already exists.
 
 1. Click **Save**.
 
