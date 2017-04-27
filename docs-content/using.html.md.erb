@@ -7,30 +7,31 @@ This topic describes how to use Crunchy PostgreSQL for Pivotal Cloud Foundry (PC
 
 ##<a id='using'></a> Crunchy PostgreSQL Services and Plans
 
+Crunchy PostgreSQL is an on-demand, single-tenant PostgreSQL database service.  
 Crunchy PostgreSQL comes with one service:
 
-* postgresql-9.5
+* postgresql-9.5-odb
+
+This service includes:
+
+* PostgreSQL cluster (primary and replicas)
+* Load balancer
+* pgBackrest dedicated backup
+* Consul cluster
 
 ###<a id='using-pgsql-95'></a> PostgreSQL 9.5 Service
 
-The `postgresql-9.5` service comes with two plans:
+The `postgresql-9.5` service comes with four plans:
 
-* small-15
-* large-30
+* Small
+* Medium
+* Large
+* Extra-Large
 
-The `small-15` plan includes the following:
+Each plan corresponds to different server size set up by the operator who deployed 
+the service.  
 
-* PostgreSQL 9.5
-* Automated Backups
-* Load Balanced Read Replicas
-* Maximum Connections: 15
-
-The `large-30` plan includes the following:
-
-* PostgreSQL 9.5
-* Automated Backups
-* Load Balanced Read Replicas
-* Maximum Connections: 30
+Review each plan offering and choose the right database size for the application.
 
 ####<a id='using-pgsql-95'></a> Create PostgreSQL 9.5 Service
 
@@ -43,15 +44,21 @@ Creating a service requires four parameters used with the create-service request
 
 Optional parameters:
 
-  * `postgis` will install PostGIS 2.2 extensions.
-  * `db_encoding` will change the default decoding of the database. This is not recommended. 
+  * `postgis` installs PostGIS 2.2 extensions.
+  * `db_encoding` changes the default decoding of the database. Crunchy Data does not recommend this.
+  * `hba_addresses` a space-separated list of IP addresses and/or networks in CIDR format that will be authorized to connect to the service database as the service user.
 
 Follow the steps below to create and bind a service instance of Crunchy PostgreSQL to use with your app.
+
+
+<p class="note"><strong>Note</strong>: With an on-demand service, new servers are built 
+and configured when a new service is created. Therefore, this step takes some time to complete. 
+You can check the status of your service from the space dashboard in the Services tab.</p>
 
 1. Create a service instance using the following command as a template:
 
     <pre class="terminal">
-    cf create-service postgresql-9.5 small-15 my_pgsql -c '
+    cf create-service postgresql-9.5-odb small myService -c '
     {
         "db_name": "crunchydb",
         "db_username": "crunchy",
@@ -75,20 +82,22 @@ Follow the steps below to create and bind a service instance of Crunchy PostgreS
 
 ##<a id='disaster'></a> Backups
 
-Crunchy PostgreSQL uses `pgBackrest` for physical backups of the database.  Backups are taken every night at 1 AM, 7 days a week. Monday through Saturday will take incremental backups, while Sunday will create a new full backup.  
+Crunchy PostgreSQL uses `pgBackrest` for physical backups of the database.  
+Backups are taken every night at 1 am, 7 days a week. Monday through Saturday takes incremental backups, 
+and Sunday creates a new full backup.  
 
 All archives from the database server are stored on the dedicated backup host.  This means that databases can be restored to specific points in time.
 
-Currently, individual databases cannot be restored. All databases will be restored in the shared cluster.
+Currently, individual databases cannot be restored. All databases are restored in the shared cluster.
 
 ##<a id='disaster-recovery'></a> Restore Deltas
 
 These instructions demonstrate how the database can be restored using only deltas between the backup and the database.
 
 The following requires an administrator to SSH to the `postgresql-master` server. 
-For guidance on SSHing to servers in the service, see the [Pivotal documentation](https://docs.pivotal.io/pivotalcf/1-8/customizing/trouble-advanced.html).
+For guidance on SSHing to servers in the service, see the [Advanced Troubleshooting with the BOSH CLI](https://docs.pivotal.io/pivotalcf/1-8/customizing/trouble-advanced.html).
 
-1. First, ssh into the `postgresql-master` server using the `bosh` tool:
+1. SSH into the `postgresql-master` server using the `bosh` tool:
     <pre class="terminal">
     bosh ssh postgresql-master
     </pre>
@@ -131,14 +140,14 @@ For guidance on SSHing to servers in the service, see the [Pivotal documentation
     monit start postgresql
     </pre>
 
-##<a id='disaster-recovery'></a> Restore Point In Time
+##<a id='disaster-recovery'></a> Restore Point in Time
 
-These instructions will demonstrate how the database can be restored using a point in time.
+These instructions demonstrate how the database can be restored using a point in time.
 
 The following requires an administrator to SSH to the `postgresql-master` server.
 For guidance on SSHing to servers in the service, see the [Pivotal documentation](https://docs.pivotal.io/pivotalcf/1-8/customizing/trouble-advanced.html).
 
-1. First, ssh into the `postgresql-master` server using the `bosh` tool:
+1. First, SSH into the `postgresql-master` server using the `bosh` tool:
     <pre class="terminal">
     bosh ssh postgresql-master
     </pre>
@@ -183,4 +192,4 @@ For guidance on SSHing to servers in the service, see the [Pivotal documentation
 
 ##<a id='disaster-recovery'></a> pgBackrest Additional Information
 
-For more information regarding pgBackrest restorations, see the [official documentation](http://www.pgbackrest.org/user-guide.html).
+For more information about pgBackrest restorations, see the [official documentation](http://www.pgbackrest.org/user-guide.html).

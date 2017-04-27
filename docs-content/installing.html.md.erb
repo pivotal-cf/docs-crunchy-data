@@ -1,91 +1,177 @@
 ---
-title: Installing and Configuring Crunchy PostgreSQL For PCF
+title: Installing and Configuring Crunchy PostgreSQL for PCF
 owner: Crunchy Data 
 ---
 
-This topic describes how to install and configure Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF).
+This topic describes how to install and configure Crunchy PostgreSQL for Pivotal 
+Cloud Foundry (PCF).
 
 ##<a id='import'></a> Import the Tile to Ops Manager
 
-1. Download the product file from [Pivotal Network](https://network.pivotal.io/).
+1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/crunchy-postgresql/).
 
-1. Navigate to the Ops Manager Installation Dashboard and click **Import a Product** to upload the product file. 
+1. Navigate to the Ops Manager Installation Dashboard and click 
+**Import a Product** to upload the product file. 
 
-1. Click **Add** next to the uploaded Crunchy PostgreSQL for PCF tile in the Ops Manager **Available Products** view to add it to your staging area.
+1. Under the **Import a Product** button, click **+** next to the version number 
+of Crunchy PostgreSQL for PCF. This adds the tile to your staging area. 
 
 ##<a id='configure'></a> Configure the Service
 
-Click the newly added **Crunchy PostgreSQL** tile on the Ops Manager Installation Dashboard to open the configuration panes. Configure each section as described below.
+1. Click the newly added **Crunchy PostgreSQL** tile on the Ops Manager 
+Installation Dashboard to open the configuration panes. 
 
   ![Crunchy PostgreSQL tile](images/tile.png)
 
-###<a id='install-az'></a> Configure Availability Zones and Networks
+2. Configure each section as described below.
+
+###<a id='az-net'></a> Configure AZ and Network Assignments
 
 To make Crunchy PostgreSQL highly available, you must balance the service 
-across multiple availability zones.
+across multiple availability zones (AZs).
 
 1. Click **Assign AZs and Networks**.      
-    ![Assign AZs and Networks pane](az-net.png)
 
-1. Choose an availability zone to deploy singleton jobs.  
+    ![Assign AZs and Networks pane](assign-azs.png)
 
-1. Choose extra availability zones to balance jobs.  To maximize uptime, balance as many jobs as possible across multiple AZs.
+1. Choose an AZ to deploy singleton jobs.  This is a private 
+service network with a route to a public gateway.
 
-1. Choose the network to deploy Crunchy PostgreSQL to.
+1. Choose AZ to balance jobs.  This should be a private 
+service network with a route to a public gateway.  Crunchy Data recommends two or 
+more AZs when possible.
 
-1. Click **Save**.
+1. Choose the primary network where the `On-Demand Broker` will be deployed.
 
-###<a id='install-postgres-conf'></a> PostgreSQL Configuration
-
-You can tune Crunchy PostgreSQL in various ways to meet the demands of the apps that use it. This section provides guidance on how to tune these settings.
-
-1. Click **PostgreSQL Configuration**.     
-   ![PostgreSQL Configuration pane](pgsql-conf.png)
-
-1. Enter an integer for the **Max Connections** setting for PostgreSQL. This setting is the maximum allowed concurrent connections to the database. For more information, see the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/static/runtime-config-connection.html#GUC-MAX-CONNECTIONS).
-
-1. Enter the amount of memory allowed for **Shared Buffers**. This sets the amount of memory the database server uses for operations. For more information, see the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-SHARED-BUFFERS).
-
-1. Enter the amount of memory allowed for **Maintenance** processes such as **VACUUM** and **CREATE INDEX**.  
-For more information, see the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM).
-
-1. Enter the number of **WAL Segments** that that are kept on the database servers, for replication of the write-ahead log (WAL).
-For more information, see the [official PostgreSQL documentation](https://www.postgresql.org/docs/9.6/static/runtime-config-replication.html#GUC-WAL-KEEP-SEGMENTS).
-
-1. Enter the **Max WAL Size** before automatic WAL Checkpoint is activated.  
-For more information, see the [official PostgreSQL documentation](https://www.postgresql.org/docs/9.6/static/runtime-config-wal.html#GUC-MAX-WAL-SIZE).
-
-1. Enter the **Max Worker Processes** to specify how many concurrent processes the system can support.
-For more information, see the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/static/runtime-config-resource.html#GUC-MAX-WORKER-PROCESSES).
-
-1. Enter the amount of memory allowed for **WAL Buffers**. This memory is used to store WAL that hasn't been written to disk yet. For more information, see the [official PostgreSQL documentation](https://www.postgresql.org/docs/current/static/runtime-config-wal.html#GUC-WAL-BUFFERS).
+1. Choose the service network that On-Demand Broker will use to deploy VMs.  This 
+is a private service network with a route to a public gateway.
 
 1. Click **Save**.
 
-###<a id='install-acceptance-tests'></a> Acceptance Tests Configuration
+###<a id='global-properties'></a> Configure Global Properties
 
-The Crunchy PostgreSQL tile deploys a test application to Cloud Foundry to verify the installation was successful. Perform the following steps to deploy the test application:
+1. Click **Global Properties**.
 
-1. Click **Acceptance Tests Configuration**.
+    ![Global Properties](global-properties.png)
 
-1. Enter an org name that already exists in Cloud Foundry. Use Apps Manager to find an org that already exists.
+1. Configure the VM type for Consul servers.  These do not need to be big servers.
 
-1. Enter a space name that already exists in Cloud Foundry. Use Apps Manager to find a space that already exists.
+1. Configure the size of disk to be attached to the Consul server. Crunchy Data
+recommends at least 10&nbsp;GB.
+
+1. Configure the VM type for the PostgreSQL Load Balancer servers.  If unsure, 
+use the defaults.
+
+1. Configure the disk size for the PostgreSQL Load Balancer server.  If unsure, 
+use the defaults.
+
+1. Configure the VM type for the Smoke-Tests.  If unsure, use the defaults.
+
+1. Configure the disk size for the Smoke-Tests Server.  If unsure, use the defaults.
+
+1. Choose an AZ to deploy these services to.
 
 1. Click **Save**.
 
-###<a id='install-resources-conf'></a> Resource Configuration
+###<a id='small-plan'></a> Configure Small Plan Properties
 
-You can configure Crunchy PostgreSQL and its services to meet any application demand.  
-Choose VM types for the PostgreSQL servers that make sense for your requirements.
+1. Click **Small Plan Properties**.
 
-1. Click **Resource Config**.     
-    ![Resource Config pane](resource-conf.png)
+    ![Small Plan Properties](small-plan-properties.png)
+
+1. Configure the VM size for databases servers in the small plan.  This is the size 
+that will be used when a developer requests a small database plan.  If unsure, 
+use the defaults.
+
+1. Configure the VM size for databases servers in the small plan.  This is the disk 
+size that will be used when a developer requests a small database plan.  If unsure, 
+use the defaults.
+
+1. Click **Save**.
+
+###<a id='medium-plan'></a> Configure Medium Plan Properties
+
+1. Click **Medium Plan Properties**.
+
+    ![Medium Plan Properties](medium-plan-properties.png)
+
+1. Configure the VM size for databases servers in the medium plan.  This is the size 
+used when a developer requests a medium database plan.  If unsure, 
+use the defaults.
+
+1. Configure the VM size for databases servers in the medium plan.  This is the disk 
+size used when a developer requests a medium database plan.  If unsure, 
+use the defaults.
+
+1. Click **Save**.
+
+###<a id='large-plan'></a> Configure Large Plan Properties
+
+1. Click **Large Plan Properties**.
+
+    ![Large Plan Properties](large-plan-properties.png)
+
+1. Configure the VM size for databases servers in the large plan.  This is the size
+used when a developer requests a large database plan.  If unsure, 
+use the defaults.
+
+1. Configure the VM size for databases servers in the large plan.  This is the disk
+size used when a developer requests a large database plan.  If unsure,
+use the defaults.
+
+1. Click **Save**.
+
+###<a id='extra-large-plan'></a> Extra Large Plan Properties
+
+1. Click **Extra Large Plan Properties**.
+
+    ![Extra Large Plan Properties](extra-large-plan-properties.png)
+
+1. Configure the VM size for databases servers in the extra large plan.  This is 
+the size used when a developer requests a large database plan.  If 
+unsure, use the defaults.
+
+1. Configure the VM size for databases servers in the extra large plan.  This is 
+the disk size used when a developer requests an extra large database 
+plan.  If unsure, use the defaults.
+
+1. Click **Save**.
+
+###<a id='errands'></a> Configure Errands
+
+1. Click **Errands**.
+
+    ![errands](errands.png)
+
+1. Configure the errands that should be run after deployment of the service.  Crunchy Data
+recommends the defaults.  
+
+1. Click **Save**.
+
+###<a id='Resource Config'></a> Configure Resources
+
+1. Click **Resource Config**.
+
+    ![Resource Config](resource-config.png)
 
 1. Review the pre-populated recommended server sizes and make any changes.
 
 1. Click **Save**.
 
+###<a id='stemcell'></a> Configure Stemcell
+
+1. Click **Stemcell**.
+
+    ![Stemcell](stemcell.png)
+
+1. Upload the required stemcell for the service.  See [Bosh.io](https://www.bosh.io/stemcells) 
+for the complete list of stemcells.
+
+1. Click **Save**.
+
 ##<a id='install'></a> Install the Tile
 
-Return to the Ops Manager Installation Dashboard and click **Apply Changes** to install the Crunchy PostgreSQL for PCF tile.
+1. Return to the Ops Manager Installation Dashboard
+
+2. Click **Apply Changes** to 
+install the Crunchy PostgreSQL for PCF tile.
