@@ -1,10 +1,14 @@
-# Crunchy PostgreSQL Tile
+---
+title: Feature Overview of Crunchy PostgreSQL for PCF
+owner: Crunchy Data 
+---
 
-## Plans
 
-The Crunchy PostgreSQL Tile offers several out of the box (configurable) plans.  When deploying your Crunchy PostgreSQL Tile, operators have the opportunity to tune these plans for their enviornment needs.
+## <a id ="plans"></a>Plans
 
-### Sizes
+The Crunchy PostgreSQL Tile offers several out-of-the-box (configurable) plans.  When deploying your Crunchy PostgreSQL Tile, operators have the opportunity to tune these plans for their environment needs.
+
+### Plan Sizes
 
 The plans that are included are as follows:
 
@@ -16,7 +20,7 @@ The plans that are included are as follows:
 
 ### Recommendations
 
-The following table suggests recommendations for configuring plans.  These recommendations will not accomodate every application, however, provides a starting point for operators to configure their tile.
+The following table suggests recommendations for configuring plans.  These recommendations do not accommodate every application, however, they provide a starting point for operators to configure their tile.
 
 | Plan   | vCPU | Memory | Disk  |
 |--------|------|--------|-------|
@@ -25,11 +29,11 @@ The following table suggests recommendations for configuring plans.  These recom
 | Large  | 16   | 128GB  | 256GB |
 | XLarge | 32   | 256GB  | 512GB |
 
-**NOTE**: Part of High Availability is having room to grow the database.  Operators and developers should consider the rate at which they expect to grow.
+<p class="note"><strong>Note</strong>: Part of maintaining High Availability is having room to grow the database.  Therefore, operators and developers should consider the rate at which they expect to grow.</p>
 
 ### Cluster Configurations
 
-The following table provides information about the out-of-box cluster configurations:
+The following table provides information about the out-of-the-box cluster configurations:
 
 | Plan   | Replica | Connections |
 |--------|---------|-------------|
@@ -38,15 +42,17 @@ The following table provides information about the out-of-box cluster configurat
 | Large  | 1       | 200         |
 | XLarge | 1       | 500         |
 
-**NOTE**: These are not yet configurable.
+Note the current limitations for these cluster configurations:
 
-**NOTE**: There is a current limitation for only one replica at this time.
+   * They are not yet modifiable.
 
-**NOTE**: All replicas use `async` replication, currently `sync` replication is not yet configurable.
+   * There is a limitation of only one replica.
 
-## Automated Backups
+   * All replicas use `async` replication. `sync` replication is not yet configurable.
 
-The Crunchy PostgreSQL Tile uses [pgBackrest](https://github.com/pgbackrest/pgbackrest) as a dedicated backup and archiving host.  The tile comes pre-configured with nightly physical backups of the database server:
+## <a id="backups"></a>Automated Backups
+
+Crunchy PostgreSQL for PCF uses [pgBackrest](https://github.com/pgbackrest/pgbackrest) as a dedicated backup and archiving host.  The tile comes pre-configured with nightly physical backups of the database server:
 
 | Day       | Backup Type | Time     |
 |-----------|-------------|----------|
@@ -60,27 +66,27 @@ The Crunchy PostgreSQL Tile uses [pgBackrest](https://github.com/pgbackrest/pgba
 
 Although backups only happen once a day, PostgreSQL is continuously shipping the Write-Ahead-Logs (WAL) to the pgBackrest server.  This means that point-in-time recovery is possible, regardless of the schedule.
 
-These backups not only offer a peace of mind but are used in the tile frequently.  The Crunchy PostgreSQL Tile uses backups to create replicas in the stack.  By using backups in operations, we can ensure that backups and restores work.
+These backups not only offer peace of mind, but are used frequently by the tile. Crunchy PostgreSQL for PCF uses backups to create replicas in the stack.  By using backups in operations, we can ensure that backups and restores work.
 
-## Load Balancing
+## <a id="load-balance"></a>Load Balancing
 
-Crunchy PostgreSQL Tile uses `HAProxy` as the single point of entry to the database cluster.  Application developers must switch ports depending on the type of cluster they want to interact with.
+Crunchy PostgreSQL for PCF uses `HAProxy` as the single point of entry to the database cluster.  Application developers must switch ports depending on the type of cluster they want to interact with.
 
-### Reads vs Writes
+### Reads and Writes
 
 To query a `replica`, applications must use the `5433` port on the load balancer.  This will ensure that reads are redirected to the replica cluster.
 
-To use the `primary` cluster, application must use the `5432` port on the load balancer.  This will ensure that writes or reads are redirected to the primary cluster.
+To use the `primary` cluster, applications must use the `5432` port on the load balancer.  This will ensure that writes or reads are redirected to the primary cluster.
 
-By using port switching, applications have the ability to manage the types of database interactions their application needs.  When used correctly, this strategy allows applications to be more perfomant.
+By using port switching, applications have the ability to manage the types of database interactions their application needs.  When used correctly, this strategy allows applications to be more performant.
 
-## HA Model
+## <a id="ha-model"></a>HA Model
 
-The Crunchy PostgreSQL Tile provisions a cluster of PostgreSQL servers and self configures their roles (primary and many replicas).  This allows the servers to change their roles when failures are detected.
+Crunchy PostgreSQL for PCF provisions a cluster of PostgreSQL servers and self-configures their roles (primary and many replicas).  This allows the servers to change their roles when failures are detected.
 
-Throughout the Crunchy PostgreSQL Tile, configuration files are managed by `consul-template`.  Each of these templates watch different parts of the stack.  When changes are detected, configuration files automatically are rendered with the latest state.  This allows the system to be dynamic and change depending on state of services.
+Crunchy PostgreSQL for PCF configuration files are managed by `consul-template`.  Each of these templates watch different parts of the stack.  When changes are detected, configuration files automatically are rendered with the latest state.  This allows the system to be dynamic and change depending on state of services.
 
-For example, the PostgreSQL load balancer will automatically detect when replicas are added/removed and will reconfigure its pool to reflect the current state.
+For example, the PostgreSQL load balancer automatically detects when replicas are added or removed, and will reconfigure its pool to reflect the current state.
 
 ### Auto Failover
 
@@ -92,9 +98,9 @@ Failed former primaries are put into a fenced state.  This tells the rest of the
 
 ![Model](http://i.imgur.com/sxamhbn.png)
 
-## Tools
+## <a id="tools"></a>Tools
 
-The Crunchy PostgreSQL Tile offers two tools to help developers manage their system:
+Crunchy PostgreSQL for PCF offers two tools to help developers manage their system:
 
 * cf-pgadmin4
 * cf-pgloader
