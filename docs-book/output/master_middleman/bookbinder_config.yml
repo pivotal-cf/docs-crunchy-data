@@ -5,9 +5,9 @@
 :subnav_templates:
   crunchy: crunchy_subnav
 :template_variables: 
-:local_repo_dir: "/Users/ghanna/workspace/docs-crunchy-data"
+:local_repo_dir: "/Users/jday/workspace/docs-crunchy-data"
 :workspace: !ruby/object:Pathname
-  path: "/Users/ghanna/workspace/docs-crunchy-data/docs-book/output/master_middleman/source"
+  path: "/Users/jday/workspace/docs-crunchy-data/docs-book/output/master_middleman/source"
 :feedback_enabled: 
 :repo_link_enabled: true
 :repo_links:
