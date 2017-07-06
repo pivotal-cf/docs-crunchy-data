@@ -31,7 +31,7 @@ The `postgresql-9.5` service comes with four plans:
 Each plan corresponds to different server size set up by the operator who deployed 
 the service.  
 
-Review each plan offering and choose the right database size for the application.
+Review each plan offering and choose the right database size for the app.
 
 ####<a id='using-pgsql-95'></a> Create PostgreSQL 9.5 Service
 
@@ -67,7 +67,7 @@ You can check the status of your service from the space dashboard in the Service
     }'
     </pre>
 
-1. Bind the service instance to your application:
+1. Bind the service instance to your app:
 
     <pre class="terminal">
     cf bind-service APP_NAME SERVICE_INSTANCE_NAME
@@ -95,7 +95,7 @@ Currently, individual databases cannot be restored. All databases are restored i
 These instructions demonstrate how the database can be restored using only deltas between the backup and the database.
 
 The following requires an administrator to SSH to the primary `postgresql` server. 
-For guidance on using SSH to connect to servers in the service, see the [Advanced Troubleshooting with the BOSH CLI](https://docs.pivotal.io/pivotalcf/1-10/customizing/trouble-advanced.html).
+For guidance on using SSH to connect to servers in the service, see [Advanced Troubleshooting with the BOSH CLI](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html).
 
 1. SSH into the `consul` server using the `bosh` tool:
     <pre class="terminal">
@@ -105,7 +105,7 @@ For guidance on using SSH to connect to servers in the service, see the [Advance
 1. Identify the current primary by querying Consul:
     <pre class="terminal">
     sudo su - vcap
-    curl -sSL http://localhost:8500/v1/catalog/service/postgresql-zone1?tag=primary \
+    curl -sSL http<span>:</span>//localhost:8500/v1/catalog/service/postgresql-zone1?tag=primary \
     | jq -r '.[] | .Node'
     </pre>
 
@@ -166,7 +166,7 @@ For guidance on using SSH to connect to servers in the service, see the [Advance
 1. Identify the current primary by querying Consul:
     <pre class="terminal">
     sudo su - vcap
-    curl -sSL http://localhost:8500/v1/catalog/service/postgresql-zone1?tag=primary \
+    curl -sSL http<span>:</span>//localhost:8500/v1/catalog/service/postgresql-zone1?tag=primary \
     | jq -r '.[] | .Node'
     </pre>
 
