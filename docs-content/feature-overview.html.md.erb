@@ -1,28 +1,28 @@
 ---
 title: Feature Overview of Crunchy PostgreSQL for PCF
-owner: Crunchy Data 
+owner: Crunchy Data
 ---
 
-This topic describes the features of Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF).
+This topic describes the features of <%= vars.service_name_long -%>.
 
-## <a id ="plans"></a>Plans
+##<a id ="plans"></a> Plans
 
-The Crunchy PostgreSQL for PCF offers several out-of-the-box (configurable) plans. 
-When deploying your Crunchy PostgreSQL for PCF, operators have the opportunity to tune these plans for their environment needs.
+The <%= vars.service_name_long -%> offers several out-of-the-box (configurable) plans.
+When deploying the service, operators have the opportunity to tune these plans for the needs of the environment.
 
-### Plan Sizes
+###<a id='plansize'></a> Plan Sizes
 
 The plans that are included are as follows:
 
-* Small
-* Medium
-* Large
-* XLarge
+<% vars.service_plans.each do |service| -%>
+- <%= service %>
+<% end -%>
 
-### Recommendations
+###<a id='suggested_plan'></a> Suggested Plan Configuration
 
 The following table suggests recommendations for configuring plans.
-These recommendations do not accommodate every app. However, they provide a starting point for operators to configure their tile.
+These recommendations do not accommodate every app.
+However, they provide a starting point for operators to configure their tile.
 
 | Plan   | vCPU | Memory | Disk  |
 |--------|------|--------|-------|
@@ -32,9 +32,9 @@ These recommendations do not accommodate every app. However, they provide a star
 | XLarge | 32   | 256GB  | 512GB |
 
 <p class="note"><strong>Note</strong>: Part of maintaining high availability is having room to grow the database.
-   Therefore, operators and developers should consider the rate at which they expect to grow.</p>
+   Therefore, operators and developers should consider the rate at which they expect to grow and select an appropriate plan.</p>
 
-### Cluster Configurations
+###<a id='cluster_config'></a> Default Cluster Configurations
 
 The following table provides information about the out-of-the-box cluster configurations:
 
@@ -47,30 +47,29 @@ The following table provides information about the out-of-the-box cluster config
 
 The current limitations for these cluster configurations are as follows:
 
-   * The number of replicas and connections are not yet configurable.
+- The number of replicas and connections are not yet configurable.
+- All replicas use `async` replication. `sync` replication is not yet configurable.
 
-   * All replicas use `async` replication. `sync` replication is not yet configurable.
-
-## <a id="backups"></a>Automated Backups
+##<a id="backups"></a> Automated Backups
 <%= partial('backup_information') -%>
 
-## <a id="load-balance"></a>Load Balancing
+##<a id="load-balance"></a> Load Balancing
 
-Crunchy PostgreSQL for PCF uses `HAProxy` as the single point of entry to the database cluster.
+Crunchy PostgreSQL for PCF uses `HAProxy` as a single point of entry to the database cluster.
 App developers must switch ports depending on the type of cluster they want to interact with.
 
-### Reads and Writes
-
-To query a `replica`, apps must use the `5433` port on the load balancer.
-This ensures that reads are redirected to the replica cluster.
-
-To use the `primary` cluster, apps must use the `5432` port on the load balancer.
-This ensures that writes or reads are redirected to the primary cluster.
+###<a id='ports'></a> Selectively Accessing Clusters
 
 By using port switching, apps have the ability to manage the types of database interactions their app needs.
 When used correctly, this strategy allows apps to be more performant.
 
-## <a id="ha-model"></a>HA Model
+To query a `primary` cluster, apps must use the `5432` port on the load balancer.
+This ensures that writes or reads are redirected to the primary cluster.
+
+To query a `replica`, apps must use the `5433` port on the load balancer.
+This ensures that reads are redirected to the replica cluster.
+
+##<a id="ha-model"></a> HA Model
 
 Crunchy PostgreSQL for PCF provisions a cluster of PostgreSQL servers and self-configures their roles (primary and many replicas).
 This allows the servers to change their roles when failures are detected.
@@ -83,7 +82,7 @@ This allows the system to be dynamic and change depending on state of services.
 For example, the PostgreSQL load balancer automatically detects when replicas are added or removed,
 and reconfigures its pool to reflect the current state.
 
-### Auto Failover
+###<a id='autofailover'></a> Automatic Failover
 
 Crunchy Cluster Manager runs on each of the Consul Servers within the Crunchy PostgreSQL for PCF.
 The job of CCM is to detect failures of the PostgreSQL servers and to determine who is the best candidate to replace a failed primary.
@@ -98,7 +97,7 @@ An hourly `cron` job attempts to repair fenced servers and add them to the repli
 
 ![Model](http://i.imgur.com/sxamhbn.png)
 
-## <a id="tools"></a>Tools
+##<a id="tools"></a> Tools
 
 Crunchy PostgreSQL for PCF offers two tools to help developers manage their system:
 

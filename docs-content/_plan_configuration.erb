@@ -1,0 +1,17 @@
+1. Configure the VM size for databases servers in the <%= plan_size -%> plan.
+This option configures the size of the VM that is used when a developer requests a <%= plan_size -%> database plan.
+For recommendations, see [Recommended Sizes](#recommended-sizes) above.
+
+1. Configure the Disk size for databases servers in the <%= plan_size -%> plan.
+This option configures the disk size which is used when a developer requests a <%= plan_size -%> database plan.
+For recommendations, see [Recommended Sizes](#recommended-sizes) above.
+
+1. Configure the number of PostgreSQL servers for the <%= plan_size -%> plan.
+This option configures the number of deployed PostgreSQL servers.
+To ensure high availability, this should always be more than one.
+One server is always primary, the rest are additional replicas.
+
+1. Configure the quota of services allowed to be created with the <%= plan_size -%> plan.
+This option prevents users from creating too many services.
+
+1. Click **Save**.
