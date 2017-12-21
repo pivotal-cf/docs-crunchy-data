@@ -3,267 +3,37 @@ title: Crunchy PostgreSQL for PCF Release Notes
 owner: Crunchy Data
 ---
 
-This topic provides release notes for Crunchy PostgreSQL for Pivotal Cloud 
-Foundry (PCF).
+This topic provides release notes for <%= vars.service_name_long -%>.
 
 ##<a id="03.090510.106"></a> v03.090510.106
-
-**Release Date:** November 9, 2017
-
-Software features in this release:
-
-* PostgreSQL minor release: 9.5.10
-* Component upgrade: PG common 184 to 187
-* Component upgrade: Backrest 1.20 to 1.25
-* Component upgrade: pgaudit_analyze 1.0.6 to 1.0.7
-* Fixed bug with SSH known hosts causing backrest failures
-* Fixed bug where replicas reported failing to BOSH
-* Tuned failover code to fence failed primaries
-
-<p class="note"><strong>IMPORTANT</strong>: Crunchy PostgreSQL for PCF v3 relies on functionality
-released in PCF v1.9 – v1.12 to provide support for "on-demand broker" capability.<br><br>
-To implement this functionality, Crunchy Data has made material modifications to the
-Crunchy PostgreSQL for PCF manifest. It does not currently provide a direct upgrade path from
-Crunchy PostgreSQL for PCF v1 or v2 to Crunchy PostgreSQL for PCF v3. <br><br>
-To avoid user confusion, Crunchy Data has removed the
-Crunchy PostgreSQL for PCF v1 and v2 software versions from Pivotal Network.
-If you previously downloaded and deployed an evaluation copy of
-Crunchy PostgreSQL for PCF v1 or v2, Crunchy Data is happy to provide ongoing commercial subscription support.<br><br>
-If you are interested in commercial subscription support for Crunchy PostgreSQL for PCF,
-please contact <a href="mailto:sales@crunchydata.com">sales@crunchydata.com</a>.</p>
-</p>
+<%= partial('release_03.090510.106') -%>
 
 ##<a id="03.090509.105"></a> v03.090509.105
-
-**Release Date:** September 15, 2017
-
-Software features in this release:
-
-* Upgrade ODB SDK from 0.14.1 -> 0.17.0
-* Added service quotas for plans
-* Added configurable replica counts
-
-<p class="note"><strong>IMPORTANT</strong>: Crunchy PostgreSQL for PCF v3 relies on functionality
-released in PCF v1.9 – v1.12 to provide support for "on-demand broker" capability.<br><br>
-To implement this functionality, Crunchy Data has made material modifications to the
-Crunchy PostgreSQL for PCF manifest and does not currently provide a direct upgrade path from
-Crunchy PostgreSQL for PCF v1 or v2 to Crunchy PostgreSQL for PCF v3. <br><br>
-To avoid confusion between the two implementations, Crunchy Data has removed the
-Crunchy PostgreSQL for PCF v1 and v2 software versions from Pivotal Network.
-If you previously downloaded and deployed an evaluation copy of
-Crunchy PostgreSQL for PCF v1 or v2, Crunchy Data is happy to provide ongoing commercial subscription support.<br><br>
-If you are interested in commercial subscription support for Crunchy PostgreSQL for PCF,
-please contact <a href="mailto:sales@crunchydata.com">sales@crunchydata.com</a>.</p>
-</p>
+<%= partial('release_03.090509.105') -%>
 
 ##<a id="03.090509.104"></a> v03.090509.104
-
-**Release Date:** August 31, 2017
-
-New tags included in this release:
-
-* PostgreSQL 9.5.9
-
-Software fixes in this release:
-
-* Fixed bug where monit triggered PostgreSQL to restart
-* Fixed bug where failover didn't repair fenced servers
-
-<p class="note"><strong>IMPORTANT</strong>: Crunchy PostgreSQL for PCF v3 relies on functionality
-released in PCF v1.9 – v1.12 to provide support for "on-demand broker" capability.<br><br>
-To implement this functionality, Crunchy Data has made material modifications to the
-Crunchy PostgreSQL for PCF manifest and does not currently provide a direct upgrade path from
-Crunchy PostgreSQL for PCF v1 or v2 to Crunchy PostgreSQL for PCF v3. <br><br>
-To avoid confusion between the two implementations, Crunchy Data has removed the
-Crunchy PostgreSQL for PCF v1 and v2 software versions from Pivotal Network.
-If you previously downloaded and deployed an evaluation copy of
-Crunchy PostgreSQL for PCF v1 or v2, Crunchy Data is happy to provide ongoing commercial subscription support.<br><br>
-If you are interested in commercial subscription support for Crunchy PostgreSQL for PCF,
-please contact <a href="mailto:sales@crunchydata.com">sales@crunchydata.com</a>.</p>
-</p>
+<%= partial('release_03.090509.104') -%>
 
 ##<a id="03.090508.103"></a> v03.090508.103
-
-**Release Date:** August 16, 2017
-
-Security fixes included in this release:
-
-Update stemcell to patch Ubuntu Linux kernel security vulnerability (USN-3385-2)
-
-<p class="note"><strong>IMPORTANT</strong>: Crunchy PostgreSQL for PCF v3 relies on functionality
-released in PCF v1.9 – v1.12 to provide support for "on-demand broker" capability.<br><br>
-To implement this functionality, Crunchy Data has made material modifications to the
-Crunchy PostgreSQL for PCF manifest and does not currently provide a direct upgrade path from
-Crunchy PostgreSQL for PCF v1 or v2 to Crunchy PostgreSQL for PCF v3. <br><br>
-To avoid confusion between the two implementations, Crunchy Data has removed the
-Crunchy PostgreSQL for PCF v1 and v2 software versions from Pivotal Network.
-If you previously downloaded and deployed an evaluation copy of
-Crunchy PostgreSQL for PCF v1 or v2, Crunchy Data is happy to provide ongoing commercial subscription support.<br><br>
-If you are interested in commercial subscription support for Crunchy PostgreSQL for PCF,
-please contact <a href="mailto:sales@crunchydata.com">sales@crunchydata.com</a>.</p>
-</p>
+<%= partial('release_03.090508.103') -%>
 
 ##<a id="03.090508.102"></a> v03.090508.102
-
-**Release Date:** August 14, 2017
-
-Security fixes included in this release:
-
-* Security Vulnerability CVE-2017-7546: Empty password accepted in some authentication methods
-* Security Vulnerability CVE-2017-7547: The "pg_user_mappings" catalog view discloses passwords to users lacking server privileges
-* Security Vulnerability CVE-2017-7548: lo_put() function ignores ACLs
-
-New tags included in this release:
-
-* PostgreSQL 9.5.8
-* PostGIS 2.3.3
-* PgAudit 1.0.6
-* pgBackrest 1.20
-* PLR 8.3.0.17
-
-Software fixes in this release:
-
-* Fixed slow deprovision bug
-* Added primary to replica pool as a fallback for read queries
-* Added hourly job to repair fenced services
-* Fixed bug where HAProxy would not disconnect users after failover
-* Lifted replica limitation
-* Improved healthchecks for PostgreSQL
-
-<p class="note"><strong>IMPORTANT</strong>: Crunchy PostgreSQL for PCF v3 relies on functionality
-released in PCF v1.9 – v1.12 to provide support for "on-demand broker" capability.<br><br>
-To implement this functionality, Crunchy Data has made material modifications to the
-Crunchy PostgreSQL for PCF manifest and does not currently provide a direct upgrade path from
-Crunchy PostgreSQL for PCF v1 or v2 to Crunchy PostgreSQL for PCF v3. <br><br>
-To avoid confusion between the two implementations, Crunchy Data has removed the
-Crunchy PostgreSQL for PCF v1 and v2 software versions from Pivotal Network.
-If you previously downloaded and deployed an evaluation copy of
-Crunchy PostgreSQL for PCF v1 or v2, Crunchy Data is happy to provide ongoing commercial subscription support.<br><br>
-If you are interested in commercial subscription support for Crunchy PostgreSQL for PCF,
-please contact <a href="mailto:sales@crunchydata.com">sales@crunchydata.com</a>.</p>
-</p>
+<%= partial('release_03.090508.102') -%>
 
 ##<a id="03.090507.101"></a> v03.090507.101
-
-**Release Date:** July 14, 2017
-
-Security fixes included in this release:
-
-* Prevent the tile from logging manifests generated by the broker when deploying PostgreSQL,
-  because they contain sensitive information.
-
-<p class="note"><strong>IMPORTANT</strong>: Crunchy PostgreSQL for PCF v3 relies on functionality
-released in PCF v1.9 – v1.12 to provide support for "on-demand broker" capability.<br><br>
-To implement this functionality, Crunchy Data has made material modifications to the
-Crunchy PostgreSQL for PCF manifest and does not currently provide a direct upgrade path from
-Crunchy PostgreSQL for PCF v1 or v2 to Crunchy PostgreSQL for PCF v3. <br><br>
-To avoid confusion between the two implementations, Crunchy Data has removed the
-Crunchy PostgreSQL for PCF v1 and v2 software versions from Pivotal Network.
-If you previously downloaded and deployed an evaluation copy of
-Crunchy PostgreSQL for PCF v1 or v2, Crunchy Data is happy to provide ongoing commercial subscription support.<br><br>
-If you are interested in commercial subscription support for Crunchy PostgreSQL for PCF, 
-please contact <a href="mailto:sales@crunchydata.com">sales@crunchydata.com</a>.</p>
-</p>
-
+<%= partial('release_03.090507.101') -%>
 
 ##<a id="03.090507.100"></a> v03.090507.100
-
-**Release Date:** July 1, 2017
-
-<p class="note warning"><strong>WARNING!</strong> This is the GA release, and is not compatible with the previous releases, including the beta release.
-Please see detailed release notes below for more information.
-</p>
-
-Features included in this release (for details on features please read the feature-overview document):
-
-* High-availability model
-* Auto-failover
-* On-Demand single-tenant service
-
-<p class="note"><strong>IMPORTANT</strong>: Crunchy PostgreSQL for PCF v3 relies on functionality
-released in PCF v1.9 – v1.12 to provide support for "on-demand broker" capability.<br><br>
-To implement this functionality, Crunchy Data has made material modifications to the
-Crunchy PostgreSQL for PCF manifest and does not currently provide a direct upgrade path from
-Crunchy PostgreSQL for PCF v1 or v2 to Crunchy PostgreSQL for PCF v3. <br><br>
-To avoid confusion between the two implementations, Crunchy Data has removed the
-Crunchy PostgreSQL for PCF v1 and v2 software versions from Pivotal Network.
-If you previously downloaded and deployed an evaluation copy of
-Crunchy PostgreSQL for PCF v1 or v2, Crunchy Data is happy to provide ongoing commercial subscription support.<br><br>
-If you are interested in commercial subscription support for Crunchy PostgreSQL for PCF, please contact sales@crunchydata.com.
-</p>
+<%= partial('release_03.090507.100') -%>
 
 ##<a id="02.090507.101"></a> v02.090507.101
-
-**Release Date:** May 23, 2017
-
-<p class="note warning"><strong>WARNING!</strong> This is an updated beta release of the on-demand single-tenant service.
-This beta release is intended for evaluation purposes only.
-The final release of this software will include some changes that will likely break compatibility between this release and the next release.
-</p>
-
-Features included in this release (for details on features please read the feature-overview document):
-
-* On-Demand single-tenant service
-
-<p class="note"><strong>IMPORTANT</strong>: Crunchy PostgreSQL for PCF v2 relies on functionality
-released in PCF v1.9 – v1.12 to provide support for "on-demand broker" capability.<br><br>
-To implement this functionality, Crunchy Data has made material modifications to the
-Crunchy PostgreSQL for PCF manifest and does not currently provide a direct upgrade path from
-Crunchy PostgreSQL for PCF v1 to Crunchy PostgreSQL for PCF v2. <br><br>
-To avoid confusion between the two implementations, Crunchy Data has removed the
-Crunchy PostgreSQL for PCF v1 from Pivotal Network.
-If you previously downloaded and deployed an evaluation copy of
-Crunchy PostgreSQL for PCF v1, Crunchy Data is happy to provide ongoing commercial subscription support.<br><br>
-If you are interested in commercial subscription support for Crunchy PostgreSQL for PCF, please contact sales@crunchydata.com.
-</p>
+<%= partial('release_02.090507.101') -%>
 
 ##<a id="02.090507.100"></a> v02.090507.100
-
-**Release Date:** May 12, 2017
-
-<p class="note warning"><strong>WARNING!</strong> This is a beta release of the on-demand single-tenant service.
-This beta release is intended for evaluation purposes only.
-The final release of this software will include some changes that will likely break compatibility between this release and the next release.
-</p>
-
-Features included in this release:
-
-* On-Demand single-tenant service
-
-
-<p class="note"><strong>IMPORTANT</strong>: Crunchy PostgreSQL for PCF v2 relies on functionality
-released in PCF v1.9 – v1.12 to provide support for "on-demand broker" capability.<br><br>
-To implement this functionality, Crunchy Data has made material modifications to the
-Crunchy PostgreSQL for PCF manifest and does not currently provide a direct upgrade path from
-Crunchy PostgreSQL for PCF v1 to Crunchy PostgreSQL for PCF v2. <br><br>
-To avoid confusion between the two implementations, Crunchy Data has removed the
-Crunchy PostgreSQL for PCF v1 from Pivotal Network.
-If you previously downloaded and deployed an evaluation copy of
-Crunchy PostgreSQL for PCF v1, Crunchy Data is happy to provide ongoing commercial subscription support.<br><br>
-If you are interested in commercial subscription support for Crunchy PostgreSQL for PCF, please contact sales@crunchydata.com.</p>
+<%= partial('release_02.090507.100') -%>
 
 ##<a id="108"></a> v1.0.8
-
-**Release Date:** March 10, 2017
-
-Features included in this release:
-
-* Crunchy PostgreSQL v9.5 and PostGIS v2.3
-* Leader/follower PostgreSQL architecture
-* Load-balanced read replicas
-* Load-balanced brokers
-* Automated backups with pgBackrest
-* Self-managed databases
+<%= partial('release_108') -%>
 
 ##<a id="106"></a> v1.0.6
-
-**Release Date:** January 13, 2017
-
-Features included in this release:
-
-* Crunchy PostgreSQL v9.5 and PostGIS v2.2
-* Leader/follower PostgreSQL architecture
-* Load-balanced read replicas
-* Load-balanced brokers
-* Automated backups with pgBackrest
-* Self-managed databases
+<%= partial('release_106') -%>

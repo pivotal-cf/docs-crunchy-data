@@ -1,0 +1,30 @@
+The following service configuration parameters are supported during service creation:
+
+#### Required Parameters
+Creating a service requires four parameters used with the create-service request:
+
+* **db_name**: Name of the service database. Value must begin with a
+lowercase alpha character and may contain only lowercase alpha, numeric, and
+underscore characters.
+* **db_username**: Name of the service database user. This user will be
+the owner of the service database and be granted all privileges on the service
+database. Value must begin with a lowercase alpha character and may contain
+only lowercase alpha, numeric, and underscore characters.
+* **owner_name**: Contact name for the service database.
+* **owner_email**: Contact email for the service database.
+
+##### Optional Parameters
+
+* **db_encoding**: Database encoding for the service database.
+It is not recommended to change this value unless specifically required.
+Default is `UTF8`.
+* **hba_addresses**: A space separated list of IP addresses and/or networks
+in CIDR format that will be authorized to connect to the service database.
+* **monitoring**: Installs the monitoring extensions and Prometheus data store, true or false. Default is `false`.
+* **plr**: Enables PL/R extensions, true or false. Default is `false`.
+* **postgis**: Enable PostGIS <%= vars.postgis_version -%> extensions,
+true or false. Extensions include `postgis`, `postgis_tiger_geocoder`,
+`postgis_topology`, and `fuzzystrmatch`.
+Default is `true`.
+* **postgres_fdw**: Enables the PostgreSQL Foreign Data Wrapper, true or false. Default is `false`.
+* **redis_fdw**: Enables the Redis Foreign Data Wrapper, true or false. Default is `false`.

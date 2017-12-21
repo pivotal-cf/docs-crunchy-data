@@ -1,0 +1,59 @@
+These instructions demonstrate how the database can be restored using only deltas between the backup and the database.
+
+The following requires an administrator to SSH to the primary `postgresql` server.
+For guidance on using SSH to connect to servers in the service, see [Advanced Troubleshooting with the BOSH CLI](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html).
+
+1. SSH into the `consul` server using the `bosh` tool:
+    <pre class="terminal">
+    bosh ssh consul-server 0
+    </pre>
+
+1. Identify the current primary by querying Consul:
+    <pre class="terminal">
+    sudo su - vcap
+    curl -sSL http<span>:</span>//localhost:8500/v1/catalog/service/postgresql-zone1?tag=primary \
+    | jq -r '.[] | .Node'
+    </pre>
+
+1. SSH into the `postgresql` server (identified above) using the `bosh` tool:
+    <pre class="terminal">
+    bosh ssh postgresql-zone1 <index identified above>
+    </pre>
+
+1. Switch to the `root` user:
+    <pre class="terminal">
+    sudo -i
+    </pre>
+
+1. Stop `postgresql` services:
+    <pre class="terminal">
+    monit unmonitor postgresql
+    monit stop postgresql
+    </pre>
+
+1. Switch to the `vcap` user:
+    <pre class="terminal">
+    su - vcap
+    </pre>
+
+1. Verify that backups are available:
+    <pre class="terminal">
+    pgbackrest --stanza=main info
+    </pre>
+
+1. Restore the database:
+    <pre class="terminal">
+    pgbackrest --stanza=main --delta restore
+    </pre>
+
+1. Switch to `root`:
+    <pre class="terminal">
+    sudo -i
+    </pre>
+
+1. Start the database:
+    <pre class="terminal">
+    monit start postgresql
+    monit monitor postgresql
+    </pre>
+
