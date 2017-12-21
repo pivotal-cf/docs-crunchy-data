@@ -34,16 +34,39 @@ Review each plan offering and choose the correct database size for the applicati
 ###<a id='parameters'></a> Service Creation Parameters
 <%= partial('parameters') -%>
 
-###<a id='create_new'></a> Creating a New Service
+###<a id='create-new'></a> Creating a New Service
 <%=
 partial(
     :creating_service,
     :locals => {
         :service_name => vars.service_name,
-        :service_plan => vars.service_plans[0],
+        :service_plan => vars.service_plans[0]
     }
 )
 -%>
+
+##<a id='integration'></a> Integrating Applications
+
+The following sections provide information on integrating an application with
+a newly created service.
+
+###<a id='binding-key'></a> Service Bindings and Service Keys
+<%= partial('binding_vs_key') -%>
+
+###<a id='service-credentials'></a> Service Credentials
+<%= partial('service_credentials') -%>
+
+###<a id='binding'></a> Binding a PCF App to a Service
+<%= partial('binding') -%>
+
+###<a id='unbinding'></a> Unbinding a PCF App from a Service
+<%= partial('unbinding') -%>
+
+###<a id='service_keys'></a> Managing Service Keys
+<%= partial('service_keys') -%>
+
+##<a id='deleting'></a> Deleting a Service
+<%= partial('deleting') -%>
 
 ##<a id='disaster'></a> Backup and Restore
 <%= partial('backup_information') -%>

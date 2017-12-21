@@ -1,34 +1,32 @@
 Follow the steps below to create and bind a service instance of Crunchy PostgreSQL to use with your app.
 
-1. Create a service instance using the following command as a template:
+<p class="note"><strong>Note</strong>: With an on-demand service, new servers are built
+and configured when a new service is created. Therefore, this step takes some time to complete.
+You may check the status of your service from the space dashboard in the Services tab.
+Ensure that the status of the service is <strong>create succeeded</strong> before proceeding.
+</p>
 
-    <pre class="terminal">
-    cf create-service <%= service_name -%> <%= service_plan -%> myService -c '
-    {
+1. Create a service instance using the following command as a template:
+<pre class="terminal">
+cf create-service <%= service_name -%> <%= service_plan -%> myService -c '
+{
         "db_name": "testdb",
         "db_username": "example",
         "owner_name": "Firstname Lastname",
         "owner_email": "email@example.com"
-    }'
-    </pre>
+}'
+</pre>
 
-<p class="note"><strong>Note</strong>: With an on-demand service, new servers are built
-and configured when a new service is created. Therefore, this step takes some time to complete.
-You may check the status of your service from the space dashboard in the Services tab.
-Ensure that the status of the service is <strong>create succeeded</strong> before proceeding.</p>
+2. Bind the service instance to your app:
+<pre class="terminal">
+cf bind-service $APP_NAME $SERVICE_INSTANCE_NAME
+</pre>
 
-1. Bind the service instance to your app:
+3. Run the following commands to restage your app so that it can use the service:
+<pre class="terminal">
+cf bind-service $APP_NAME $SERVICE_NAME
+cf restage $APP_NAME
+</pre>
 
-    <pre class="terminal">
-    cf bind-service $APP_NAME $SERVICE_INSTANCE_NAME
-    </pre>
+The service will then be available for use within any bound application.
 
-1. Run the following commands to restage your app so that it can use the service:
-
-    <pre class="terminal">
-    cf bind-service $APP_NAME $SERVICE_NAME
-    cf restage $APP_NAME
-    </pre>
-
-<p class="note"><strong>Note</strong>: You must restage or restart your app before
-it will have access to the service credentials.</p>
