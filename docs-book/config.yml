@@ -4,6 +4,7 @@ layout_repo: docs-layout
 
 broken_link_exclusions: iefix|arrowhead
 repo_link_enabled: true
+feedback_enabled: true
 
 pcf_header: &local_pcf
   use_local_header: true
@@ -17,9 +18,20 @@ sections:
   - repository:
       name: docs-content
     directory: crunchy
-    subnav_template: crunchy_subnav.erb       
+    subnav_template: crunchy_subnav.erb
 
-template_variables:                             # optional
+template_variables:
+  tile_version: 1.90510.204
+  release_date: TBD
+  service_name: postgresql-9.5-odb
+  service_name_long: Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile
+  postgresql_version: 9.5
+  service_plans:
+    - small
+    - medium
+    - large
+    - extra-large
+  postgis_version: 2.2
 
 book_title: Partner Services Template
 book_repo: docs-book
