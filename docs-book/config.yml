@@ -23,7 +23,7 @@ sections:
 
 template_variables:
   book_title: Crunchy PostgreSQL for PCF
-  tile_version: 1.90510.106
+  tile_version: 1.90510.107
   release_date: November 9, 2017
   service_name: postgresql-9.5-odb
   service_name_long: Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile
