@@ -7,6 +7,10 @@ For guidance on using SSH to connect to servers in the service, see [Advanced Tr
     <pre class="terminal">
     bosh ssh consul-server 0
     </pre>
+    If using the Bosh V2 Client:
+    <pre class="terminal">
+    bosh -e $ENV ssh consul-server 0
+    </pre>
 
 1. Identify the current primary by querying Consul:
     <pre class="terminal">
@@ -18,6 +22,10 @@ For guidance on using SSH to connect to servers in the service, see [Advanced Tr
 1. SSH into the `postgresql` server (identified above) using the `bosh` tool:
     <pre class="terminal">
     bosh ssh postgresql-zone1 <index identified above>
+    </pre>
+    If using the Bosh V2 Client:
+    <pre class="terminal">
+    bosh -e $ENV ssh postgresql-zone1 <index identified above>
     </pre>
 
 1. Switch to the `root` user:
