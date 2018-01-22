@@ -15,17 +15,17 @@ For guidance on using SSH to connect to servers in the service, see the [Advance
 1. Identify the current primary by querying Consul:
     <pre class="terminal">
     sudo su - vcap
-    curl -sSL http<span>:</span>//localhost:8500/v1/catalog/service/postgresql-0?tag=primary \
+    curl -sSL http<span>:</span>//localhost:8500/v1/catalog/service/postgresql-zone1?tag=primary \
     | jq -r '.[] | .Node'
     </pre>
 
 1. SSH into the `postgresql` server (identified above) using the `bosh` tool:
     <pre class="terminal">
-    bosh ssh postgresql 0 <index identified above>
+    bosh ssh postgresql <index identified above>
     </pre>
     If using the Bosh V2 Client:
     <pre class="terminal">
-    bosh -e $ENV ssh postgresql 0 <index identified above>
+    bosh -e $ENV ssh postgresql <index identified above>
     </pre>
 
 1. Switch to the `root` user:
