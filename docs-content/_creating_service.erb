@@ -7,7 +7,7 @@ Ensure that the status of the service is <strong>create succeeded</strong> befor
 </p>
 
 1. Create a service instance using the following command as a template:
-<pre class="terminal">
+```
 cf create-service <%= service_name -%> <%= service_plan -%> myService -c '
 {
         "db_name": "testdb",
@@ -15,18 +15,18 @@ cf create-service <%= service_name -%> <%= service_plan -%> myService -c '
         "owner_name": "Firstname Lastname",
         "owner_email": "email@example.com"
 }'
-</pre>
+```
 
 2. Bind the service instance to your app:
-<pre class="terminal">
-cf bind-service $APP_NAME $SERVICE_INSTANCE_NAME
-</pre>
+```
+cf bind-service <APP_NAME> <SERVICE_INSTANCE_NAME>
+```
 
 3. Run the following commands to restage your app so that it can use the service:
-<pre class="terminal">
-cf bind-service $APP_NAME $SERVICE_NAME
-cf restage $APP_NAME
-</pre>
+```
+cf bind-service <APP_NAME> <SERVICE_INSTANCE_NAME>
+cf restage <APP_NAME>
+```
 
 The service will then be available for use within any bound application.
 
