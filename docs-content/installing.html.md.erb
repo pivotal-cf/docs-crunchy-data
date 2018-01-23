@@ -29,9 +29,9 @@ Configure each section as described below.
 To make Crunchy PostgreSQL highly available, you must balance the service
 across multiple availability zones (AZs).
 
-1. Click **Assign AZs and Networks**.
-
 ![Assign AZs and Networks pane](assign-azs.png)
+
+1. Click **Assign AZs and Networks**.
 
 1. Choose an AZ to deploy singleton jobs.  This is a private
 service network with a route to a public gateway.
@@ -87,15 +87,11 @@ The following table can be used as a baseline when configuring the plans for use
 
 ####<a id='small-plan'></a> Configure Small Plan Properties
 
-1. Click **Small Plan Properties**.
-
 ![Small Plan Properties](small-plan-properties.png)
 
 <%= partial(:plan_configuration, :locals => {:plan_size => 'small'}) -%>
 
 ####<a id='medium-plan'></a> Configure Medium Plan Properties
-
-1. Click **Medium Plan Properties**.
 
 ![Medium Plan Properties](medium-plan-properties.png)
 
@@ -103,15 +99,11 @@ The following table can be used as a baseline when configuring the plans for use
 
 ####<a id='large-plan'></a> Configure Large Plan Properties
 
-1. Click **Large Plan Properties**.
-
 ![Large Plan Properties](large-plan-properties.png)
 
 <%= partial(:plan_configuration, :locals => {:plan_size => 'large'}) -%>
 
 ####<a id='extra-large-plan'></a> Extra Large Plan Properties
-
-1. Click **Extra Large Plan Properties**.
 
 ![Extra Large Plan Properties](extra-large-plan-properties.png)
 
@@ -119,9 +111,9 @@ The following table can be used as a baseline when configuring the plans for use
 
 ###<a id='errands'></a> Configure Errands
 
-1. Click **Errands**.
-
 ![errands](errands.png)
+
+1. Click **Errands**.
 
 1. Configure the errands that should be run after deployment of the service.
 Crunchy Data recommends the defaults.
@@ -130,9 +122,9 @@ Crunchy Data recommends the defaults.
 
 ###<a id='Resource Config'></a> Configure Resources
 
-1. Click **Resource Config**.
-
 ![Resource Config](resource-config.png)
+
+1. Click **Resource Config**.
 
 1. Review the pre-populated recommended server sizes and make any changes.
 
@@ -140,9 +132,9 @@ Crunchy Data recommends the defaults.
 
 ###<a id='stemcell'></a> Configure Stemcell
 
-1. Click **Stemcell**.
-
 ![Stemcell](stemcell.png)
+
+1. Click **Stemcell**.
 
 1. Upload the required stemcell for the service.
 See [Pivotal.io](https://network.pivotal.io/products/stemcells) for the complete list of stemcells.
