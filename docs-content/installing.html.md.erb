@@ -1,130 +1,206 @@
 ---
 title: Installing and Configuring Crunchy PostgreSQL for PCF
-owner: Crunchy Data
+owner: Crunchy Data 
 ---
 
-This topic describes how to install and configure <%= vars.service_name_long -%>.
+This topic describes how to install and configure Crunchy PostgreSQL for Pivotal 
+Cloud Foundry (PCF).
 
 ##<a id='import'></a> Import the Tile to Ops Manager
 
-1. Download the <%= vars.service_name_long -%> file from [Pivotal Network](https://network.pivotal.io/products/crunchy-postgresql/).
+1. Download the product file from [Pivotal Network](https://network.pivotal.io/products/crunchy-postgresql/).
 
-1. Navigate to the Ops Manager Installation Dashboard and click
-**Import a Product** to upload the product file.
+1. Navigate to the Ops Manager Installation Dashboard and click 
+**Import a Product** to upload the product file. 
 
-1. Under the **Import a Product** button, click **+** next to the version number
-of Crunchy PostgreSQL for PCF. This adds the tile to your staging area.
+1. Under the **Import a Product** button, click **+** next to the version number 
+of Crunchy PostgreSQL for PCF. This adds the tile to your staging area. 
 
-##<a id='configure'></a> Configuring the Service
+##<a id='configure'></a> Configure the Service
 
-Click the newly added **Crunchy PostgreSQL** tile on the Ops Manager
-Installation Dashboard to open the configuration panes.
+1. Click the newly added **Crunchy PostgreSQL** tile on the Ops Manager 
+Installation Dashboard to open the configuration panes. 
 
-![Crunchy PostgreSQL tile](images/tile.png)
+    ![Crunchy PostgreSQL tile](images/tile.png)
 
-Configure each section as described below.
+1. Configure each section as described below.
 
 ###<a id='az-net'></a> Configure AZ and Network Assignments
 
-To make Crunchy PostgreSQL highly available, you must balance the service
+To make Crunchy PostgreSQL highly available, you must balance the service 
 across multiple availability zones (AZs).
 
-![Assign AZs and Networks pane](assign-azs.png)
+1. Click **Assign AZs and Networks**.      
 
-1. Click **Assign AZs and Networks**.
+    ![Assign AZs and Networks pane](assign-azs.png)
 
-1. Choose an AZ to deploy singleton jobs.  This is a private
+1. Choose an AZ to deploy singleton jobs.  This is a private 
 service network with a route to a public gateway.
 
-1. Choose AZ to balance jobs.  This should be a private
-service network with a route to a public gateway.  Crunchy Data recommends two or
+1. Choose AZ to balance jobs.  This should be a private 
+service network with a route to a public gateway.  Crunchy Data recommends two or 
 more AZs when possible.
 
 1. Choose the primary network where the `On-Demand Broker` will be deployed.
 
-1. Choose the service network that On-Demand Broker will use to deploy VMs.  This
+1. Choose the service network that On-Demand Broker will use to deploy VMs.  This 
 is a private service network with a route to a public gateway.
 
 1. Click **Save**.
 
 ###<a id='global-properties'></a> Configure Global Properties
 
-![Global Properties](global-properties.png)
-
 1. Click **Global Properties**.
 
-1. Configure the VM type for Consul servers.
-These do not need to be large servers.
+    ![Global Properties](global-properties.png)
 
-1. Configure the size of disk to be attached to the Consul server.
-Crunchy Data recommends at least 10&nbsp;GB.
+1. Configure the VM type for Consul servers.  These do not need to be big servers.
 
-1. Configure the VM type for the PostgreSQL Load Balancer servers.
-If unsure, use the defaults.
+1. Configure the size of disk to be attached to the Consul server. Crunchy Data
+recommends at least 10&nbsp;GB.
 
-1. Configure the disk size for the PostgreSQL Load Balancer server.
-If unsure, use the defaults.
+1. Configure the VM type for the PostgreSQL Load Balancer servers.  If unsure, 
+use the defaults.
 
-1. Configure the VM type for the Smoke-Tests.
-If unsure, use the defaults.
+1. Configure the disk size for the PostgreSQL Load Balancer server.  If unsure, 
+use the defaults.
 
-1. Configure the disk size for the Smoke-Tests Server.
-If unsure, use the defaults.
+1. Configure the VM type for the Smoke-Tests.  If unsure, use the defaults.
 
-1. Choose an AZ in which to deploy these services.
+1. Configure the disk size for the Smoke-Tests Server.  If unsure, use the defaults.
+
+1. Choose an AZ to deploy these services to.
 
 1. Click **Save**.
 
-###<a id='recommended-sizes'></a> Configure Plan Properties
+###<a id='recommended-sizes'></a> Recommended Sizes
 
-The plans made available to developers must be configured prior to deployment.
+The plans made available to developers need to be configured prior to deployment.
 The following table can be used as a baseline when configuring the plans for use:
 
-<%= partial('plan_table') -%>
+| Plan   | vCPU | Memory | Disk  |
+|--------|------|--------|-------|
+| Small  | 4    | 32&nbsp;GB   | 64&nbsp;GB  |
+| Medium | 8    | 64&nbsp;GB   | 128&nbsp;GB |
+| Large  | 16   | 128&nbsp;GB  | 256&nbsp;GB |
+| XLarge | 32   | 256&nbsp;GB  | 512&nbsp;GB |
 
 <p class="note"><strong>Note</strong>: Do not set any PostgreSQL or pgBackrest VMs to less than 4&nbsp;GB of memory.</p>
 <p class="note"><strong>Note</strong>: Do not set any PostgreSQL or pgBackrest VMs to fewer than 2 cores.</p>
 
-####<a id='small-plan'></a> Configure Small Plan Properties
+###<a id='small-plan'></a> Configure Small Plan Properties
 
-![Small Plan Properties](small-plan-properties.png)
+1. Click **Small Plan Properties**.
 
-<%= partial(:plan_configuration, :locals => {:plan_size => 'small'}) -%>
+    ![Small Plan Properties](small-plan-properties.png)
 
-####<a id='medium-plan'></a> Configure Medium Plan Properties
+1. Configure the VM size for databases servers in the small plan.  This is the size 
+that is used when a developer requests a small database plan.  For recommendations, 
+see [Recommended Sizes](#recommended-sizes) above.
 
-![Medium Plan Properties](medium-plan-properties.png)
+1. Configure the Disk size for databases servers in the small plan.  This is the disk 
+size that is used when a developer requests a small database plan.  For recommendations, 
+see [Recommended Sizes](#recommended-sizes) above.
 
-<%= partial(:plan_configuration, :locals => {:plan_size => 'medium'}) -%>
+1. Configure the number of PostgreSQL servers for the small plan.  This is the number 
+of PostgreSQL servers deployed.  To ensure high availability, this should 
+always be more than one.  One server is always primary, the rest are 
+additional replicas.
 
-####<a id='large-plan'></a> Configure Large Plan Properties
+1. Configure the quota of services allowed to be created with the small plan.  This 
+number prevents users from creating too many services. 
 
-![Large Plan Properties](large-plan-properties.png)
 
-<%= partial(:plan_configuration, :locals => {:plan_size => 'large'}) -%>
+1. Click **Save**.
 
-####<a id='extra-large-plan'></a> Extra-Large Plan Properties
+###<a id='medium-plan'></a> Configure Medium Plan Properties
 
-![Extra-Large Plan Properties](extra-large-plan-properties.png)
+1. Click **Medium Plan Properties**.
 
-<%= partial(:plan_configuration, :locals => {:plan_size => 'extra-large'}) -%>
+    ![Medium Plan Properties](medium-plan-properties.png)
+
+1. Configure the VM size for databases servers in the medium plan.  This is the size
+that is used when a developer requests a medium database plan.  For recommendations,
+see [Recommended Sizes](#recommended-sizes) above.
+
+1. Configure the Disk size for databases servers in the medium plan.  This is the disk
+size that is used when a developer requests a medium database plan.  For recommendations,
+see [Recommended Sizes](#recommended-sizes) above.
+
+1. Configure the number of PostgreSQL servers for the medium plan.  This is the number
+of PostgreSQL servers deployed.  To ensure high availability, this should
+always be more than one.  One server is always primary, the rest are
+additional replicas.
+
+1. Configure the quota of services allowed to be created with the medium plan.  This
+number prevents users from creating too many services.
+
+1. Click **Save**.
+
+###<a id='large-plan'></a> Configure Large Plan Properties
+
+1. Click **Large Plan Properties**.
+
+    ![Large Plan Properties](large-plan-properties.png)
+
+1. Configure the VM size for databases servers in the large plan.  This is the size
+that is used when a developer requests a large database plan.  For recommendations,
+see [Recommended Sizes](#recommended-sizes) above.
+
+1. Configure the Disk size for databases servers in the large plan.  This is the disk
+size that is used when a developer requests a large database plan.  For recommendations,
+see [Recommended Sizes](#recommended-sizes) above.
+
+1. Configure the number of PostgreSQL servers for the large plan.  This is the number
+of PostgreSQL servers deployed.  To ensure high availability, this should
+always be more than one.  One server is always primary, the rest are
+additional replicas.
+
+1. Configure the quota of services allowed to be created with the large plan.  This
+number prevents users from creating too many services.
+
+1. Click **Save**.
+
+###<a id='extra-large-plan'></a> Extra Large Plan Properties
+
+1. Click **Extra Large Plan Properties**.
+
+    ![Extra Large Plan Properties](extra-large-plan-properties.png)
+
+1. Configure the VM size for databases servers in the extra-large plan.  This is the size
+that is used when a developer requests a extra-large database plan.  For recommendations,
+see [Recommended Sizes](#recommended-sizes) above.
+
+1. Configure the Disk size for databases servers in the extra-large plan.  This is the disk
+size that is used when a developer requests a extra-large database plan.  For recommendations,
+see [Recommended Sizes](#recommended-sizes) above.
+
+1. Configure the number of PostgreSQL servers for the extra-large plan.  This is the number
+of PostgreSQL servers deployed.  To ensure high availability, this should
+be more than one.  One server is always primary, the rest are
+additional replicas.
+
+1. Configure the quota of services allowed to be created with the extra-large plan.  This
+number prevents users from creating too many services.
+
+1. Click **Save**.
 
 ###<a id='errands'></a> Configure Errands
 
-![errands](errands.png)
-
 1. Click **Errands**.
 
-1. Configure the errands that should be run after deployment of the service.
-Crunchy Data recommends the defaults.
+    ![errands](errands.png)
+
+1. Configure the errands that should be run after deployment of the service.  Crunchy Data
+recommends the defaults.  
 
 1. Click **Save**.
 
 ###<a id='Resource Config'></a> Configure Resources
 
-![Resource Config](resource-config.png)
-
 1. Click **Resource Config**.
+
+    ![Resource Config](resource-config.png)
 
 1. Review the pre-populated recommended server sizes and make any changes.
 
@@ -132,12 +208,12 @@ Crunchy Data recommends the defaults.
 
 ###<a id='stemcell'></a> Configure Stemcell
 
-![Stemcell](stemcell.png)
-
 1. Click **Stemcell**.
 
-1. Upload the required stemcell for the service.
-See [Pivotal.io](https://network.pivotal.io/products/stemcells) for the complete list of stemcells.
+    ![Stemcell](stemcell.png)
+
+1. Upload the required stemcell for the service.  See [Bosh.io](https://www.bosh.io/stemcells) 
+for the complete list of stemcells.
 
 1. Click **Save**.
 
@@ -145,5 +221,5 @@ See [Pivotal.io](https://network.pivotal.io/products/stemcells) for the complete
 
 1. Return to the Ops Manager Installation Dashboard
 
-2. Click **Apply Changes** to
+2. Click **Apply Changes** to 
 install the Crunchy PostgreSQL for PCF tile.
