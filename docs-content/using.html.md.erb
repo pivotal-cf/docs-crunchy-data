@@ -3,13 +3,13 @@ title: Using Crunchy PostgreSQL for PCF
 owner: Crunchy Data
 ---
 
-This topic describes how to use <%= vars.service_name_long -%>.
+This topic describes how to use Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile.
 
 ##<a id='using'></a> Crunchy PostgreSQL Service
-<%= vars.service_name_long -%> is an on-demand, single-tenant PostgreSQL database service.
+Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile is an on-demand, single-tenant PostgreSQL database service.
 Crunchy PostgreSQL comes with one service:
 
-* <%= vars.service_name %>
+* postgresql-9.5-odb
 
 This service includes:
 
@@ -19,11 +19,14 @@ This service includes:
 * Consul cluster
 
 ###<a id='service-info'></a> PostgreSQL Plans
-The `<%= vars.service_name -%>` service comes with several plans:
+The `postgresql-9.5-odb` service comes with several plans:
 
-<% vars.service_plans.each do |service| -%>
-- <%= service %>
-<% end -%>
+<ul>
+  <li>small</li>
+  <li>medium</li>
+  <li>large</li>
+  <li>extra-large</li>
+</ul>
 
 Each plan corresponds to different server size set up by the operator when the
 service was deployed.
@@ -38,13 +41,7 @@ Review each plan offering and choose the correct database size for the applicati
 
 ###<a id='create-new'></a> Creating a New Service
 <%=
-partial(
-    :creating_service,
-    :locals => {
-        :service_name => vars.service_name,
-        :service_plan => vars.service_plans[0]
-    }
-)
+partial('creating_service')
 -%>
 
 ##<a id='integration'></a> Integrating Applications
