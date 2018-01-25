@@ -8,7 +8,7 @@ Ensure that the status of the service is <strong>create succeeded</strong> befor
 
 1. Create a service instance using the following command as a template:
 ```
-cf create-service <%= service_name -%> <%= service_plan -%> myService -c '
+cf create-service postgresql-9.5-odb small myService -c '
 {
         "db_name": "testdb",
         "db_username": "example",
@@ -28,4 +28,3 @@ cf restage <APP_NAME>
 ```
 
 The service will then be available for use within any bound application.
-
