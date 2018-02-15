@@ -9,16 +9,13 @@ This topic describes how to install and configure Crunchy PostgreSQL for Pivotal
 
 1. Download the Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile file from [Pivotal Network](https://network.pivotal.io/products/crunchy-postgresql/).
 
-1. Navigate to the Ops Manager Installation Dashboard and click
-**Import a Product** to upload the product file.
+1. Navigate to the Ops Manager Installation Dashboard and click **Import a Product** to upload the product file.
 
-1. Under the **Import a Product** button, click **+** next to the version number
-of Crunchy PostgreSQL for PCF. This adds the tile to your staging area.
+1. Under the **Import a Product** button, click **+** next to the version number of Crunchy PostgreSQL for PCF. This adds the tile to your staging area.
 
 ##<a id='configure'></a> Configuring the Service
 
-Click the newly added **Crunchy PostgreSQL** tile on the Ops Manager
-Installation Dashboard to open the configuration panes.
+Click the newly added **Crunchy PostgreSQL** tile on the Ops Manager Installation Dashboard to open the configuration panes.
 
 ![Crunchy PostgreSQL tile](images/tile.png)
 
@@ -26,24 +23,19 @@ Configure each section as described below.
 
 ###<a id='az-net'></a> Configure AZ and Network Assignments
 
-To make Crunchy PostgreSQL highly available, you must balance the service
-across multiple availability zones (AZs).
+To make Crunchy PostgreSQL highly available, you must balance the service across multiple availability zones (AZs).
 
 ![Assign AZs and Networks pane](assign-azs.png)
 
 1. Click **Assign AZs and Networks**.
 
-1. Choose an AZ to deploy singleton jobs.  This is a private
-service network with a route to a public gateway.
+1. Choose an AZ to deploy singleton jobs. This is a private service network with a route to a public gateway.
 
-1. Choose AZ to balance jobs.  This should be a private
-service network with a route to a public gateway.  Crunchy Data recommends two or
-more AZs when possible.
+1. Choose AZ to balance jobs. This should be a private service network with a route to a public gateway. Crunchy Data recommends two or more AZs when possible.
 
 1. Choose the primary network where the `On-Demand Broker` will be deployed.
 
-1. Choose the service network that On-Demand Broker will use to deploy VMs.  This
-is a private service network with a route to a public gateway.
+1. Choose the service network that On-Demand Broker will use to deploy VMs. This is a private service network with a route to a public gateway.
 
 1. Click **Save**.
 
@@ -53,23 +45,17 @@ is a private service network with a route to a public gateway.
 
 1. Click **Global Properties**.
 
-1. Configure the VM type for Consul servers.
-These do not need to be large servers.
+1. Configure the VM type for Consul servers. These do not need to be large servers.
 
-1. Configure the size of disk to be attached to the Consul server.
-Crunchy Data recommends at least 10&nbsp;GB.
+1. Configure the size of disk to be attached to the Consul server. Crunchy Data recommends at least 10&nbsp;GB.
 
-1. Configure the VM type for the PostgreSQL Load Balancer servers.
-If unsure, use the defaults.
+1. Configure the VM type for the PostgreSQL Load Balancer servers. If unsure, use the defaults.
 
-1. Configure the disk size for the PostgreSQL Load Balancer server.
-If unsure, use the defaults.
+1. Configure the disk size for the PostgreSQL Load Balancer server. If unsure, use the defaults.
 
-1. Configure the VM type for the Smoke-Tests.
-If unsure, use the defaults.
+1. Configure the VM type for the Smoke-Tests. If unsure, use the defaults.
 
-1. Configure the disk size for the Smoke-Tests Server.
-If unsure, use the defaults.
+1. Configure the disk size for the Smoke-Tests Server. If unsure, use the defaults.
 
 1. Choose an AZ in which to deploy these services.
 
@@ -77,13 +63,12 @@ If unsure, use the defaults.
 
 ###<a id='recommended-sizes'></a> Configure Plan Properties
 
-The plans made available to developers must be configured prior to deployment.
-The following table can be used as a baseline when configuring the plans for use:
+The plans made available to developers must be configured prior to deployment. The following table can be used as a baseline when configuring the plans for use:
 
 <%= partial('plan_table') -%>
 
-<p class="note"><strong>Note</strong>: Do not set any PostgreSQL or pgBackrest VMs to less than 4&nbsp;GB of memory.</p>
-<p class="note"><strong>Note</strong>: Do not set any PostgreSQL or pgBackrest VMs to fewer than 2 cores.</p>
+<p class="note"><strong>Note:</strong> Do not set any PostgreSQL or pgBackrest VMs to less than 4&nbsp;GB of memory.</p>
+<p class="note"><strong>Note:</strong> Do not set any PostgreSQL or pgBackrest VMs to fewer than 2 cores.</p>
 
 ####<a id='small-plan'></a> Configure Small Plan Properties
 
@@ -115,8 +100,7 @@ The following table can be used as a baseline when configuring the plans for use
 
 1. Click **Errands**.
 
-1. Configure the errands that should be run after deployment of the service.
-Crunchy Data recommends the defaults.
+1. Configure the errands that should be run after deployment of the service. Crunchy Data recommends the defaults.
 
 1. Click **Save**.
 
@@ -144,5 +128,4 @@ Crunchy Data recommends the defaults.
 
 1. Return to the Ops Manager Installation Dashboard
 
-2. Click **Apply Changes** to
-install the Crunchy PostgreSQL for PCF tile.
+2. Click **Apply Changes** to install the Crunchy PostgreSQL for PCF tile.
