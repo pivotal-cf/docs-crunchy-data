@@ -17,11 +17,11 @@ For guidance on using SSH to connect to servers in the service, see [Advanced Tr
 1. Identify the current primary by querying Consul:
     <pre class="terminal">
     sudo su - vcap
-    curl -sSL http<span>:</span>//localhost:8500/v1/catalog/service/postgresql-zone1?tag=primary \
-    | jq -r '.[] | .Node'
+    curl -sSL http<span>:</span>//localhost:8500/v1/catalog/service/postgresql-zone1 \
+    | jq -r '.[] | .Node, .ServiceTags'
     </pre>
 
-1. SSH into the `postgresql` server (identified above) using the `bosh` tool:
+1. SSH into the `postgresql` server(s) identified above as replicas using the `bosh` tool:
     <pre class="terminal">
     bosh ssh postgresql <index identified above>
     </pre>
@@ -35,11 +35,37 @@ For guidance on using SSH to connect to servers in the service, see [Advanced Tr
     sudo -i
     </pre>
 
-1. Stop `postgresql` services:
+1. Stop monitoring `consul` and `postgresql` services:
     <pre class="terminal">
+    monit unmonitor consul
+    monit stop consul
     monit unmonitor postgresql
     monit stop postgresql
     </pre>
+
+1. SSH into the `postgresql` server identified above as primary using the `bosh` tool:
+    <pre class="terminal">
+    bosh ssh postgresql <index identified above>
+    </pre>
+    If using the BOSH v2 Client:
+    <pre class="terminal">
+    bosh -e $ENV ssh postgresql <index identified above>
+    </pre>
+
+1. Switch to the `root` user:
+    <pre class="terminal">
+    sudo -i
+    </pre>
+
+1. Stop monitoring `consul` and `postgresql` services:
+    <pre class="terminal">
+    monit unmonitor consul
+    monit stop consul
+    sleep 60 # Give adequate time for consul to settle
+    monit unmonitor postgresql
+    monit stop postgresql
+    </pre>
+
 
 1. Switch to the `vcap` user:
     <pre class="terminal">
@@ -50,10 +76,18 @@ For guidance on using SSH to connect to servers in the service, see [Advanced Tr
     <pre class="terminal">
     pgbackrest --stanza=main info
     </pre>
+    Note that you may need to provide the `pgbackrest.conf` path:
+    <pre class="terminal">
+    pgbackrest --config=/var/vcap/store/pgbackrest/config/pgbackrest.conf --stanza=main info
+    </pre>
 
 1. Restore the database:
     <pre class="terminal">
-    pgbackrest --stanza=main --delta restore
+    pgbackrest --config=/var/vcap/store/pgbackrest/config/pgbackrest.conf \
+        --stanza=main \
+        --delta \
+        --log-level-console=detail \
+        restore
     </pre>
 
 1. Switch to `root`:
@@ -67,3 +101,30 @@ For guidance on using SSH to connect to servers in the service, see [Advanced Tr
     monit monitor postgresql
     </pre>
 
+1. Return the other systems to working order:
+    <pre class="terminal">
+    monit start consul
+    monit monitor consul
+    </pre>
+
+1. SSH into the `postgresql` server(s) identified above as replicas using the `bosh` tool:
+    <pre class="terminal">
+    bosh ssh postgresql <index identified above>
+    </pre>
+    If using the BOSH v2 Client:
+    <pre class="terminal">
+    bosh -e $ENV ssh postgresql <index identified above>
+    </pre>
+
+1. Switch to the `root` user:
+    <pre class="terminal">
+    sudo -i
+    </pre>
+
+1. Resume monitoring `consul` and `postgresql` services:
+    <pre class="terminal">
+    monit start consul
+    monit monitor consul
+    monit start postgresql
+    monit monitor postgresql
+    </pre>
