@@ -1,0 +1,235 @@
+---
+title: ATO Procedures
+author: Crunchy Data Solutions
+date: 23 Feb 2018
+geometry: margin=2cm
+---
+
+<p class='note warning'>
+<strong>IMPORTANT!</strong> The following instructions describe in detail the full process for running and obtaining the STIG results.
+They have been verified and tested as of 23 Feb 2018.
+</p>
+
+The ATO Tarball package will be provided upon request.
+
+### Unpack ATO Tarball
+```
+tar xzf crunchy-ato.tgz
+```
+Contents should include:
+
+- `ato-run.sh`: Script to automatically execute the ATO STIG tests
+- `inspec2ckl-release/inspec2ckl-manifest.yml`: Manifest for `inspec2ckl` converter tools.
+- `inspec2ckl-release/inspec2ckl-0+dev.1500078905.tgz`: Release for `inspec2ckl` converter tools.
+
+The `inspec2ckl` release will be used in the [InSpec Results](#convert-inspec-results-to-disa-stig-ckl-format) section.
+This deployment is optional, but highly encouraged.
+
+### Set environment variables
+
+The following variables will be used in subsequent procedures.
+The usage of these variables will ensure the integrity of the tests.
+Update values as appropriate.
+
+```
+export CF_ORG='CrunchyData'
+export CF_SPACE='development'
+export SERVICE_INSTANCE='ato'
+```
+
+**NOTE**: The `<TAB>` key can be used to auto-complete the name of the variables
+when using them in subsequent commands.
+
+### Create Service Instance
+
+Create on-demand service instance using PCF CLI for the express purpose for collecting
+ATO results:
+
+```
+cf create-org ${CF_ORG}
+cf create-space ${CF_SPACE}
+cf target -o ${CF_ORG} -s ${CF_SPACE}
+cf create-service crunchy-postgresql-9.5-on-demand small ${SERVICE_INSTANCE} -c '{
+    "db_name": "atodb",
+    "db_username": "ato",
+    "owner_name": "ATO User",
+    "owner_email": "ato.user@example.com",
+    "compliance_profile": "stig_compliance_full"
+}'
+```
+
+Service creation is asynchronous; check progress with the following command:
+```
+watch -d -n 60 --color cf service ${SERVICE_INSTANCE}
+```
+
+When `Status: create succeeded` is observed in the output, press `<CTRL>+C` to stop
+watching the process.
+
+### Generate Deployment Manifest for Service Instance
+
+The following command will generate a deployment manifest for the service
+instance. This allows for the use of the `bosh ssh` and `bosh scp`, which
+will be used in subsequent procedures.
+
+This command will create a `yml` file at `/tmp/crunchyATO.yml` with the contents of the
+file being defined between each occurrence of `EOF`.
+
+```
+cat >/tmp/crunchyATO.yml <<EOF
+---
+director_uuid: $(bosh target >/dev/null 2>&1 && bosh status --uuid)
+name: service-instance_$(cf service --guid ${SERVICE_INSTANCE} 2>/dev/null)
+releases:
+- name: crunchy-postgresql
+EOF
+```
+
+### Execute `ato-run.sh` Against Service Instance
+Copy `ato-run.sh` script to `postgresql/0` VM of service instance:
+
+```
+bosh deployment /tmp/crunchyATO.yml
+bosh scp postgresql/0 --upload crunchy-ato/ato-run.sh /tmp
+```
+
+Connect to `postgresql/0` VM and execute `ato-run.sh`:
+
+```
+bosh ssh postgresql/0
+sudo chown vcap:vcap /tmp/ato-run.sh
+sudo chmod +x /tmp/ato-run.sh
+sudo -iu vcap
+cp /tmp/ato-run.sh .
+./ato-run.sh
+# Make a note of the result location
+exit # Log out of VCAP user
+exit # Log out of BOSH SSH
+```
+
+**NOTE**: Warnings related to already initialized constants can be ignored.
+
+Retrieve results from `postgresql/0` VM:
+
+```
+bosh scp postgresql/0 --download /path/to/results-<TIMESTAMP>.tgz .
+mv results-<TIMESTAMP>.tgz.postgresql.0 results-<TIMESTAMP>.tgz
+tar xzf results-<TIMESTAMP>.tgz
+```
+
+**NOTE**: The exact path of `/path/to/results-<TIMESTAMP>.tgz` will be in the
+last line of output of the `ato-run.sh` script.
+
+Verify that the following files will be unpacked into the working directory:
+
+- `custom-inspec-overlay-<TIMESTAMP>.json`
+- `ics_500-27-<TIMESTAMP>.log`
+
+### Convert InSpec Results to DISA STIG CKL Format
+
+The inspec2ckl deployment creates a VM with software that can convert InSpec
+JSON output to DISA STIG CKL format. The resultant file can be opened with the
+*DISA STIG Viewer*.
+
+Use the following commands to create the `inspec2ckl` deployment:
+
+```
+bosh upload release crunchy-ato/inspec2ckl-release/inspec2ckl-0+dev.1500078905.tgz
+bosh deployment crunchy-ato/inspec2ckl-release/inspec2ckl-manifest.yml
+bosh -n deploy
+```
+
+Copy the InSpec JSON result file to the `inspec2ckl/0` VM:
+
+```
+bosh scp inspec2ckl/0 --upload custom-inspec-overlay-<TIMESTAMP>.json /tmp
+```
+
+Connect to the `inspec2ckl/0` VM and run the `inspec2ckl` tool:
+
+```
+bosh ssh inspec2ckl 0
+sudo chown vcap:vcap /tmp/custom-inspec-overlay-<TIMESTAMP>.json
+sudo -iu vcap
+cp /tmp/custom-inspec-overlay-<TIMESTAMP>.json .
+cd /var/vcap/packages/inspec2ckl
+
+/var/vcap/packages/ruby/bin/bundle exec inspec2ckl exec \
+    -j ~/custom-inspec-overlay-<TIMESTAMP>.json \
+    -c data/postgres_checklist.ckl \
+    -o /tmp/custom-inspec-overlay-<TIMESTAMP>.ckl
+
+exit # Log out of VCAP user
+exit # Log out of BOSH SSH
+```
+
+Retrieve `*.ckl` file from `inspec2ckl/0` VM:
+
+```
+bosh scp inspec2ckl/0 --download /tmp/custom-inspec-overlay-<TIMESTAMP>.ckl .
+mv custom-inspec-overlay-<TIMESTAMP>.ckl.inspec2ckl.0 \
+    custom-inspec-overlay-<TIMESTAMP>.ckl
+```
+
+The `*.ckl` file can then be used on a device running the *DISA STIG VIEWER*
+application for further examination.
+
+## Appendix
+
+### Run a PostgreSQL Query
+
+Be sure you have previously completed the instructions outlined in the
+[Deployment Manifest Section](#generate-deployment-manifest-for-service-instance)
+prior to running the commands in this section.
+
+1. Connect to `postgresql/0` VM:
+
+  ```
+  bosh deployment /tmp/crunchyATO.yml
+  bosh ssh postgresql 0
+  ```
+
+1. Run a command:
+
+A. As a database administrator:
+
+```
+sudo -i -u vcap
+psql -d <DATABASE> -c '<COMMAND>'
+```
+
+B. As a non-privileged user:
+
+```
+psql -U <ROLE> -h localhost -d <DATABASE> -c '<COMMAND>'
+```
+
+Common examples:
+
+```
+# Display a configuration setting, such as port
+psql -d postgres -c 'SHOW port;'
+# Run a psql command, such as \du (list roles)
+psql -d postgres -c '\du'
+# Run a sql query, such as selecting roles with SUPERUSER
+psql -d postgres \
+    -c "SELECT rolname FROM pg_catalog.pg_roles WHERE rolsuper = 't';"
+```
+
+### Execute Tests for Individual STIG Control
+
+Connect to `postgresql/0` VM:
+
+```
+bosh deployment /tmp/crunchyATO.yml
+bosh ssh postgresql 0
+```
+
+Run individual tests for STIG control:
+
+```
+sudo -i -u vcap
+cd /var/vcap/store/compliance
+inspec exec inspec-profiles/postgresql-baseline/controls/<STIG_CONTROL>.rb \
+    --attrs=attributes.yml
+```

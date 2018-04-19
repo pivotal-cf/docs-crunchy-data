@@ -1,0 +1,36 @@
+#### Using Cloud Foundry CLI
+
+To update an existing on-demand service instance, run `cf update-service
+SERVICE_INSTANCE -c SERVICE_PARAMS`, substituting `SERVICE_INSTANCE` with the
+name of your service, and `SERVICE_PARAMS` with a JSON object containing the
+parameters to update. For example:
+
+```
+cf update-service myService -c '{
+    "add_hba_addresses": "192.168.0.24/32 192.168.1.0/24"
+}'
+```
+
+<p class="note">
+New servers may be created and/or reconfigured when an on-demand
+service is updated. Therefore, this step will take some time to complete. You
+can check the status of your service my running <code>cf services</code> and
+looking for <code>SERVICE_INSTANCE</code> or with
+<code>cf service SERVICE_INSTANCE</code>.
+</p>
+
+#### Using Pivotal Apps Manager UI
+
+1. From the space dashboard, select the **Services** tab, then select your
+service.
+1. Select the **Settings** tab, then add any service update supported
+parameters in the fields under the **Configure Instance** section; click the
+**+** to create additional fields.
+1. Once the desired parameters have been added, click the **Update** button.
+
+<p class="note">
+New servers may be created and/or reconfigured when an on-demand
+service is updated. Therefore, this step will take some time to complete. You
+can check the status service from the space dashboard, in the
+<strong>Services</strong> tab.
+</p>
