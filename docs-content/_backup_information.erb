@@ -1,5 +1,7 @@
-Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile uses [pgBackrest](https://github.com/pgbackrest/pgbackrest) as a dedicated backup and archiving host.
-The tile comes pre-configured with nightly physical backups of the database server:
+Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile uses
+[pgBackRest](https://github.com/pgbackrest/pgbackrest) as a dedicated backup
+and archiving host. The tile comes pre-configured with nightly physical backups
+of the database server:
 
 | Day       | Backup Type | Time     |
 |-----------|-------------|----------|
@@ -11,12 +13,15 @@ The tile comes pre-configured with nightly physical backups of the database serv
 | Friday    | Incremental | 1 am UTC |
 | Saturday  | Incremental | 1 am UTC |
 
-Although backups only happen once a day, PostgreSQL is continuously shipping the Write-Ahead-Logs (WAL) to the pgBackrest server.
-This means that point-in-time recovery is possible, regardless of the schedule.
+Although backups only happen once a day, PostgreSQL is continuously shipping
+the Write-Ahead-Logs (WAL) to the pgBackrest server. This means that
+point-in-time recovery is possible, regardless of the schedule.
 
-These backups not only offer peace of mind, but are used frequently by the tile.
+These backups not only offer peace of mind, but are used frequently by the
+tile.
+
 Crunchy PostgreSQL for PCF uses backups to create replicas in the stack.
-By using backups in operations, we can ensure that backups and restores work.
+By using backups in operations, we ensure that backup and restore operations are functioning properly.
 
 All archives from the database server are stored on the dedicated backup host.
 This means that databases can be restored to specific points in time.
