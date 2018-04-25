@@ -18,8 +18,6 @@ The STIGs contain technical guidance to “lock down” information systems/soft
 Importantly, compliance with the STIG guidance requires only open source software and documentation.
 The PostgreSQL STIG is based on open source, unmodified PostgreSQL 9.x used in conjunction with certain open source PostgreSQL extensions – most notably, pgAudit.
 
-<p class='note'>Out of the box, Crunchy PostgreSQL service instances are configured to be 100% STIG Compliant.</p>
-
 [Announcing the PostgreSQL STIG](http://info.crunchydata.com/blog/postgres-stig-disa-security-guide)
 
 ###<a id='intro'></a> DISA PostgreSQL STIG Automation
@@ -57,13 +55,6 @@ Results of each test are appended to the Finding Details field.
 ##<a id='ics_500'></a> ICS 500-27 Audit with Crunchy pgAudit
 
 Crunchy’s pgAudit configuration enhances PostgreSQL's logging abilities by allowing administrators to audit specific classes of operations or choosing specific objects to monitor and provides detailed session and/or object audit logging.
-
-<p class='note warning'>
-<strong>IMPORTANT!</strong>
-By default, Crunchy PostgreSQL service instances are configured to be 100% STIG Compliant for capturing all required Audit statements with proper level of details.
-Changing any of these setting will mark the instance as "Not Compliant"
-</p>
-
 
 Session auditing allows administrators to choose classes of statements to log:
 
