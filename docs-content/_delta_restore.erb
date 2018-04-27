@@ -3,15 +3,15 @@ These instructions demonstrate how the database can be restored using only delta
 The following requires an administrator to SSH to the primary `postgresql` server.
 For guidance on using SSH to connect to servers in the service, see [Advanced Troubleshooting with the BOSH CLI](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html).
 
-<p class="note"><strong>Note</strong>: Pivotal recommends that you use BOSH CLI v2 when running PCF v1.11 or higher.</p>
+<p class="note"><strong>Note</strong>: Pivotal recommends that you use BOSH CLI v2+ when running PCF v1.11 or higher.</p>
 
 1. SSH into the `consul` server using the `bosh` tool:
     <pre class="terminal">
     bosh ssh consul-server 0
     </pre>
-    If using the BOSH v2 Client:
+    If using the BOSH v2+ Client:
     <pre class="terminal">
-    bosh -e $ENV ssh consul-server 0
+    bosh -e $ENV -d $DEPLOYMENT ssh consul-server/0
     </pre>
 
 1. Identify the current primary by querying Consul:
@@ -25,9 +25,9 @@ For guidance on using SSH to connect to servers in the service, see [Advanced Tr
     <pre class="terminal">
     bosh ssh postgresql <index identified above>
     </pre>
-    If using the BOSH v2 Client:
+    If using the BOSH v2+ Client:
     <pre class="terminal">
-    bosh -e $ENV ssh postgresql <index identified above>
+    bosh -e $ENV -d $DEPLOYMENT ssh postgresql/<index identified above>
     </pre>
 
 1. Switch to the `root` user:
@@ -47,9 +47,9 @@ For guidance on using SSH to connect to servers in the service, see [Advanced Tr
     <pre class="terminal">
     bosh ssh postgresql <index identified above>
     </pre>
-    If using the BOSH v2 Client:
+    If using the BOSH v2+ Client:
     <pre class="terminal">
-    bosh -e $ENV ssh postgresql <index identified above>
+    bosh -e $ENV -d $DEPLOYMENT ssh postgresql/<index identified above>
     </pre>
 
 1. Switch to the `root` user:
@@ -111,9 +111,9 @@ For guidance on using SSH to connect to servers in the service, see [Advanced Tr
     <pre class="terminal">
     bosh ssh postgresql <index identified above>
     </pre>
-    If using the BOSH v2 Client:
+    If using the BOSH v2+ Client:
     <pre class="terminal">
-    bosh -e $ENV ssh postgresql <index identified above>
+    bosh -e $ENV -d $DEPLOYMENT ssh postgresql/<index identified above>
     </pre>
 
 1. Switch to the `root` user:

@@ -21,15 +21,29 @@ This service includes:
 ###<a id='service-info'></a> PostgreSQL Plans
 The `postgresql-9.5-odb` service comes with several plans:
 
-- small
-- medium
-- large
-- extra-large
+- `small`
+- `medium`
+- `large`
+- `extra-large`
 
 Each plan corresponds to different server size set up by the operator when the
 service was deployed.
 
 Review each plan offering and choose the correct database size for the application.
+###<a id='viewing-service-plans'></a> Viewing Service Plans in Cloud Foundry
+#### Using Cloud Foundry CLI
+
+Run `cf marketplace -s postgresql-9.5-odb`. This will display
+information about each service plan offered by the Crunchy
+service. Choose the plan that best fits your application requirements.
+
+#### Using Pivotal Apps Manager
+
+1. Select **Marketplace** on the left navigation menu.
+1. Find and select **Crunchy PostgreSQL** in the list of available
+services.
+1. Browse the available service plans and choose the one that best fits your
+application requirements.
 
 ##<a id='creating'></a> Creating PostgreSQL Service
 ###<a id='parameters'></a> Service Creation Parameters
@@ -39,6 +53,13 @@ Review each plan offering and choose the correct database size for the applicati
 
 ###<a id='create-new'></a> Creating a New Service
 <%= partial('creating_service') -%>
+
+##<a id='updating'></a> Updating an On-Demand Service
+###<a id='updating-params'></a> Configuration Parameters
+<%= partial 'updating_params' %>
+
+###<a id='updating-examples'></a> Updating an Existing Service
+<%= partial 'updating_examples' -%>
 
 ##<a id='integration'></a> Integrating Applications
 
@@ -63,14 +84,9 @@ a newly created service.
 ##<a id='deleting'></a> Deleting a Service
 <%= partial('deleting') -%>
 
-##<a id='disaster'></a> Backup and Restore
-<%= partial('backup_information') -%>
-
-###<a id='deltas'></a> Restore Using Deltas
-<%= partial('delta_restore') -%>
-
-###<a id='pitr'></a> Point in Time Recovery
-<%= partial('pitr') -%>
+##<a id='appendix'></a> Appendix
+###<a id='compliance'></a> Security and Compliance
+<%= partial('compliance_profiles') -%>
 
 ###<a id='pgbackrest'></a> pgBackrest Documentation
 For more information about pgBackrest restorations, please refer to the
