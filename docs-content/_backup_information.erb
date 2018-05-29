@@ -13,6 +13,11 @@ of the database server:
 | Friday    | Incremental | 1 am UTC |
 | Saturday  | Incremental | 1 am UTC |
 
+<p class="warning"><strong>WARNING</strong>: archiving and backups are disabled
+by default in the <code>standalone</code> plan; PCF users can set the
+<code>pgc_archive_mode</code> parameter to <code>on</code> to enable this
+feature.</p>
+
 Although backups only happen once a day, PostgreSQL is continuously shipping
 the Write-Ahead-Logs (WAL) to the pgBackrest server. This means that
 point-in-time recovery is possible, regardless of the schedule.
