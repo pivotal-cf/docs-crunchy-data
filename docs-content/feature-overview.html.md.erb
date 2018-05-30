@@ -48,6 +48,13 @@ The current limitations for these plan configurations are as follows:
 - The number of replicas are only configurable during initial setup.
 - All replicas use `async` replication. `sync` replication is not yet configurable.
 
+###<a id="standalone"></a> Standalone Plan
+
+The standalone plan includes a single PostgreSQL instance without the HA and
+load balancing features outlined below. Archiving and automated backups are
+disabled by default, but can be enabled by setting `standalone_backups` to
+`true` during service creation or update.
+
 ##<a id="backups"></a> Automated Backups
 
 <%= partial('backup_information') %>
@@ -103,10 +110,3 @@ Crunchy PostgreSQL for PCF offers the following tools to help developers manage 
 * cf-pgadmin4
 * cf-pgloader
 * cf-grafana
-
-##<a id="standalone"></a> Standalone Plan
-
-The standalone plan includes a single PostgreSQL instance without the HA and
-load balancing features outlined above. Archiving and automated backups are
-disabled by default, but can be enabled by setting `pgc_archive_mode` to `on`
-during service creation or update.
