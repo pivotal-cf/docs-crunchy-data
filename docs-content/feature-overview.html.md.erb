@@ -14,6 +14,7 @@ When deploying the service, operators have the opportunity to tune these plans f
 
 The plans that are included are as follows:
 
+- `standalone`
 - `small`
 - `medium`
 - `large`
@@ -30,21 +31,29 @@ However, they provide a starting point for operators to configure their tile.
 <p class="note"><strong>Note</strong>: Part of maintaining high availability is having room to grow the database.
    Therefore, operators and developers should consider the rate at which they expect to grow and select an appropriate plan.</p>
 
-###<a id='cluster_config'></a> Default Cluster Configurations
+###<a id='cluster_config'></a> Default Plan Configurations
 
-The following table provides information about the out-of-the-box cluster configurations:
+The following table provides information about the out-of-the-box plan configurations:
 
 | Plan        | Replica   | Connections   |
 | --------    | --------- | ------------- |
+| Standalone  | 0         | 100           |
 | Small       | 1         | 100           |
 | Medium      | 2         | 100           |
 | Large       | 2         | 200           |
 | Extra-Large | 2         | 500           |
 
-The current limitations for these cluster configurations are as follows:
+The current limitations for these plan configurations are as follows:
 
 - The number of replicas are only configurable during initial setup.
 - All replicas use `async` replication. `sync` replication is not yet configurable.
+
+###<a id="standalone"></a> Standalone Plan
+
+The standalone plan includes a single PostgreSQL instance without the HA and
+load balancing features outlined below. Archiving and automated backups are
+disabled by default, but can be enabled by setting `standalone_backups` to
+`true` during service creation or update.
 
 ##<a id="backups"></a> Automated Backups
 
