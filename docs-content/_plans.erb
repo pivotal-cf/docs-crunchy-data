@@ -1,0 +1,14 @@
+The `<%= service_version -%>` service comes with several preconfigured plans.
+
+Each plan corresponds to different server size set up by the operator when the service was deployed.
+
+Review each plan offering and choose the correct database size for the application.
+
+| Plan Name            | Description                                                                            |
+| ---------            | -----------                                                                            |
+| `standalone`         | Single PostgreSQL server, useful for small development purposes                        |
+| `standalone-replica` | Single PostgreSQL server configured as a remote replica for an existing parent service |
+| `general`            | Standard service plan, configured to fit most general use cases                        |
+| `general-monitor`    | Same as `general`, but with added support for Grafana monitoring                       |
+| `custom`             | Uses similar `general` plan settings, configurable to specific use cases               |
+
