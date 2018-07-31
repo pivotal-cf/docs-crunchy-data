@@ -6,7 +6,7 @@ substituting `APP_NAME` with the name of your PCF app and `SERVICE_INSTANCE`
 with the name of your service. For example:
 
 ```
-cf bind-service myApp myService
+cf bind-service myApp <%= service_instance_name %>
 cf restage myApp
 ```
 

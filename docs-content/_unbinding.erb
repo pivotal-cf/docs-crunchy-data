@@ -5,7 +5,7 @@ SERVICE_INSTANCE`, substituting `APP_NAME` with the name of your PCF app and
 `SERVICE_INSTANCE` with the name of your service. For example:
 
 ```
-cf unbind-service myApp myService
+cf unbind-service myApp <%= service_instance_name %>
 ```
 
 #### Using Pivotal Apps Manager
