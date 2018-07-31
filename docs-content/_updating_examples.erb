@@ -1,14 +1,22 @@
 #### Using Cloud Foundry CLI
 
-To update an existing on-demand service instance, run `cf update-service
-SERVICE_INSTANCE -c SERVICE_PARAMS`, substituting `SERVICE_INSTANCE` with the
-name of your service, and `SERVICE_PARAMS` with a JSON object containing the
-parameters to update. For example:
+To update an existing on-demand service instance's configuration parameters, 
+run `cf update-service SERVICE_INSTANCE -c SERVICE_PARAMS`, substituting 
+`SERVICE_INSTANCE` with the name of your service, and `SERVICE_PARAMS` with
+ a JSON object containing the parameters to update. For example:
 
 ```
 cf update-service myService -c '{
     "add_hba_addresses": "192.168.0.24/32 192.168.1.0/24"
 }'
+```
+
+To update the plan of an existing on-demand service instance, run
+`cf update-service SERVICE_INSTANCE -p PLAN_NAME`, substituting `PLAN_NAME`
+with the name of the desired service plan. For example, to switch to the
+`general-monitor` plan:
+```
+cf update-service myService -p general-monitor
 ```
 
 <p class="note">

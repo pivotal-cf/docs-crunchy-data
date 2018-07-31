@@ -13,8 +13,9 @@ Crunchy PostgreSQL comes with one service:
 
 * postgresql-9.5-odb
 
-This service includes:
+This service includes standalone and clustered configurations:
 
+Cluster plans include:
 * PostgreSQL cluster (primary and replicas)
 * Load balancer
 * pgBackrest dedicated backup
@@ -24,14 +25,18 @@ This service includes:
 
 The `postgresql-9.5-odb` service comes with several plans:
 
-- `small`
-- `medium`
-- `large`
-- `extra-large`
+- `standalone`
+- `standalone-replica`
+- `general`
+- `general-monitor`
+- `custom`
+- `custom-monitor`
 
-Each plan corresponds to different server size set up by the operator when the service was deployed.
+The standalone plan includes a PostgreSQL server on a single VM.
+The standalone-replica plan includes a single PostgreSQL server on a single VM
+configured to replicate a clustered plan into a separate PCF foundation.
 
-Review each plan offering and choose the correct database size for the application.
+Plans ending in `-monitor` include monitoring metrics gathered into a Prometheus server.
 
 ###<a id='viewing-service-plans'></a> Viewing Service Plans in Cloud Foundry
 
