@@ -15,10 +15,11 @@ When deploying the service, operators have the opportunity to tune these plans f
 The plans that are included are as follows:
 
 - `standalone`
-- `small`
-- `medium`
-- `large`
-- `extra-large`
+- `standalone-replica`
+- `general`
+- `general-monitor`
+- `custom`
+- `custom-monitor`
 
 ###<a id='suggested_plan'></a> Suggested Plan Configuration
 
@@ -29,7 +30,10 @@ However, they provide a starting point for operators to configure their tile.
 <%= partial('plan_table') %>
 
 <p class="note"><strong>Note</strong>: Part of maintaining high availability is having room to grow the database.
-   Therefore, operators and developers should consider the rate at which they expect to grow and select an appropriate plan.</p>
+Therefore, operators and developers should consider the rate at which they expect to grow and select an
+appropriately sized plan.</p>
+
+<%= partial('plan_table') %>
 
 ###<a id='cluster_config'></a> Default Plan Configurations
 
@@ -66,42 +70,15 @@ App developers must switch ports depending on the type of cluster they want to i
 
 ###<a id='ports'></a> Selectively Accessing Clusters
 
-By using port switching, apps have the ability to manage the types of database interactions their app needs.
-When used correctly, this strategy allows apps to be more performant.
-
-To query a `primary` cluster, apps must use the `5432` port on the load balancer.
-This ensures that writes or reads are redirected to the primary cluster.
-
-To query a `replica`, apps must use the `5433` port on the load balancer.
-This ensures that reads are redirected to the replica cluster.
+<%= partial('ports') %>
 
 ##<a id="ha-model"></a> HA Model
 
-Crunchy PostgreSQL for PCF provisions a cluster of PostgreSQL servers and self-configures their roles (primary and many replicas).
-This allows the servers to change their roles when failures are detected.
-
-Crunchy PostgreSQL for PCF configuration files are managed by `consul-template`.
-Each of these templates watch different parts of the stack.
-When changes are detected, configuration files automatically are rendered with the latest state.
-This allows the system to be dynamic and change depending on state of services.
-
-For example, the PostgreSQL load balancer automatically detects when replicas are added or removed,
-and reconfigures its pool to reflect the current state.
+<%= partial('ha-model') %>
 
 ###<a id='autofailover'></a> Automatic Failover
 
-Crunchy Cluster Manager runs on each of the Consul Servers within the Crunchy PostgreSQL for PCF.
-The job of CCM is to detect failures of the PostgreSQL servers and to determine who is the best candidate to replace a failed primary.
-CCM measures replication lag to determine the best candidate to elect for the primary role.
-
-Once a new primary role is elected, CCM updates the Consul Service Catalog to reflect the new state.
-The newly elected primary reconfigures itself (trigger a failover) and all other services detect the new primary.
-
-Failed former primaries are put into a fenced state.
-This tells the rest of the stack to no longer communicate with the failed service.
-An hourly `cron` job attempts to repair fenced servers and add them to the replica pool.
-
-![Model](http://i.imgur.com/sxamhbn.png)
+<%= partial('automatic_failover') %>
 
 ##<a id="tools"></a> Tools
 
