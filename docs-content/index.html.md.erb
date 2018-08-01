@@ -32,7 +32,16 @@ partial(
 
 ## <a id="snapshot"></a>Product Snapshot
 
-<%= partial('product_snapshot') %>
+<%=
+partial(
+    :product_snapshot,
+    :locals => {
+        :release_version => '05.1004.001',
+        :release_date => 'August 2018',
+        :postgresql_version => '10.4'
+    }
+)
+-%>
 
 ## <a id="limitations"></a>Limitations
 
