@@ -65,6 +65,11 @@ The following sections provide information on integrating an application with a 
 
 <%= partial('service_credentials') %>
 
+###<a id='service_keys'></a> Managing Service Keys
+
+<%= partial('service_keys') %>
+<%= partial('database_roles') %>
+
 ###<a id='binding'></a> Binding a PCF App to a Service
 
 <%= partial(:binding, :locals => {:service_instance_name => 'myService'}) %>
@@ -72,10 +77,6 @@ The following sections provide information on integrating an application with a 
 ###<a id='unbinding'></a> Unbinding a PCF App from a Service
 
 <%= partial(:unbinding, :locals => {:service_instance_name => 'myService'}) %>
-
-###<a id='service_keys'></a> Managing Service Keys
-
-<%= partial('service_keys') %>
 
 ##<a id='deleting'></a> Deleting a Service
 
