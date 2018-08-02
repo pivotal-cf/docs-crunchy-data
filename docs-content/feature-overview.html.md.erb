@@ -21,7 +21,7 @@ The plans that are included are as follows:
 - `custom`
 - `custom-monitor`
 
-<%= partial('plan_table') %>
+<%= partial(:plans, :locals => {:service_version => 'postgresql-10-odb'}) %>
 
 <p class="note warning">
 <strong>Note:</strong>
