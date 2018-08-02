@@ -16,7 +16,7 @@ Since 1998, DISA has played a critical role enhancing the security posture of Do
 The STIGs contain technical guidance to “lock down” information systems/software that might otherwise be vulnerable to a malicious computer attack.
 
 Importantly, compliance with the STIG guidance requires only open source software and documentation.
-The PostgreSQL STIG is based on open source, unmodified PostgreSQL 9.x used in conjunction with certain open source PostgreSQL extensions – most notably, pgAudit.
+The PostgreSQL STIG is based on open source, unmodified PostgreSQL 9.x used in conjunction with certain open source PostgreSQL extensions – most notably, pgaudit.
 
 [Announcing the PostgreSQL STIG](http://info.crunchydata.com/blog/postgres-stig-disa-security-guide)
 
@@ -109,5 +109,4 @@ AUDIT: SESSION,1,1,ROLE,CREATE ROLE,,,CREATE ROLE bob; SET ROLE bob; CREATE TABL
 ```
 
 ###<a id='compliance-profiles'></a> Compliance Profiles
- 
-<%= partial 'compliance_profiles' %>
+<%= partial 'compliance_profiles' -%>

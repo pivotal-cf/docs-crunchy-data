@@ -3,32 +3,45 @@ title: Crunchy PostgreSQL For PCF
 owner: Crunchy Data
 ---
 
+Using the cloud-native platform Pivotal Cloud Foundry (PCF), Crunchy Data
+engineers have created a service offering that provides a secure, reliable,
+and robust database infrastructure delivered as "Database-as-a-Service"
+(DBaaS). Crunchy Certified PostgreSQL for PCF provides a Marketplace service
+and complete PostgreSQL infrastructure to enable any applications deployed to
+PCF to utilize PostgreSQL databases in a self-service, on-demand manner. This
+allows developers to focus on coding and not the underlying infrastructure.
+
 This documentation describes the Crunchy PostgreSQL for Pivotal Cloud Foundry
 (PCF) tile. Installing this tile creates a service that allows PCF developers
 to use Crunchy PostgreSQL databases with their apps.
 
 ## <a id="features"></a>Key Features
 
-Crunchy PostgreSQL For PCF includes the following key features:
+<%=
+partial(
+    :keyfeatures,
+    :locals => {
+        :postgresql_version => '10.4',
+        :postgis_version => '2.4'
+    }
+)
+-%>
 
-* On-Demand single-tenant service
-* Crunchy PostgreSQL v9.5.13 and PostGIS v2.3
-* Primary/replica PostgreSQL architecture
-* Load-balanced read replicas
-* Automated backups with pgBackrest
-* Disaster recovery
-* High availability
-
-<p class="note"><strong>Note</strong>: Apps Manager support is only available if you are using PCF Ops Manager and Elastic Runtime v1.10 or later.</p>
-
-For details on the features of this tile, see the [feature overview](./feature-overview.html).
-
-For more information about Crunchy PostgreSQL, see the
-[Crunchy Data](http://crunchydata.com/) website.
+##<a id='intro-video'></a> Service Introduction Video
+[Watch PivNET Overview of the Crunchy PostgreSQL Service](https://pivotal.io/platform/services-marketplace/data-management/crunchy )
 
 ## <a id="snapshot"></a>Product Snapshot
 
-<%= partial('product_snapshot') %>
+<%=
+partial(
+    :product_snapshot,
+    :locals => {
+        :release_version => '05.1004.001',
+        :release_date => 'August 2018',
+        :postgresql_version => '10.4'
+    }
+)
+-%>
 
 ## <a id="limitations"></a>Limitations
 

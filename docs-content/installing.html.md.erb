@@ -19,6 +19,8 @@ Click the newly added **Crunchy PostgreSQL** tile on the Ops Manager Installatio
 
 ![Crunchy PostgreSQL tile](images/tile.png)
 
+If necessary, import a stemcell as required by the service.
+
 Configure each section as described below.
 
 ###<a id='az-net'></a> Configure AZ and Network Assignments
@@ -45,58 +47,63 @@ To make Crunchy PostgreSQL highly available, you must balance the service across
 
 1. Click **Global Properties**.
 
-1. Configure the VM type for Consul servers. These do not need to be large servers.
-
-1. Configure the size of disk to be attached to the Consul server. Crunchy Data recommends at least 10&nbsp;GB.
-
-1. Configure the VM type for the PostgreSQL Load Balancer servers. If unsure, use the defaults.
-
-1. Configure the disk size for the PostgreSQL Load Balancer server. If unsure, use the defaults.
-
-1. Configure the VM type for the Smoke-Tests. If unsure, use the defaults.
-
-1. Configure the disk size for the Smoke-Tests Server. If unsure, use the defaults.
+1. Configure a secure passphrase for UAA Login Client
 
 1. Choose an AZ in which to deploy these services.
 
+1. Configure the number of Standalone PostgreSQL instances permitted in the environment
+
+1. Configure the number of Replica PostgreSQL instances permitted in the environment
+
+1. Configure the number of General PostgreSQL instances permitted in the environment
+
+1. Configure the number of General-Monitored PosgreSQL instances permitted in the environment
+
+1. Configure the number of Custom PostgreSQL instances permitted in the environment
+
+1. Configure the number of Custom-Monitored PosgreSQL instances permitted in the environment
+
 1. Click **Save**.
 
-###<a id='recommended-sizes'></a> Configure Plan Properties
+###<a id='standalone-properties'></a> Configure Standalone Properties
 
-The plans made available to developers must be configured prior to deployment. The following table can be used as a baseline when configuring the plans for use:
+The standalone plans made available to developers must be configured prior to deployment.
 
-<%= partial('plan_table') %>
+![Standalone Properties](standalone-properties.png)
 
-<p class="note"><strong>Note:</strong> Do not set any PostgreSQL or pgBackrest VMs to less than 4&nbsp;GB of memory.</p>
-<p class="note"><strong>Note:</strong> Do not set any PostgreSQL or pgBackrest VMs to fewer than 2 cores.</p>
+1. Click **Standalone Properties**.
 
-####<a id='small-plan'></a> Configure Small Plan Properties
+1. Select a default size for the standalone instances
 
-![Small Plan Properties](small-plan-properties.png)
+1. Select a default disk size for the standalone instances
 
-<%= partial(:plan_configuration, :locals => {:plan_size => 'small'}) %>
+1. Optionally enable backups by default for all standalone instances.
 
-####<a id='medium-plan'></a> Configure Medium Plan Properties
+1. Select a default maximum connections per standalone instance.
 
-![Medium Plan Properties](medium-plan-properties.png)
+<p class="note"><strong>Note:</strong> Do not set any PostgreSQL VMs to less than 4&nbsp;GB of memory.</p>
+<p class="note"><strong>Note:</strong> Do not set any PostgreSQL VMs to fewer than 2 cores.</p>
 
-<%= partial(:plan_configuration, :locals => {:plan_size => 'medium'}) %>
+###<a id='cluster-properties'></a> Configure Cluster Properties
 
-####<a id='large-plan'></a> Configure Large Plan Properties
+The standard plans made available to developers must be configured prior to deployment.
 
-![Large Plan Properties](large-plan-properties.png)
+![Cluster Properties](cluster-properties.png)
 
-<%= partial(:plan_configuration, :locals => {:plan_size => 'large'}) %>
+1. Select the default system specification for General plans
 
-####<a id='extra-large-plan'></a> Extra-Large Plan Properties
+1. Select the default disk size for the General plans
 
-![Extra-Large Plan Properties](extra-large-plan-properties.png)
+1. Select the default number of PostgreSQL instances in a General plan
 
-<%= partial(:plan_configuration, :locals => {:plan_size => 'extra-large'}) %>
+1. Select the default maximum number of connections to the PostgreSQL instances
+
+1. Select the system specifications and disk types for the Consul, HAProxy, and errand Virtual Machines.
+
+<p class="note"><strong>Note:</strong> Do not set any plan which uses PostgreSQL or pgBackrest VMs to less than 4&nbsp;GB of memory.</p>
+<p class="note"><strong>Note:</strong> Do not set any plan which uses PostgreSQL or pgBackrest VMs to fewer than 2 cores.</p>
 
 ###<a id='errands'></a> Configure Errands
-
-![errands](errands.png)
 
 1. Click **Errands**.
 
@@ -106,21 +113,9 @@ The plans made available to developers must be configured prior to deployment. T
 
 ###<a id='Resource Config'></a> Configure Resources
 
-![Resource Config](resource-config.png)
-
 1. Click **Resource Config**.
 
-1. Review the pre-populated recommended server sizes and make any changes.
-
-1. Click **Save**.
-
-###<a id='stemcell'></a> Configure Stemcell
-
-![Stemcell](stemcell.png)
-
-1. Click **Stemcell**.
-
-1. Upload the required stemcell for the service. Compatible stemcells can be downloaded from [Pivotal Network](https://network.pivotal.io/products/stemcells).
+1. Review the pre-populated recommended server sizes and make any necessary changes. Crunchy Data recommends the defaults.
 
 1. Click **Save**.
 
