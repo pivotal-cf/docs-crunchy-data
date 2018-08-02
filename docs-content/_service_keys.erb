@@ -11,6 +11,16 @@ cf create-service-key myService myService_sk
 cf service-key myService myService_sk
 ```
 
+Service Keys presently accept one optional parameter:
+- "remote_replica": true
+
+The `create-service-key` command expects these parameters as
+JSON:
+
+```sh
+cf create-service-key myService myService_sk -c '{"remote_replica": true}'
+```
+
 #### Deleting a Service Key
 
 To delete a service key, run `cf delete-service-key SERVICE_NAME
