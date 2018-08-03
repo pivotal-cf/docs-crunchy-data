@@ -36,7 +36,7 @@ cf create-service <%= service_name %> custom customService -c '{
     "server_type": "crunchy-small",
     "num_of_replicas": 2,
     "disk_size": "64GB",
-    "allow_replication": true,
+    "allow_remote_replication": true,
     "db_connection_limit": 200
 }'
 ```
