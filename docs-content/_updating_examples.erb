@@ -42,3 +42,13 @@ service is updated. Therefore, this step will take some time to complete. You
 can check the status service from the space dashboard, in the
 <strong>Services</strong> tab.
 </p>
+
+<p class="note warning">
+<strong>Warning!</strong>
+Prior to upgrading a cluster-type plan (`general`, `custom`, etc) to a
+standalone plan; it is <strong>imperative</strong> that the cluster is
+healthy and `postgresql/0` server is healthy. Failure to do so will result
+in data loss.
+</br>
+If there is any confusion, contact Crunchy Support prior to upgrading the service.
+</p>
