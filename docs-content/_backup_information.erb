@@ -32,6 +32,7 @@ This means that databases can be restored to specific points in time.
 
 Currently, individual databases cannot be restored. All databases are restored in the shared cluster.
 
-<p class="note warning"><strong>NOTE:</strong> Standalone plans do not include automatic backups.
-When using a standalone plan, it is advised to regularly perform manual backups using external tools.
+<p class="note warning"><strong>NOTE:</strong> Standalone plans do not include automatic backups by default.
+When using a standalone plan, it is advised to regularly perform manual backups using external tools, or enable
+the backup using the service creation/update parameter.
 </p>
