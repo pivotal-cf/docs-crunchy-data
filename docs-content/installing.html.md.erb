@@ -47,7 +47,10 @@ To make Crunchy PostgreSQL highly available, you must balance the service across
 
 1. Click **Global Properties**.
 
-1. Configure a secure passphrase for UAA Login Client
+1. Configure a secure passphrase for UAA Login Client.
+   - The UAA client login is the bosh pre-defined user account with `bosh.read` access.
+   - The pre-defined account can be accessed from the BOSH credentials list under the heading "UAA Client Login".
+   - Typically: `<ops manager url>/api/v0/deployed/director/credentials/uaa_login_client_credentials`
 
 1. Choose an AZ in which to deploy these services.
 
