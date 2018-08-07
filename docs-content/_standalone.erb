@@ -59,7 +59,7 @@ to compose a json file for creation;
 The service can be created by:
 
 ```
-cf create-service postgresql-10-odb standalone-replica \
+cf create-service <%= service_name %> standalone-replica \
 $STANDALONE_SERVICE_NAME -c values.json
 ```
 
