@@ -7,46 +7,20 @@ This topic describes how to use Crunchy PostgreSQL for Pivotal Cloud Foundry (PC
 
 ##<a id='using'></a> Crunchy PostgreSQL Service
 
-Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile is an on-demand, single-tenant PostgreSQL database service.
-
-Crunchy PostgreSQL comes with one service:
-
-* postgresql-9.5-odb
-
-This service includes:
-
-* PostgreSQL cluster (primary and replicas)
-* Load balancer
-* pgBackrest dedicated backup
-* Consul cluster
+<%= partial(:using, :locals => {:service_version => 'postgresql-10-odb'}) %>
 
 ###<a id='service-info'></a> PostgreSQL Plans
 
-The `postgresql-9.5-odb` service comes with several plans:
+<%= partial(:plans, :locals => {:service_version => 'postgresql-10-odb'}) %>
 
-- `small`
-- `medium`
-- `large`
-- `extra-large`
-
-Each plan corresponds to different server size set up by the operator when the service was deployed.
-
-Review each plan offering and choose the correct database size for the application.
+####<a id='standalone'></a> Standalone Instances
+<%= partial(:standalone, :locals => {:service_name => 'postgresql-10-odb'}) %>
 
 ###<a id='viewing-service-plans'></a> Viewing Service Plans in Cloud Foundry
 
 #### Using Cloud Foundry CLI
 
-Run `cf marketplace -s postgresql-9.5-odb`. This will display information about each service plan offered by the Crunchy
-service. Choose the plan that best fits your application requirements.
-
-#### Using Pivotal Apps Manager
-
-1. Select **Marketplace** on the left navigation menu.
-1. Find and select **Crunchy PostgreSQL** in the list of available
-services.
-1. Browse the available service plans and choose the one that best fits your
-application requirements.
+<%= partial(:cfcli, :locals => {:service_version => 'postgresql-10-odb'}) %>
 
 ##<a id='creating'></a> Creating PostgreSQL Service
 
@@ -58,7 +32,16 @@ application requirements.
 
 ###<a id='create-new'></a> Creating a New Service
 
-<%= partial('creating_service') %>
+<%=
+partial(
+    :creating_service,
+    :locals => {
+        :service_name => 'postgresql-10-odb',
+        :service_plan => 'general',
+        :service_instance_name => 'myService'
+    }
+)
+-%>
 
 ##<a id='updating'></a> Updating an On-Demand Service
 
@@ -82,17 +65,18 @@ The following sections provide information on integrating an application with a 
 
 <%= partial('service_credentials') %>
 
-###<a id='binding'></a> Binding a PCF App to a Service
-
-<%= partial('binding') %>
-
-###<a id='unbinding'></a> Unbinding a PCF App from a Service
-
-<%= partial('unbinding') %>
-
 ###<a id='service_keys'></a> Managing Service Keys
 
 <%= partial('service_keys') %>
+<%= partial('database_roles') %>
+
+###<a id='binding'></a> Binding a PCF App to a Service
+
+<%= partial(:binding, :locals => {:service_instance_name => 'myService'}) %>
+
+###<a id='unbinding'></a> Unbinding a PCF App from a Service
+
+<%= partial(:unbinding, :locals => {:service_instance_name => 'myService'}) %>
 
 ##<a id='deleting'></a> Deleting a Service
 
@@ -104,6 +88,9 @@ The following sections provide information on integrating an application with a 
 
 <%= partial('compliance_profiles') %>
 
-###<a id='pgbackrest'></a> pgBackrest Documentation
+###<a id='pgbackrest'></a> pgBackRest Documentation
 
-For more information about pgBackrest restorations, please refer to the official [PGBackRest documentation](http://www.pgbackrest.org/user-guide.html).
+For more information about pgBackRest restorations, please refer to the official [PGBackRest documentation](http://www.pgbackrest.org/user-guide.html).
+
+###<a id='ssp'></a> Self Service Dashboard
+<%= partial('ssp') %>
