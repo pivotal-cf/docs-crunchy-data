@@ -3,6 +3,9 @@
 The default configuration settings for PostgreSQL attempt to
 apply the most tuned settings for each plan and service instance.
 
+It should not be necessary to change any of the low-level settings
+unless a service instance is being used in a very advanced configuration.
+
 However, if further configuration is found to be necessary, the following
 settings can be overridden manually:
 
@@ -49,5 +52,4 @@ settings can be overridden manually:
 - `pgc_unix_socket_directories`
 - `pgc_wal_buffers`
 - `pgc_wal_keep_segments`
-- `pgc_wal_level`
 - `pgc_work_mem`
