@@ -1,11 +1,10 @@
 These instructions demonstrate how the database can be restored using only deltas between the backup and the database.
 
-The following requires an administrator to SSH to the `postgresql` servers of the service instance.
-For guidance on using SSH to connect to servers in the service, see [Advanced Troubleshooting with the BOSH CLI](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html).
+The following requires an administrator to SSH to the `postgresql` servers of the service instance. For guidance on using SSH to connect to servers in the service, see [Advanced Troubleshooting with the BOSH CLI](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html).
 
-<p class="note"><strong>Note</strong>: Pivotal recommends that you use BOSH CLI v2+ when running PCF v1.11 or higher.</p>
+<p class="note"><strong>Note</strong>: Pivotal recommends that you use BOSH CLI v2 or later when running PCF v1.11 or later.</p>
 
-###<a id='cluster-delta'></a> Cluster Plans
+### <a id='cluster-delta'></a> Cluster Plans
 
 1. SSH into any `postgresql` server using the `bosh` tool:
     <pre class="terminal">
