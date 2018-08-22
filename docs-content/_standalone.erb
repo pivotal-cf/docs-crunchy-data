@@ -1,46 +1,40 @@
 A standalone instance may be used in one of two ways:
 
-1. Isolated single PostgreSQL instance, with no supporting software
-2. Isolated replica instance, allowing to 'add on' remote disaster recovery to an existing cluster.
+* Isolated single PostgreSQL instance, with no supporting software
+* Isolated replica instance, allowing to 'add on' remote disaster recovery to an existing cluster.
 
-<p class="note">
-<strong>Note:</strong> These instances are to be used with care, as they have no
-internal support services that are typically deployed with the standard service plans.
-In the event that any question or concern regarding implementation arises, please
-contact Crunchy Support.
-</p>
+<p class="note"><strong>Note:</strong> These instances have no internal support services that are typically deployed with the standard service plans. In the event that any question or concern regarding implementation arises, contact Crunchy Support.</p>
 
-**Using the Standalone-Replica Plan:**
+#### Using the Standalone-Replica Plan
+
 There are several prerequisites when creating a service using the standalone-replica plan type.
 
-- Services must be in the same VPC or their networks must be peered
-- A 'parent' cluster service (using any other service plan) must exist
-  - To enable remote replication on an existing cluster:
+- Services must be in the same VPC or their networks must be peered.
+- A 'parent' cluster service (using any other service plan) must exist.
+
+To enable remote replication on an existing cluster, do the following:
+
+1. Run the following command:
     ```
     cf update-service $SERVICE_NAME -c '{"allow_remote_replication": true}'
     ```
 
-Create a Service Key from the parent cluster with the following parameters:
+1. Create a service key from the parent cluster with the following parameters:
+    ```
+    cf create-service-key $CLUSTER_SERVICE_NAME \
+    $SERVICE_KEY_NAME -c '{"remote_replica": true}'
+    ```
+    This service key will contain all of the relevant info for binding the standalone-replica instance to the parent cluster.
 
-```
-cf create-service-key $CLUSTER_SERVICE_NAME \
-$SERVICE_KEY_NAME -c '{"remote_replica": true}'
-```
-
-This service key will contain all of the relevant info for binding the
-standalone-replica instance to the parent cluster.
-
-You can query this information directly from the service key with the following command:
+You can query this information directly from the service key by running the following command:
 
 ```
 cf service-key $CLUSTER_SERVICE_NAME $SERVICE_KEY_NAME
 ```
 
-These parameters provided from the service key are required during the creation
-of the standalone-replica service.
+These parameters provided from the service key are required during the creation of the standalone-replica service.
 
-Because of the complexity of some of these parameters, it's recommended
-to compose a json file for creation;
+Because of the complexity of some of these parameters, Crunchy Data recommends you compose a JSON file for creation:
 
 ```json
 {
@@ -56,12 +50,11 @@ to compose a json file for creation;
 }
 ```
 
-The service can be created by:
+You can create the service by running the following command:
 
 ```
 cf create-service <%= service_name %> standalone-replica \
 $STANDALONE_SERVICE_NAME -c values.json
 ```
 
-Please see the section on [Creating a New Service](#creating-examples)
-for more information.
+For more information, see [Creating a New Service](#creating-examples).
