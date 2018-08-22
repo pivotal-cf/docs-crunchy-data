@@ -5,7 +5,8 @@ owner: Crunchy Data
 
 This topic describes how to install and configure Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile.
 
-##<a id='import'></a> Import the Tile to Ops Manager
+
+## <a id='import'></a> Import the Tile to Ops Manager
 
 1. Download the Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile file from [Pivotal Network](https://network.pivotal.io/products/crunchy-postgresql/).
 
@@ -13,7 +14,8 @@ This topic describes how to install and configure Crunchy PostgreSQL for Pivotal
 
 1. Under the **Import a Product** button, click **+** next to the version number of Crunchy PostgreSQL for PCF. This adds the tile to your staging area.
 
-##<a id='configure'></a> Configuring the Service
+
+## <a id='configure'></a> Configuring the Service
 
 Click the newly added **Crunchy PostgreSQL** tile on the Ops Manager Installation Dashboard to open the configuration panes.
 
@@ -23,7 +25,7 @@ If necessary, import a stemcell as required by the service.
 
 Configure each section as described below.
 
-###<a id='az-net'></a> Configure AZ and Network Assignments
+### <a id='az-net'></a> Configure AZ and Network Assignments
 
 To make Crunchy PostgreSQL highly available, you must balance the service across multiple availability zones (AZs).
 
@@ -41,7 +43,7 @@ To make Crunchy PostgreSQL highly available, you must balance the service across
 
 1. Click **Save**.
 
-###<a id='global-properties'></a> Configure Global Properties
+### <a id='global-properties'></a> Configure Global Properties
 
 ![Global Properties](global-properties.png)
 
@@ -54,21 +56,21 @@ To make Crunchy PostgreSQL highly available, you must balance the service across
 
 1. Choose an AZ in which to deploy these services.
 
-1. Configure the number of Standalone PostgreSQL instances permitted in the environment
+1. Configure the number of Standalone PostgreSQL instances permitted in the environment.
 
-1. Configure the number of Replica PostgreSQL instances permitted in the environment
+1. Configure the number of Replica PostgreSQL instances permitted in the environment.
 
-1. Configure the number of General PostgreSQL instances permitted in the environment
+1. Configure the number of General PostgreSQL instances permitted in the environment.
 
-1. Configure the number of General-Monitored PosgreSQL instances permitted in the environment
+1. Configure the number of General-Monitored PosgreSQL instances permitted in the environment.
 
-1. Configure the number of Custom PostgreSQL instances permitted in the environment
+1. Configure the number of Custom PostgreSQL instances permitted in the environment.
 
-1. Configure the number of Custom-Monitored PosgreSQL instances permitted in the environment
+1. Configure the number of Custom-Monitored PosgreSQL instances permitted in the environment.
 
 1. Click **Save**.
 
-###<a id='standalone-properties'></a> Configure Standalone Properties
+### <a id='standalone-properties'></a> Configure Standalone Properties
 
 The standalone plans made available to developers must be configured prior to deployment.
 
@@ -76,37 +78,39 @@ The standalone plans made available to developers must be configured prior to de
 
 1. Click **Standalone Properties**.
 
-1. Select a default size for the standalone instances
+1. Select a default size for the standalone instances.
 
-1. Select a default disk size for the standalone instances
+1. Select a default disk size for the standalone instances.
 
 1. Optionally enable backups by default for all standalone instances.
 
 1. Select a default maximum connections per standalone instance.
 
 <p class="note"><strong>Note:</strong> Do not set any PostgreSQL VMs to less than 4&nbsp;GB of memory.</p>
+
 <p class="note"><strong>Note:</strong> Do not set any PostgreSQL VMs to fewer than 2 cores.</p>
 
-###<a id='cluster-properties'></a> Configure Cluster Properties
+### <a id='cluster-properties'></a> Configure Cluster Properties
 
 The standard plans made available to developers must be configured prior to deployment.
 
 ![Cluster Properties](cluster-properties.png)
 
-1. Select the default system specification for General plans
+1. Select the default system specification for General plans.
 
-1. Select the default disk size for the General plans
+1. Select the default disk size for the General plans.
 
-1. Select the default number of PostgreSQL instances in a General plan
+1. Select the default number of PostgreSQL instances in a General plan.
 
-1. Select the default maximum number of connections to the PostgreSQL instances
+1. Select the default maximum number of connections to the PostgreSQL instances.
 
 1. Select the system specifications and disk types for the Consul, HAProxy, and errand Virtual Machines.
 
 <p class="note"><strong>Note:</strong> Do not set any plan which uses PostgreSQL or pgBackrest VMs to less than 4&nbsp;GB of memory.</p>
+
 <p class="note"><strong>Note:</strong> Do not set any plan which uses PostgreSQL or pgBackrest VMs to fewer than 2 cores.</p>
 
-###<a id='errands'></a> Configure Errands
+### <a id='errands'></a> Configure Errands
 
 1. Click **Errands**.
 
@@ -114,7 +118,7 @@ The standard plans made available to developers must be configured prior to depl
 
 1. Click **Save**.
 
-###<a id='Resource Config'></a> Configure Resources
+### <a id='Resource Config'></a> Configure Resources
 
 1. Click **Resource Config**.
 
@@ -122,8 +126,9 @@ The standard plans made available to developers must be configured prior to depl
 
 1. Click **Save**.
 
-##<a id='install'></a> Install the Tile
+      
+## <a id='install'></a> Install the Tile
 
-1. Return to the Ops Manager Installation Dashboard
+1. Return to the Ops Manager Installation Dashboard.
 
-2. Click **Apply Changes** to install the Crunchy PostgreSQL for PCF tile.
+1. Click **Apply Changes** to install the Crunchy PostgreSQL for PCF tile.
