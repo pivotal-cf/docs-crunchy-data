@@ -5,32 +5,32 @@ owner: Crunchy Data
 
 This topic describes how to use Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile.
 
-##<a id='using'></a> Crunchy PostgreSQL Service
+## <a id='using'></a> Crunchy PostgreSQL Service
 
 <%= partial(:using, :locals => {:service_version => 'postgresql-10-odb'}) %>
 
-###<a id='service-info'></a> PostgreSQL Plans
+### <a id='service-info'></a> PostgreSQL Plans
 
 <%= partial(:plans, :locals => {:service_version => 'postgresql-10-odb'}) %>
 
-####<a id='standalone'></a> Standalone Instances
+#### <a id='standalone'></a> Standalone Instances
 <%= partial(:standalone, :locals => {:service_name => 'postgresql-10-odb'}) %>
 
-###<a id='viewing-service-plans'></a> Viewing Service Plans in Cloud Foundry
+### <a id='viewing-service-plans'></a> Viewing Service Plans in Cloud Foundry
 
 #### Using Cloud Foundry CLI
 
 <%= partial(:cfcli, :locals => {:service_version => 'postgresql-10-odb'}) %>
 
-##<a id='creating'></a> Creating PostgreSQL Service
+## <a id='creating'></a> Creating PostgreSQL Service
 
-###<a id='parameters'></a> Service Creation Parameters
+### <a id='parameters'></a> Service Creation Parameters
 
 <%= partial('parameters') %>
 
 <%= partial('pgc_params') %>
 
-###<a id='create-new'></a> Creating a New Service
+### <a id='create-new'></a> Creating a New Service
 
 <%=
 partial(
@@ -43,54 +43,55 @@ partial(
 )
 -%>
 
-##<a id='updating'></a> Updating an On-Demand Service
+## <a id='updating'></a> Updating an On-Demand Service
 
-###<a id='updating-params'></a> Configuration Parameters
+### <a id='updating-params'></a> Configuration Parameters
 
 <%= partial 'updating_params' %>
 
-###<a id='updating-examples'></a> Updating an Existing Service
+### <a id='updating-examples'></a> Updating an Existing Service
 
 <%= partial 'updating_examples' %>
 
-##<a id='integration'></a> Integrating Applications
+## <a id='integration'></a> Integrating Applications
 
 The following sections provide information on integrating an application with a newly created service.
 
-###<a id='binding-key'></a> Service Bindings and Service Keys
+### <a id='binding-key'></a> Service Bindings and Service Keys
 
 <%= partial('binding_vs_key') %>
 
-###<a id='service-credentials'></a> Service Credentials
+### <a id='service-credentials'></a> Service Credentials
 
 <%= partial('service_credentials') %>
 
-###<a id='service_keys'></a> Managing Service Keys
+### <a id='service_keys'></a> Managing Service Keys
 
 <%= partial('service_keys') %>
 <%= partial('database_roles') %>
 
-###<a id='binding'></a> Binding a PCF App to a Service
+### <a id='binding'></a> Binding a PCF App to a Service
 
 <%= partial(:binding, :locals => {:service_instance_name => 'myService'}) %>
 
-###<a id='unbinding'></a> Unbinding a PCF App from a Service
+### <a id='unbinding'></a> Unbinding a PCF App from a Service
 
 <%= partial(:unbinding, :locals => {:service_instance_name => 'myService'}) %>
 
-##<a id='deleting'></a> Deleting a Service
+## <a id='deleting'></a> Deleting a Service
 
 <%= partial('deleting') %>
 
-##<a id='appendix'></a> Appendix
+## <a id='appendix'></a> Appendix
 
-###<a id='compliance'></a> Security and Compliance
+### <a id='compliance'></a> Security and Compliance
 
 <%= partial('compliance_profiles') %>
 
-###<a id='pgbackrest'></a> pgBackRest Documentation
+### <a id='pgbackrest'></a> pgBackRest Documentation
 
-For more information about pgBackRest restorations, please refer to the official [PGBackRest documentation](http://www.pgbackrest.org/user-guide.html).
+For more information about pgBackRest restorations, see the official [PGBackRest documentation](http://www.pgbackrest.org/user-guide.html).
 
-###<a id='ssp'></a> Self Service Dashboard
+### <a id='ssp'></a> Self Service Dashboard
+
 <%= partial('ssp') %>
