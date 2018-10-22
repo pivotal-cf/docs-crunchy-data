@@ -16,7 +16,7 @@ Follow the steps below to create and bind a service instance of Crunchy PostgreS
    ```
    cf bind-service <APP_NAME> <%= service_instance_name %>
    ```
-                
+
 3. Run the following commands to restage your app so that it can use the service:
    ```
    cf restage <APP_NAME>
@@ -43,8 +43,7 @@ Further, in instances where `"` chars might cause issues in the command prompt (
 
 Create a JSON file with required values: `param.json`
 
-```
-   json
+```json
 {
         "db_name": "testdb",
         "db_username": "testdb",
