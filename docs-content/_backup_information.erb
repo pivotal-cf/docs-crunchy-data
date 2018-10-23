@@ -1,4 +1,7 @@
-Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile uses [pgBackRest](https://github.com/pgbackrest/pgbackrest) as a dedicated backup and archiving host. The tile comes pre-configured with nightly physical backups of the database server for non-standalone plans:
+Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile uses
+[pgBackRest](https://github.com/pgbackrest/pgbackrest) as a dedicated backup and
+archiving host. The tile comes pre-configured with nightly physical backups of
+the database server for non-standalone plans:
 
 | Day       | Backup Type | Time     |
 |-----------|-------------|----------|
@@ -10,7 +13,12 @@ Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile uses [pgBackRest](https:
 | Friday    | Incremental | 1 am UTC |
 | Saturday  | Incremental | 1 am UTC |
 
-<p class="warning"><strong>WARNING:</strong> Archiving and backups are disabled by default in the <code>standalone</code> plan. PCF users can set the <code>standalone_backups</code> parameter to <code>true</code> to enable this feature.</p>
+<p class="warning">
+<strong>WARNING: </strong>
+Archiving and backups are disabled by default in the <code>standalone</code>
+plan. PCF users can set the <code>standalone_backups</code> parameter to
+<code>true</code> to enable this feature.
+</p>
 
 Although backups only happen once a day, PostgreSQL is continuously shipping the Write-Ahead-Logs (WAL) to the pgBackrest server. This means that point-in-time recovery is possible, regardless of the schedule.
 
@@ -22,4 +30,9 @@ All archives from the database server are stored on the dedicated backup host. T
 
 Currently, individual databases cannot be restored. All databases are restored in the shared cluster.
 
-<p class="note"><strong>Note:</strong> Standalone plans do not include automatic backups by default. When using a standalone plan, you should regularly perform manual backups using external tools, or enable the backup using the service creation/update parameter.</p>
+<p class="note">
+<strong>Note: </strong>
+Standalone plans do not include automatic backups by default. When using a
+standalone plan, you should regularly perform manual backups using external
+tools, or enable the backup using the service creation/update parameter.
+</p>
