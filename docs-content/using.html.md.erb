@@ -30,6 +30,17 @@ This topic describes how to use Crunchy PostgreSQL for Pivotal Cloud Foundry (PC
 
 <%= partial('pgc_params') %>
 
+<%=
+partial(
+    :ext_params,
+    :locals => {
+        :service_name => 'postgresql-10-odb',
+        :service_plan => 'general',
+        :service_instance_name => 'myService'
+    }
+)
+-%>
+
 ### <a id='create-new'></a> Creating a New Service
 
 <%=
@@ -48,6 +59,18 @@ partial(
 ### <a id='updating-params'></a> Configuration Parameters
 
 <%= partial 'updating_params' %>
+
+<%= partial('pgc_params') %>
+<%=
+partial(
+    :ext_params,
+    :locals => {
+        :service_name => 'postgresql-10-odb',
+        :service_plan => 'general',
+        :service_instance_name => 'myService'
+    }
+)
+-%>
 
 ### <a id='updating-examples'></a> Updating an Existing Service
 
