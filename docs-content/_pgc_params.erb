@@ -56,3 +56,31 @@ settings can be overridden manually:
 
 More information specific to the individual values can be found in the
 [Official PostgreSQL Documentation](https://www.postgresql.org/docs/9.5/static/runtime-config.html).
+
+#### Example Usage for PostgreSQL Internal Settings
+
+For example, if you wish to create a service with custom PostgreSQL setting for `timezone` and `log_timezone`:
+
+```sh
+cf create-service <%= service_name %> <%= service_plan %> <%= service_instance_name %> -c '
+{
+    "db_name": "testdb",
+    "db_username": "testuser",
+    "owner_name": "Test User",
+    "owner_email": "test.user@fabrikam.com",
+    "pgc_timezone": "America/New_York",
+    "pgc_log_timezone": "America/New_York"
+}'
+```
+
+It is also possible to edit the PostgreSQL Config settings within an existing service.
+
+For example, the following `update-service` command would set `timezone` and `log_timezone` to UTC:
+
+```sh
+cf update-service <%= service_instance_name %> -c '
+{
+    "pgc_timezone": "UTC",
+    "pgc_log_timezone": "UTC"
+}'
+```
