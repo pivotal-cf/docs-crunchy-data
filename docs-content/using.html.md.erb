@@ -7,13 +7,14 @@ This topic describes how to use Crunchy PostgreSQL for Pivotal Cloud Foundry (PC
 
 ## <a id='using'></a> Crunchy PostgreSQL Service
 
-<%= partial(:using, :locals => {:service_version => 'postgresql-10-odb'}) %>
+<%= partial(:odb_summary, :locals => {:service_version => 'postgresql-10-odb'}) %>
 
 ### <a id='service-info'></a> PostgreSQL Plans
 
 <%= partial(:plans, :locals => {:service_version => 'postgresql-10-odb'}) %>
 
 #### <a id='standalone'></a> Standalone Instances
+
 <%= partial(:standalone, :locals => {:service_name => 'postgresql-10-odb'}) %>
 
 ### <a id='viewing-service-plans'></a> Viewing Service Plans in Cloud Foundry
