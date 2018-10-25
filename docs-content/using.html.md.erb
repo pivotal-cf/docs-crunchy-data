@@ -1,5 +1,5 @@
 ---
-title: Using Crunchy PostgreSQL for PCF
+title: Using the On-Demand Service
 owner: Crunchy Data
 ---
 
@@ -21,11 +21,12 @@ This topic describes how to use Crunchy PostgreSQL for Pivotal Cloud Foundry (PC
 
 <%= partial(:viewing_service_plans, :locals => {:service_version => 'postgresql-10-odb'}) %>
 
-## <a id='creating'></a> Creating PostgreSQL Service
+## <a id='creating'></a> Creating an On-Demand PostgreSQL Service
 
 ### <a id='parameters'></a> Service Creation Parameters
-
 <%= partial('parameters') %>
+
+### <a id='pgc-create'></a> Optional PostgreSQL Settings Parameters
 
 <%=
 partial(
@@ -111,15 +112,22 @@ The following sections provide information on integrating an application with a 
 <%= partial('service_keys') %>
 <%= partial('database_roles') %>
 
-### <a id='binding'></a> Binding a PCF App to a Service
+### <a id='binding'></a> Binding a PCF App to an On-Demand Service
 
 <%= partial(:binding, :locals => {:service_instance_name => 'myService'}) %>
 
-### <a id='unbinding'></a> Unbinding a PCF App from a Service
+### <a id='unbinding'></a> Unbinding a PCF App from an On-Demand Service
 
-<%= partial(:unbinding, :locals => {:service_instance_name => 'myService'}) %>
+<%=
+partial(
+    :unbinding,
+    :locals => {
+        :service_instance_name => 'myService'
+    }
+)
+-%>
 
-## <a id='deleting'></a> Deleting a Service
+## <a id='deleting'></a> Deleting an On-Demand Service
 
 <%= partial('deleting') %>
 
