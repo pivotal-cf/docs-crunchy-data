@@ -4,7 +4,14 @@ owner: Crunchy Data
 ---
 
 This topic describes how to install and configure Crunchy PostgreSQL for Pivotal Cloud Foundry (PCF) Tile.
+If performing an upgrade of the Tile, please refer to the [Upgrading](#upgrading) section before proceeding.
 
+<p class="warning">
+<strong>Warning: </strong>
+If upgrading the Tile, an Upgrade Token must be obtained from Crunchy Data
+prior to beginning an upgrade action.
+The upgrade process will not be able to complete without an Upgrade Token.
+</p>
 
 ## <a id='import'></a> Import the Tile to Ops Manager
 
@@ -143,3 +150,16 @@ Do not set any plan which uses PostgreSQL or pgBackrest VMs to less than 4&nbsp;
 1. Return to the Ops Manager Installation Dashboard.
 
 1. Click **Apply Changes** to install the Crunchy PostgreSQL for PCF tile.
+
+## <a id='upgrading'></a> Upgrading the Tile
+
+![Upgrade Token](upgrade-token.png)
+
+1. Obtain the Upgrade Code from Crunchy Data's Customer Access Portal.
+  - Log in to the Customer Access Portal and select PCF Tile Upgrade Token
+  - Select the version to which you wish to upgrade
+  - Select the Generate Token button to receive the Upgrade Token
+  ![Token Generator](token-generator.png)
+1. Enter the Upgrade Code, exactly as provided, into the associated field on the
+   Upgrade Token page of the Tile Installer
+1. Continue the steps as necessary from the [Errands](#errands) section.
