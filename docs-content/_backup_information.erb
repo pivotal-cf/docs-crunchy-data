@@ -20,13 +20,17 @@ plan. PCF users can set the <code>standalone_backups</code> parameter to
 <code>true</code> to enable this feature.
 </p>
 
-Although backups only happen once a day, PostgreSQL is continuously shipping the Write-Ahead-Logs (WAL) to the pgBackrest server. This means that point-in-time recovery is possible, regardless of the schedule.
+Although backups only happen once a day, PostgreSQL is continuously shipping
+the Write-Ahead-Logs (WAL) to the pgBackrest server. This means that
+point-in-time recovery is possible, regardless of the schedule.
 
 These backups not only offer peace of mind, but are used frequently by the tile.
 
-Crunchy PostgreSQL for PCF uses backups to create replicas in the stack. By using backups in operations, we ensure that backup and restore operations are functioning properly.
+Crunchy PostgreSQL for PCF uses backups to create replicas in the stack.
+By using backups in operations, we ensure that backup and restore operations are functioning properly.
 
-All archives from the database server are stored on the dedicated backup host. This means that databases can be restored to specific points in time.
+All archives from the database server are stored on the dedicated backup host.
+This means that databases can be restored to specific points in time.
 
 Currently, individual databases cannot be restored. All databases are restored in the shared cluster.
 
