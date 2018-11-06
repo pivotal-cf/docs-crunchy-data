@@ -57,22 +57,36 @@ To make Crunchy PostgreSQL highly available, you must balance the service across
 
 1. Click **Global Properties**.
 
-1. Configure a secure passphrase for UAA Login Client.
-   - The UAA client login is the bosh pre-defined user account with `bosh.read` access.
-   - The pre-defined account can be accessed from the BOSH credentials list under the heading "UAA Client Login".
-   - Typically: `<ops manager url>/api/v0/deployed/director/credentials/uaa_login_client_credentials`
+1. Configure a username and passphrase for a UAA Client.
+  - Requires an UAA account that has client login and either BOSH read or BOSH admin access.
+  - If the account has BOSH client admin login, select the check box labeled `Account Has Admin`.
+  - Example with BOSH read: `<ops manager url>/api/v0/deployed/director/credentials/uaa_login_client_credentials`
+
+1. Configured the maximum number of upgrades that can be processed at a given time.
 
 1. Choose an AZ in which to deploy these services.
 
+1. Configure the availability of the Standalone PostgreSQL plan for organizations.
+
 1. Configure the number of Standalone PostgreSQL instances permitted in the environment.
+
+1. Configure the availability of the Replica PostgreSQL plan for organizations.
 
 1. Configure the number of Replica PostgreSQL instances permitted in the environment.
 
+1. Configure the availability of the General PostgreSQL plan for organizations.
+
 1. Configure the number of General PostgreSQL instances permitted in the environment.
+
+1. Configure the availability of the General-Monitored PostgreSQL plan for organizations.
 
 1. Configure the number of General-Monitored PosgreSQL instances permitted in the environment.
 
+1. Configure the availability of the Custom PostgreSQL plan for organizations.
+
 1. Configure the number of Custom PostgreSQL instances permitted in the environment.
+
+1. Configure the availability of the Custom-Monitored PostgreSQL plan for organizations.
 
 1. Configure the number of Custom-Monitored PosgreSQL instances permitted in the environment.
 
@@ -119,6 +133,35 @@ The standard plans made available to developers must be configured prior to depl
 1. Select the default maximum number of connections to the PostgreSQL instances.
 
 1. Select the system specifications and disk types for the Consul, HAProxy, and errand Virtual Machines.
+
+<p class="note">
+<strong>Note: </strong>
+Do not set any plan which uses PostgreSQL or pgBackrest VMs to less than 4&nbsp;GB of memory.
+</p>
+
+<p class="note">
+<strong>Note: </strong>Do not set any plan which uses PostgreSQL or pgBackrest VMs to fewer than 2 cores.
+</p>
+
+### <a id='cluster-properties'></a> Configure PostgreSQL Properties
+
+The standard plans made available to developers must be configured prior to deployment.
+
+![PostgreSQL Properties](postgresql-properties.png)
+
+1. Select the Log File Name Pattern by which PostgreSQL will rotate the logs.
+
+1. Select the frequency with which PostgreSQL will rotate the logs.
+
+1. Select the size by which PostgreSQL will rotate the logs.
+
+1. Either enable or disable the option to allow developers to use MD5 authentication when binding applications to the service instances.
+
+1. Select the PostgreSQL configuration parameters developers will be allowed to set while using a Crunchy PostgreSQL service instance.
+![Configuration Parameters](postgresql-configurations.png)
+
+1. Select the PostgreSQL extensions developers will be allowed to create while using a Crunchy PostgreSQL service instance.
+![Extensions](postgresql-extensions.png)
 
 <p class="note">
 <strong>Note: </strong>
