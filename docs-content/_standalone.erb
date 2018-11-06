@@ -10,27 +10,28 @@ In the event that any question or concern regarding implementation arises, pleas
 contact Crunchy Support.
 </p>
 
-**Using the Standalone-Replica Plan:**
+#### Using the Standalone-Replica Plan
+
 There are several prerequisites when creating a service using the standalone-replica plan type.
 
-- Services must be in the same VPC or their networks must be peered
-- A 'parent' cluster service (using any other service plan) must exist
-  - To enable remote replication on an existing cluster:
+- Services must be in the same VPC or their networks must be peered.
+- A 'parent' cluster service (using any other service plan) must exist.
+
+To enable remote replication on an existing cluster, do the following:
+
+1. Run the following command:
     ```
     cf update-service $SERVICE_NAME -c '{"allow_remote_replication": true}'
     ```
 
-Create a Service Key from the parent cluster with the following parameters:
+1. Create a service key from the parent cluster with the following parameters:
+    ```
+    cf create-service-key $CLUSTER_SERVICE_NAME \
+    $SERVICE_KEY_NAME -c '{"remote_replica": true}'
+    ```
+    This service key will contain all of the relevant info for binding the standalone-replica instance to the parent cluster.
 
-```
-cf create-service-key $CLUSTER_SERVICE_NAME \
-$SERVICE_KEY_NAME -c '{"remote_replica": true}'
-```
-
-This service key will contain all of the relevant info for binding the
-standalone-replica instance to the parent cluster.
-
-You can query this information directly from the service key with the following command:
+You can query this information directly from the service key by running the following command:
 
 ```
 cf service-key $CLUSTER_SERVICE_NAME $SERVICE_KEY_NAME
@@ -39,8 +40,8 @@ cf service-key $CLUSTER_SERVICE_NAME $SERVICE_KEY_NAME
 These parameters provided from the service key are required during the creation
 of the standalone-replica service.
 
-Because of the complexity of some of these parameters, it's recommended
-to compose a json file for creation;
+Because of the complexity of some of these parameters, Crunchy Data recommends
+to compose a json file for creation:
 
 ```json
 {
@@ -63,5 +64,4 @@ cf create-service <%= service_name %> standalone-replica \
 $STANDALONE_SERVICE_NAME -c values.json
 ```
 
-Please see the section on [Creating a New Service](#creating-examples)
-for more information.
+For more information, see [Creating a New Service](#creating-service).

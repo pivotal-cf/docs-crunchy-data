@@ -1,4 +1,4 @@
-**Release Date:** Aug , 2018
+**Release Date:** August 14, 2018
 
 Software features in this release:
 
@@ -25,7 +25,6 @@ Software features in this release:
   - Allows users to upgrade a standalone instance to a full cluster instance.
   - Fixes a bug that caused configuration options to reset when new parameters
     were passed in to the service instance.
-  - Allows users to upgrade from Crun
 - [Software Component Update] Crunchy PostgreSQL BOSH version 05
   - This new software version provides the updated service offerings, plan
     restructure, and remote replication.
@@ -46,14 +45,15 @@ Software features in this release:
   - python-urllib3 version 1.23
 - [Software Component Update] pgaudit-set-user version 1.6.1
 - [New Software Feature] `wal2json` library availability
-- [New Software Feature] pgc_ configuration parameters can now be updated through `update-service`
+- [New Software Feature] `pgc_` configuration parameters can now be updated through `update-service`
 - [New Configuration Option] Parallel upgrades for service instances
 - [New Configuration Option] Standalone configurations:
   - Option for backups by default
   - Customizable VM type, persistent storage, connection limit
 - [Stability Enhancemnet] Improves recovery from IaaS storage disconnection
 
-# Notes
+Additional notes about this release:
+
 - Crunchy PostgreSQL for PCF can **NOT** be directly upgraded from v4 with PostgreSQL
   9.5 to v5 with PostgreSQL 10.
 - Crunchy PostgreSQL for PCF v5 relies on functionality released in PCF

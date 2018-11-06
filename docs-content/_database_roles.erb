@@ -8,10 +8,11 @@ to `cf create-service`. This role is granted ownership of the service instance
 database and the `public` schema. The service role is identified by the
 **service_role** key of the binding credentials object.
 
-<p class="note"><strong>Note</strong>: The service role has the
-<code>NOLOGIN</code> attribute, therefore it can not be used directly to connect
-to the service instance database. The binding role should be used to connect to
-the database.
+<p class="note">
+<strong>Note:</strong>
+The service role has the <code>NOLOGIN</code> attribute, so it cannot be used
+directly to connect to the service instance database.
+The binding role should be used to connect to the database.
 </p>
 
 ##### Binding Role
@@ -38,7 +39,7 @@ database objects created by previous binding roles.
 Services with multiple active bindings that create database objects may have
 objects owned by multiple roles. In this scenario, an attempt to alter or drop
 an object that is not owned by the current binding role or the service role
-may fail with an error similar to:
+may fail with an error like the one below:
 
 ```
 ERROR:  must be owner of ...
@@ -65,7 +66,7 @@ To access the primary database server, which should be used for database write
 operations, use the `db_host` and `db_port` keys to construct a connection
 string. The `uri` and `jdbc_uri` may also be used to connect to the primary
 database server when supported by the client application or library.
-For further information, please see [Selectively Accessing Clusters](feature-overview.html#ports)
+For more information, see [Selectively Accessing Clusters](feature-overview.html#ports).
 
 #### Accessing the Replica Database Server(s)
 
@@ -74,4 +75,4 @@ read operations, use the `read_host` and `read_port` keys to construct a
 connection string. The `read_uri` and `jdbc_read_uri` may also be used to
 connect to the replica database server(s) when supported by the client
 application or library.
-For further information, please see [Selectively Accessing Clusters](feature-overview.html#ports)
+For more information, see [Selectively Accessing Clusters](feature-overview.html#ports).
