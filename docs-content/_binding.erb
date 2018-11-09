@@ -10,9 +10,23 @@ cf bind-service myApp <%= service_instance_name %>
 cf restage myApp
 ```
 
+If the app does not support SCRAM-SHA-256 authentication, you
+can optionally enable MD5 Auth methods at binding time:
+
+```
+cf bind-service myApp <%= service_instance_name %> -c '{"use_md5_auth": true}'
+cf restage myApp
+```
+
 <p class="note">
 <strong>Note:</strong> You must restage or restart your app before it will have access to the service
 credentials.
+</p>
+
+<p class="note">
+<strong>Note: </strong>
+MD5 Authentication is considered cryptographically broken.
+Any and all efforts should be made to utilize SCRAM-SHA-256 authentication where possible.
 </p>
 
 #### Using Pivotal Apps Manager

@@ -45,7 +45,11 @@ cf create-service <%= service_name %> custom customService -c '{
 }'
 ```
 
-Further, in instances where `"` chars might cause issues in the command prompt (such as with Windows CMD), instances where consistent service parameters are used, or in instances where private data would be passed in the parameters, it is possible to create a separate JSON file with all of the parameters to be used in service creation.
+Further, in instances where `"` chars might cause issues in the command prompt
+(such as with Windows CMD), instances where consistent service parameters are
+used, or in instances where private data would be passed in the parameters, it
+is possible to create a separate JSON file with all of the parameters to be used
+in service creation.
 
 Create a JSON file with required values: `param.json`
 
