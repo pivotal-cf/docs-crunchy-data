@@ -1,9 +1,14 @@
 A standalone instance may be used in one of two ways:
 
-* Isolated single PostgreSQL instance, with no supporting software
-* Isolated replica instance, allowing to 'add on' remote disaster recovery to an existing cluster.
+1. Isolated single PostgreSQL instance, with no supporting software
+2. Isolated replica instance, allowing to 'add on' remote disaster recovery to an existing cluster.
 
-<p class="note"><strong>Note:</strong> These instances have no internal support services that are typically deployed with the standard service plans. In the event that any question or concern regarding implementation arises, contact Crunchy Support.</p>
+<p class="note">
+<strong>Note:</strong> These instances are to be used with care, as they have no
+internal support services that are typically deployed with the standard service plans.
+In the event that any question or concern regarding implementation arises, please
+contact Crunchy Support.
+</p>
 
 #### Using the Standalone-Replica Plan
 
@@ -32,9 +37,11 @@ You can query this information directly from the service key by running the foll
 cf service-key $CLUSTER_SERVICE_NAME $SERVICE_KEY_NAME
 ```
 
-These parameters provided from the service key are required during the creation of the standalone-replica service.
+These parameters provided from the service key are required during the creation
+of the standalone-replica service.
 
-Because of the complexity of some of these parameters, Crunchy Data recommends you compose a JSON file for creation:
+Because of the complexity of some of these parameters, Crunchy Data recommends
+to compose a json file for creation:
 
 ```json
 {
@@ -50,11 +57,11 @@ Because of the complexity of some of these parameters, Crunchy Data recommends y
 }
 ```
 
-You can create the service by running the following command:
+The service can be created by:
 
 ```
 cf create-service <%= service_name %> standalone-replica \
 $STANDALONE_SERVICE_NAME -c values.json
 ```
 
-For more information, see [Creating a New Service](#creating-examples).
+For more information, see [Creating a New Service](#creating).
