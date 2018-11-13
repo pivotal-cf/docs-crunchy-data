@@ -293,11 +293,11 @@ Authentication with a DoD-approved PKI certificate does not imply authorization 
 
 Service instances bound to an app contain credential data.
 Users specify the binding credentials for user-provided service instances, while third-party brokers specify the binding credentials for managed service instances.
-The [`VCAP_SERVICES`](on-demand-service.html#service-credentials) environment variable contains credential information for any service bound to an app.
+The [`VCAP_SERVICES`](using.html#service-credentials) environment variable contains credential information for any service bound to an app.
 Cloud Foundry constructs this value from encrypted data that it stores in the Cloud Controller Database (CCDB).
 
 PCF Apps hosted within the PaaS System Boundary and Legacy Applications running within IaaS boundaries can ONLY access Crunchy service through a load balancer.
-[`Bindings`](on-demand-service.html#binding-vs-key) and [`Service keys`](on-demand-service.html#binding-vs-key) are used to dynamically generate system accounts for the database.
+[`Bindings`](using.html#binding-key) and [`Service keys`](using.html#binding-key) are used to dynamically generate system accounts for the database.
 
 ###<a id='Admin-System-Accounts'></a> Admin System Accounts
 
