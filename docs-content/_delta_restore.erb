@@ -84,7 +84,7 @@ Pivotal recommends that you use BOSH CLI v2 or later when running PCF v1.11 or l
     <pre class="terminal">
     pgbackrest --config=/var/vcap/store/pgbackrest/config/pgbackrest-local.conf --stanza=main info
     </pre>
-    Note for S3 Support use the s3 pgbackreset config file `pgbackrest-s3.conf`
+    If you wish to restore from S3, replace `pgbackrest-local.conf` with `pgbackrest-s3.conf`.
 
 1. Restore the database:
     <pre class="terminal">
@@ -169,7 +169,7 @@ Pivotal recommends that you use BOSH CLI v2 or later when running PCF v1.11 or l
     <pre class="terminal">
     pgbackrest --config=/var/vcap/store/pgbackrest/config/pgbackrest-local.conf --stanza=main info
     </pre>
-    Note for S3 Support use the s3 pgbackreset config file `pgbackrest-s3.conf`
+    If you wish to restore from S3, replace `pgbackrest-local.conf` with `pgbackrest-s3.conf`.
 
 1. Restore the database:
     <pre class="terminal">
