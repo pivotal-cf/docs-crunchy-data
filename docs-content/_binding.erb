@@ -10,13 +10,24 @@ cf bind-service myApp <%= service_instance_name %>
 cf restage myApp
 ```
 
-If the app does not support SCRAM-SHA-256 authentication, you
-can optionally enable MD5 Auth methods at binding time:
+Binding parameters can be passed in as the binding is created. For example:
 
 ```
-cf bind-service myApp <%= service_instance_name %> -c '{"use_md5_auth": true}'
+cf bind-service myApp <%= service_instance_name %> -c '{"parameter": value}'
 cf restage myApp
 ```
+
+The acceptable parameters are as follows:
+
+##### Optional Binding Parameters
+
+| Parameter        | Description                                                                            | Example Value | Parameter Limitations               | Notes                                                                |
+| :--------        | :----------                                                                            | :--------     | :-----------:                       | :--------------------                                                |
+| `use_md5_auth`   | Enables MD5 auth methods                                                               | `true`        | Value must be boolean true or false | Can be used if the app does not support SCRAM-SHA-256 authentication |
+| `stats_access`   | Allow users to create service bindings with superuser visibility of `pg_stat_activity` | `true`        | Value must be boolean true or false | Access must also be enabled in the service instance                  |
+| `remote_replica` | Properly configure connection for a standalone remote replica instance                 | `true`        | Value must be boolean true or false | Only valid on standalone-replica instances                           |
+
+If access to stats is enabled in your service instance, you can optionally enable this feature at binding time. With stats enabled you will be able to access the `pg_stat_activity` and `pg_stat_statements` views that are created in your service database. You can access these tables by calling `SELECT * FROM pg_stat_activity` in the Crunchy PostgreSQL 10 tile and `SELECT * FROM monitor.pg_stat_activity()` in the Crunchy PostgreSQL 9.5 tile.
 
 <p class="note">
 <strong>Note:</strong> You must restage or restart your app before it will have access to the service
