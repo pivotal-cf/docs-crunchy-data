@@ -155,9 +155,10 @@ The standard plans made available to developers must be configured prior to depl
 
 1. Select the size by which PostgreSQL will rotate the logs.
 
-1. Either enable or disable the option to allow developers to use MD5 authentication when binding applications to the service instances.
-
-1. Either enable or disable the option to allow developers to create bindings with superuser visibility of stats tables with the `stats_access` checkbox.
+1. Select the default Archive Mode for instances. If "S3" or "local&S3" are selected, enter the associated S3 bucket info.
+  - Repo Path Prefix setting allows for defining a 'subfolder' within the bucket.
+  - pgBackRest repositories can be stored in the bucket root by setting this value to `/`, but it is usually best to specify a prefix, such as `/repo`, so logs and other AWS generated content can also be stored in the bucket.
+  - Services will be archived to this path, each with their own folder based on the service GUID.
 
 1. Select the PostgreSQL configuration parameters developers will be allowed to set while using a Crunchy PostgreSQL service instance.
 ![Configuration Parameters](postgresql-configurations.png)
@@ -167,14 +168,22 @@ The standard plans made available to developers must be configured prior to depl
 
 <p class="note">
 <strong>Note: </strong>
-Do not set any plan which uses PostgreSQL or pgBackrest VMs to less than 4&nbsp;GB of memory.
+If Standalone Replica plans are to be used in the environment, only use "local" or "local&S3" options.
+Selecting S3 only archive mode will cause serious configuration issues on Standalone Replica instances.
 </p>
 
-<p class="note">
-<strong>Note: </strong>Do not set any plan which uses PostgreSQL or pgBackrest VMs to fewer than 2 cores.
-</p>
+### <a id='extended-features'></a> Extended Features
+Optionally, configure extended service features
+
+![Extended Features](extened-features.png)
+
+1. Either enable or disable the option to allow developers to use MD5 authentication when binding applications to the service instances.
+
+1. Either enable or disable the option to allow developers to create bindings with superuser visibility of stats tables with the `stats_access` checkbox.
 
 ### <a id='errands'></a> Configure Errands
+
+![Errands](errands.png)
 
 1. Click **Errands**.
 
@@ -183,6 +192,8 @@ Do not set any plan which uses PostgreSQL or pgBackrest VMs to less than 4&nbsp;
 1. Click **Save**.
 
 ### <a id='Resource Config'></a> Configure Resources
+
+![Resource Config](resource-config.png)
 
 1. Click **Resource Config**.
 
