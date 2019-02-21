@@ -82,12 +82,13 @@ Pivotal recommends that you use BOSH CLI v2 or later when running PCF v1.11 or l
     </pre>
     Note that you may need to provide the `pgbackrest.conf` path:
     <pre class="terminal">
-    pgbackrest --config=/var/vcap/store/pgbackrest/config/pgbackrest.conf --stanza=main info
+    pgbackrest --config=/var/vcap/store/pgbackrest/config/pgbackrest-local.conf --stanza=main info
     </pre>
+    Note for S3 Support use the s3 pgbackreset config file `pgbackrest-s3.conf`
 
 1. Restore the database:
     <pre class="terminal">
-    pgbackrest --config=/var/vcap/store/pgbackrest/config/pgbackrest.conf \
+    pgbackrest --config=/var/vcap/store/pgbackrest/config/pgbackrest-local.conf \
         --stanza=main \
         --delta \
         --log-level-console=detail \
@@ -166,12 +167,13 @@ Pivotal recommends that you use BOSH CLI v2 or later when running PCF v1.11 or l
     </pre>
     Note that you may need to provide the `pgbackrest.conf` path:
     <pre class="terminal">
-    pgbackrest --config=/var/vcap/store/pgbackrest/config/pgbackrest.conf --stanza=main info
+    pgbackrest --config=/var/vcap/store/pgbackrest/config/pgbackrest-local.conf --stanza=main info
     </pre>
+    Note for S3 Support use the s3 pgbackreset config file `pgbackrest-s3.conf`
 
 1. Restore the database:
     <pre class="terminal">
-    pgbackrest --config=/var/vcap/store/pgbackrest/config/pgbackrest.conf \
+    pgbackrest --config=/var/vcap/store/pgbackrest/config/pgbackrest-local.conf \
         --stanza=main \
         --delta \
         --log-level-console=detail \
@@ -184,7 +186,7 @@ Pivotal recommends that you use BOSH CLI v2 or later when running PCF v1.11 or l
     </p>
 
     <pre class="terminal">
-    pgbackrest --config=/var/vcap/store/pgbackrest/config/pgbackrest.conf \
+    pgbackrest --config=/var/vcap/store/pgbackrest/config/pgbackrest-local.conf \
         --stanza=main \
         --delta \
         --log-level-console=detail \
