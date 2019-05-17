@@ -6,39 +6,9 @@ apply the most tuned settings for each plan and service instance.
 It should not be necessary to change any of the low-level settings
 unless a service instance is being used in a very advanced configuration.
 
-However, if further configuration is found to be necessary, the following
-settings can be overridden manually:
-
-- `pgc_autovacuum_analyze_scale_factor`
-- `pgc_autovacuum_analyze_threshold`
-- `pgc_autovacuum_freeze_max_age`
-- `pgc_autovacuum_max_workers`
-- `pgc_autovacuum_vacuum_cost_delay`
-- `pgc_autovacuum_vacuum_scale_factor`
-- `pgc_autovacuum_vacuum_threshold`
-- `pgc_checkpoint_completion_target`
-- `pgc_log_checkpoints`
-- `pgc_log_connections`
-- `pgc_log_disconnections`
-- `pgc_log_duration`
-- `pgc_log_hostname`
-- `pgc_log_line_prefix`
-- `pgc_log_min_duration_statement`
-- `pgc_log_min_error_statement`
-- `pgc_log_min_messages`
-- `pgc_log_timezone`
-- `pgc_maintenance_work_mem`
-- `pgc_max_locks_per_transaction`
-- `pgc_max_wal_senders`
-- `pgc_max_wal_size`
-- `pgc_max_worker_processes`
-- `pgc_random_page_cost`
-- `pgc_timezone`
-- `pgc_wal_buffers`
-- `pgc_wal_keep_segments`
-- `pgc_wal_keep_segments`
-- `pgc_work_mem`
-- `pgc_work_mem`
+However, if further configuration is found to be necessary, please
+refer to [Crunchy Data's Official Documentation]() for the full list of
+settings that can be overridden manually.
 
 More information specific to the individual values can be found in the
 [Official PostgreSQL Documentation](https://www.postgresql.org/docs/9.5/static/runtime-config.html).
