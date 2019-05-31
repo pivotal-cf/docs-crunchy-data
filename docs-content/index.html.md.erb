@@ -26,8 +26,8 @@ features:
 partial(
     :keyfeatures,
     :locals => {
-        :postgresql_version => '10.7',
-        :postgis_version => '2.4.4'
+        :postgresql_version => '10.8',
+        :postgis_version => '2.5'
     }
 )
 -%>
@@ -41,9 +41,9 @@ partial(
 partial(
     :product_snapshot,
     :locals => {
-        :release_version => '05.1007.004',
-        :release_date => 'February 20, 2019',
-        :postgresql_version => '10.7'
+        :release_version => '05.1008.005',
+        :release_date => 'May 20, 2019',
+        :postgresql_version => '10.8'
     }
 )
 -%>
@@ -53,6 +53,14 @@ partial(
 Crunchy PostgreSQL for PCF currently includes the following limitation:
 
 * You must manually restore backups.
+
+## <a id="further-info"></a>Further Information
+
+The documentation provided here is intended to cover most general
+use cases.
+
+For further in-depth information, please refer to the [Official
+Crunchy Data Documentation](https://access.crunchydata.com/documentation/)
 
 ## <a id="feedback"></a>Feedback
 
