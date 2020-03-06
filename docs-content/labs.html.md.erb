@@ -7,7 +7,7 @@ owner: Crunchy Data
 
 The following examples provide a general overview for setting up a service and binding
 certain tools and applications to the service.
-These topics are covered in-depth on the [Using Crunchy PostgreSQL for Pivotal Platform](using.html) page.
+These topics are covered in-depth on the [Using Crunchy PostgreSQL for VMware Tanzu](using.html) page.
 
 <p class="note">
 <strong>Note:</strong>
@@ -18,7 +18,7 @@ For further information, contact Crunchy Data Sales.
 
 In order to start setting up the Crunchy PostgreSQL tools, some environment details will need to be set up.
 
-Initially, make sure you have access to whichever Pivotal Platform environment you will be working in.
+Initially, make sure you have access to whichever VMware Tanzu environment you will be working in.
 Whomever is your administrator or supervisor should be able to provide you with the web URL and login credentials.
 
 This procedure requires the Cloud Foundry Command Line Interface (cf CLI). To obtain the tool,
@@ -31,7 +31,7 @@ do the following:
 1. If you experience any difficulty installing cf CLI, please use [reference guide](https://docs.cloudfoundry.org/cf-cli/cf-help.html)
 
 Using the cf CLI, log into the CF instance you intend to use by running
-`cf login -a API_URL -u USERNAME -p PASSWORD -o ORG -s SPACE`.
+`cf login -a API_URL -u USERNAME -p TAS for VMsSWORD -o ORG -s SPACE`.
 
 
 ## <a id="setting-up-a-crunchy-postgresql-database"></a> Setting Up a Crunchy PostgreSQL Database
@@ -88,9 +88,9 @@ To administer the database using the pgAdmin web interface, do the following:
 1. Save the file.
 1. Open the `config_local.py` file in an editor and change the following values:
   * `PGADMIN_SETUP_EMAIL`: The email user account you use to log in to the pgAdmin interface. Crunchy Data recommends using the same email address you used in the database setup steps.
-  * `PGADMIN_SETUP_PASSWORD`: The password used to access the pgAdmin interface.
+  * `PGADMIN_SETUP_TAS for VMsSWORD`: The password used to access the pgAdmin interface.
 1. Go the `crunchy-pgadmin` directory by running `cd ~/crunchy-pgadmin`.
-1. Push the app up to the Pivotal Platform area by running `cf push`.
+1. Push the app up to the VMware Tanzu area by running `cf push`.
 
 <p class='note'>
 <strong>Note:</strong>

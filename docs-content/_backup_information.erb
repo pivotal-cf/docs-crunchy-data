@@ -1,4 +1,4 @@
-Crunchy PostgreSQL for Pivotal Platform Tile uses
+Crunchy PostgreSQL for VMware Tanzu Tile uses
 [pgBackRest](https://github.com/pgbackrest/pgbackrest) as a dedicated backup and
 archiving host. The tile comes pre-configured with nightly physical backups of
 the database server for non-standalone plans:
@@ -16,7 +16,7 @@ the database server for non-standalone plans:
 <p class="note warning">
 <strong>WARNING: </strong>
 Archiving and backups are disabled by default in the <code>standalone</code>
-plan. Pivotal Platform users can set the <code>standalone_backups</code> parameter to
+plan. VMware Tanzu users can set the <code>standalone_backups</code> parameter to
 <code>true</code> to enable this feature.
 </p>
 
@@ -26,7 +26,7 @@ point-in-time recovery is possible, regardless of the schedule.
 
 These backups not only offer peace of mind, but are used frequently by the tile.
 
-Crunchy PostgreSQL for Pivotal Platform uses backups to create replicas in the stack.
+Crunchy PostgreSQL for VMware Tanzu uses backups to create replicas in the stack.
 By using backups in operations, we ensure that backup and restore operations are functioning properly.
 
 All archives from the database server are stored on the dedicated backup host.

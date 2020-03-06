@@ -3,7 +3,7 @@ title: Using the On-Demand Service
 owner: Crunchy Data
 ---
 
-This topic describes how to use Crunchy PostgreSQL for Pivotal Platform Tile.
+This topic describes how to use Crunchy PostgreSQL for VMware Tanzu Tile.
 
 ## <a id='using'></a> Crunchy PostgreSQL Service
 
@@ -115,11 +115,11 @@ The following sections provide information on integrating an application with a 
 <%= partial('service_keys') %>
 <%= partial('database_roles') %>
 
-### <a id='binding'></a> Binding a Pivotal Platform App to an On-Demand Service
+### <a id='binding'></a> Binding a VMware Tanzu App to an On-Demand Service
 
 <%= partial(:binding, :locals => {:service_instance_name => 'myService'}) %>
 
-### <a id='unbinding'></a> Unbinding a Pivotal Platform App from an On-Demand Service
+### <a id='unbinding'></a> Unbinding a VMware Tanzu App from an On-Demand Service
 
 <%=
 partial(

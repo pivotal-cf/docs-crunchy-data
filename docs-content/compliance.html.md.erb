@@ -11,10 +11,10 @@ from Pivotal, our Partners, and the Cloud Foundry community providing a
 curated selection of capabilities from data persistence, caching, messaging to
 continuous integration, security, and much more.
 
-Crunchy PostgreSQL for Pivotal Platform brings the tools and expertise software engineers
+Crunchy PostgreSQL for VMware Tanzu brings the tools and expertise software engineers
 need to make their open source database environments successful and manageable.
 Developers can now easily deploy a production-ready PostgreSQL cluster within a
-Pivotal Platform environment through a Pivotal Platform Service Tile.
+VMware Tanzu environment through a VMware Tanzu Service Tile.
 
 Crunchy PostgreSQL for Cloud Foundry provides PostgreSQL necessary infrastructure to support enterprise requirements including:
 
@@ -194,7 +194,7 @@ AUDIT: SESSION,1,1,ROLE,CREATE ROLE,,,CREATE ROLE bob; SET ROLE bob; CREATE TABL
 ##<a id='Protocols'></a> Protocols
 
 ###<a id='pcf-protocols'></a> PaaS Protocols
-All traffic from the public internet to the Pivotal Platform (PaaS) happens
+All traffic from the public internet to the VMware Tanzu (PaaS) happens
 over HTTPS.
 Inside the boundary of the system, components communicate over a
 publish-subscribe (pub-sub) message bus NATS, HTTP, and SSL/TLS.
@@ -296,14 +296,14 @@ Users specify the binding credentials for user-provided service instances, while
 The [`VCAP_SERVICES`](using.html#service-credentials) environment variable contains credential information for any service bound to an app.
 Cloud Foundry constructs this value from encrypted data that it stores in the Cloud Controller Database (CCDB).
 
-Pivotal Platform Apps hosted within the PaaS System Boundary and Legacy Applications running within IaaS boundaries can ONLY access Crunchy service through a load balancer.
+VMware Tanzu Apps hosted within the PaaS System Boundary and Legacy Applications running within IaaS boundaries can ONLY access Crunchy service through a load balancer.
 [`Bindings`](using.html#binding-key) and [`Service keys`](using.html#binding-key) are used to dynamically generate system accounts for the database.
 
 ###<a id='Admin-System-Accounts'></a> Admin System Accounts
 
 | Account               | Description                                                                                                                                         |
 | ---------             | ---------------------------------------                                                                                                             |
-| VCAP                  | Automated Pivotal Platform Superuser account. Only Pivotal Platform Platform Administrators (not DBA nor DO nor IO) have local login abilities to access this system account. |
+| VCAP                  | Automated VMware Tanzu Superuser account. Only VMware Tanzu Platform Administrators (not DBA nor DO nor IO) have local login abilities to access this system account. |
 | CRUNCHY               | Automated Superuser Database Admin Account. Used by the Crunchy Broker and is NOT exposed to anyone (DBA or DO or IO)                               |
 | REPLICATION / HAPROXY | Automated Accounts used to configure replication and load balancer. NOT exposed to anyone (DBA or DO or IO)                                         |
 

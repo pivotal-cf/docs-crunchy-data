@@ -1,13 +1,13 @@
 ---
-title: Feature Overview of Crunchy PostgreSQL for Pivotal Platform
+title: Feature Overview of Crunchy PostgreSQL for VMware Tanzu
 owner: Crunchy Data
 ---
 
-This topic describes the features of Crunchy PostgreSQL for Pivotal Platform Tile.
+This topic describes the features of Crunchy PostgreSQL for VMware Tanzu Tile.
 
 ## <a id ="plans"></a> Plans
 
-The Crunchy PostgreSQL for Pivotal Platform Tile offers several out-of-the-box (configurable) plans. When deploying the service, operators have the opportunity to tune these plans for the needs of the environment.
+The Crunchy PostgreSQL for VMware Tanzu Tile offers several out-of-the-box (configurable) plans. When deploying the service, operators have the opportunity to tune these plans for the needs of the environment.
 
 ### <a id='plansize'></a> Plan Sizes
 
@@ -33,7 +33,7 @@ The standalone-replica plan leverages the standalone instance as a very basic
 remote replica. All of the restrictions for the Standalone plan apply to this
 service plan.
 The standalone-replica service must be accessible from the parent cluster;
-it must be in the same Pivotal Platform instance, or the networks must be peered.
+it must be in the same VMware Tanzu instance, or the networks must be peered.
 
 (See [Load Balancing](#load-balancing) and
 [Selectively Accessing Clusters](#ports) for more information)
@@ -44,7 +44,7 @@ it must be in the same Pivotal Platform instance, or the networks must be peered
 
 ## <a id="load-balancing"></a> Load Balancing
 
-Crunchy PostgreSQL for Pivotal Platform uses HAProxy as a single point of entry to the database cluster.
+Crunchy PostgreSQL for VMware Tanzu uses HAProxy as a single point of entry to the database cluster.
 App developers must switch ports depending on the type of cluster they want to interact with.
 
 ### <a id='ports'></a> Selectively Accessing Clusters
@@ -60,7 +60,7 @@ App developers must switch ports depending on the type of cluster they want to i
 
 ## <a id="tools"></a> Tools
 
-Crunchy PostgreSQL for Pivotal Platform offers the following tools to help developers manage their system:
+Crunchy PostgreSQL for VMware Tanzu offers the following tools to help developers manage their system:
 
 * cf-pgadmin4
 * cf-pgloader
