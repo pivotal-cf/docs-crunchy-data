@@ -31,7 +31,7 @@ do the following:
 1. If you experience any difficulty installing cf CLI, please use [reference guide](https://docs.cloudfoundry.org/cf-cli/cf-help.html)
 
 Using the cf CLI, log into the CF instance you intend to use by running
-`cf login -a API_URL -u USERNAME -p TAS for VMsSWORD -o ORG -s SPACE`.
+`cf login -a API_URL -u USERNAME -p PASSWORD -o ORG -s SPACE`.
 
 
 ## <a id="setting-up-a-crunchy-postgresql-database"></a> Setting Up a Crunchy PostgreSQL Database
@@ -88,7 +88,7 @@ To administer the database using the pgAdmin web interface, do the following:
 1. Save the file.
 1. Open the `config_local.py` file in an editor and change the following values:
   * `PGADMIN_SETUP_EMAIL`: The email user account you use to log in to the pgAdmin interface. Crunchy Data recommends using the same email address you used in the database setup steps.
-  * `PGADMIN_SETUP_TAS for VMsSWORD`: The password used to access the pgAdmin interface.
+  * `PGADMIN_SETUP_PASSWORD`: The password used to access the pgAdmin interface.
 1. Go the `crunchy-pgadmin` directory by running `cd ~/crunchy-pgadmin`.
 1. Push the app up to the VMware Tanzu area by running `cf push`.
 
